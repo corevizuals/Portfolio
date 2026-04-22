@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ouroboros — Looping 3D Animation · Jeboy Compuesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --cs-a: #2D6A4F;
+    --cs-b: #52B788;
+    --cs-c: #1B4332;
+  }
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); text-decoration:none; font-size:.875rem; margin-bottom:40px; transition:color .2s; }
+  .back-link:hover { color:var(--accent); }
+  .cs-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--cs-a); margin-bottom:20px; }
+  .cs-eyebrow::before { content:''; display:inline-block; width:24px; height:2px; background:var(--cs-a); border-radius:2px; }
+  .cs-title { font-size:clamp(36px,5.5vw,68px); font-weight:800; letter-spacing:-.03em; line-height:1.05; color:var(--text-main); margin-bottom:24px; }
+  .cs-title .aw { background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .cs-lead { font-size:1.05rem; line-height:1.75; color:var(--text-muted); max-width:640px; margin-bottom:28px; }
+  .cs-meta-bar { display:flex; flex-wrap:wrap; gap:32px; padding:28px 32px; background:white; border:1px solid var(--border); border-radius:var(--radius); margin-top:36px; margin-bottom:48px; box-shadow:0 4px 12px rgba(0,0,0,.05); }
+  .cs-meta-item { display:flex; flex-direction:column; gap:4px; }
+  .cs-meta-label { font-size:.65rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
+  .cs-meta-value { font-size:.9rem; font-weight:600; color:var(--text-main); }
+  .cs-category-pill { display:inline-block; font-size:.7rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:#fce4ec; color:#ad1457; margin-bottom:16px; }
+  .cs-chapter { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .cs-chapter-num { font-size:.68rem; font-weight:800; letter-spacing:.14em; color:var(--cs-a); }
+  .cs-chapter-line { width:28px; height:2px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); border-radius:2px; }
+  .cs-chapter-label { font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); }
+  .cs-divider { width:44px; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); border-radius:999px; margin-bottom:24px; }
+  .cs-section { margin-bottom:80px; }
+  .cs-section-title { font-size:clamp(24px,3.2vw,40px); font-weight:800; letter-spacing:-.025em; line-height:1.1; color:var(--text-main); margin-bottom:16px; }
+  .cs-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:72px; }
+  .cs-stat { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:32px 28px; box-shadow:0 4px 12px rgba(0,0,0,.05); position:relative; overflow:hidden; transition:transform .25s,box-shadow .25s; }
+  .cs-stat::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); }
+  .cs-stat:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.09); }
+  .cs-stat-num { font-size:clamp(32px,4vw,48px); font-weight:800; letter-spacing:-.03em; line-height:1; background:linear-gradient(135deg,var(--cs-a),var(--cs-b)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+  .cs-stat-label { font-size:.8rem; font-weight:500; color:var(--text-muted); line-height:1.4; }
+  .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+  .cs-img { border-radius:var(--radius); overflow:hidden; background:linear-gradient(135deg,#edf7f0,#f0faf4); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .cs-img-tall   { height:400px; }
+  .cs-img-medium { height:280px; }
+  .cs-img-short  { height:180px; }
+  .ph-icon { font-size:2rem; opacity:.22; }
+  .ph-text { font-size:.67rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); opacity:.55; }
+  .cs-img-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  .cs-img-col { display:flex; flex-direction:column; gap:16px; }
+  .cs-challenges { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .cs-challenge { display:flex; gap:16px; align-items:flex-start; background:white; border:1px solid var(--border); border-radius:12px; padding:18px 20px; box-shadow:0 2px 8px rgba(0,0,0,.04); transition:border-color .2s,box-shadow .2s; }
+  .cs-challenge:hover { border-color:rgba(45,106,79,0.25); box-shadow:0 4px 16px rgba(45,106,79,0.07); }
+  .cs-challenge-icon { width:32px;height:32px;min-width:32px; border-radius:8px; background:linear-gradient(135deg,var(--cs-a),var(--cs-b)); display:flex;align-items:center;justify-content:center; font-size:.9rem; }
+  .cs-challenge p { font-size:.875rem; line-height:1.65; color:var(--text-muted); margin:0; }
+  .cs-steps { display:flex; flex-direction:column; margin-top:8px; }
+  .cs-step { display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+  .cs-step:last-child { border-bottom:none; padding-bottom:0; }
+  .cs-step-num { font-size:.65rem; font-weight:800; letter-spacing:.1em; color:var(--cs-a); min-width:24px; padding-top:3px; }
+  .cs-step h4 { font-size:.9rem; font-weight:700; color:var(--text-main); margin-bottom:5px; }
+  .cs-step p { font-size:.85rem; color:var(--text-muted); line-height:1.65; margin:0; }
+  .cs-results-banner { background:linear-gradient(135deg,var(--cs-a) 0%,var(--cs-b) 55%,var(--cs-c) 100%); border-radius:var(--radius); padding:56px 48px; margin:16px 0 64px; position:relative; overflow:hidden; text-align:center; }
+  .cs-results-banner::before { content:'OUROBOROS'; position:absolute; top:50%;left:50%; transform:translate(-50%,-50%); font-size:clamp(40px,10vw,120px); font-weight:800; letter-spacing:.1em; color:rgba(255,255,255,.07); white-space:nowrap; pointer-events:none; }
+  .cs-results-banner h2 { font-size:clamp(20px,3vw,34px); font-weight:800; color:white; letter-spacing:-.02em; position:relative; margin-bottom:8px; }
+  .cs-results-banner p { color:rgba(255,255,255,.82); font-size:.95rem; position:relative; }
+  .cs-result-rows { display:flex; flex-direction:column; }
+  .cs-result-row { display:flex; align-items:center; gap:28px; padding:24px 0; border-bottom:1px solid var(--border); }
+  .cs-result-row:last-child { border-bottom:none; }
+  .cs-result-num {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background:linear-gradient(135deg,var(--cs-a),var(--cs-b));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;}
+  .cs-result-row p { font-size:.9rem; color:var(--text-muted); line-height:1.65; margin:0; }
+  .cs-lessons { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
+  .cs-lesson { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:28px; box-shadow:0 4px 12px rgba(0,0,0,.05); transition:transform .25s,box-shadow .25s; position:relative; overflow:hidden; }
+  .cs-lesson::after { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); opacity:0; transition:opacity .25s; }
+  .cs-lesson:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.09); }
+  .cs-lesson:hover::after { opacity:1; }
+  .cs-lesson-num { font-size:2.2rem; font-weight:800; letter-spacing:-.03em; color:var(--cs-a); opacity:.15; line-height:1; margin-bottom:10px; }
+  .cs-lesson h4 { font-size:.9rem; font-weight:700; color:var(--text-main); margin-bottom:7px; }
+  .cs-lesson p { font-size:.83rem; color:var(--text-muted); line-height:1.65; margin:0; }
+
+  /* ── Concept block ── */
+  .concept-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin: 36px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .concept-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cs-a), var(--cs-b));
+  }
+  .concept-tag {
+    font-size: .67rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cs-a); margin-bottom: 8px;
+  }
+  .concept-block h3 {
+    font-size: 1.2rem; font-weight: 800;
+    letter-spacing: -.02em; color: var(--text-main); margin-bottom: 12px;
+  }
+  .concept-block p {
+    font-size: .9rem; color: var(--text-muted);
+    line-height: 1.75; margin-bottom: 0;
+  }
+
+  /* ── Technique grid ── */
+  .technique-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .technique-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color .2s, background .2s;
+  }
+  .technique-item:hover {
+    background: white;
+    border-color: rgba(45,106,79,.25);
+  }
+  .technique-icon { font-size: 1.4rem; }
+  .technique-name { font-size: .82rem; font-weight: 700; color: var(--text-main); }
+  .technique-desc { font-size: .75rem; color: var(--text-muted); line-height: 1.5; }
+
+  @media(max-width:860px){
+    .cs-two-col { grid-template-columns:1fr; }
+    .cs-stats { grid-template-columns:1fr; }
+    .cs-lessons { grid-template-columns:1fr; }
+    .cs-img-row { grid-template-columns:1fr; }
+    .technique-grid { grid-template-columns:1fr 1fr; }
+    .cs-meta-bar { gap:20px; }
+    .cs-results-banner { padding:40px 24px; }
+  }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+      <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="projects.html" class="back-link reveal">← Back to projects</a>
+
+      <!-- ══ HERO ══ -->
+      <div class="cs-section">
+        <div class="cs-eyebrow reveal">3D & Motion · Concordia CART 361 · 2025</div>
+        <span class="cs-category-pill reveal">3D & Motion</span>
+        <h1 class="cs-title reveal">
+          <span class="aw">Ouroboros</span> —<br>
+          Looping 3D Animation
+        </h1>
+        <p class="cs-lead reveal">
+          A seamlessly looping Blender animation of a willow tree resting on a floating rock — exploring the concept of circular time, stillness within motion, and the meditative quality of cycles that never truly begin or end.
+        </p>
+        <div class="cs-meta-bar reveal">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Course</span>
+            <span class="cs-meta-value">Concordia — CART 361</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">3D Artist, Motion Designer</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Year</span>
+            <span class="cs-meta-value">2025</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Deliverables</span>
+            <span class="cs-meta-value">Looping Animation · 3D Scene · Conceptual Render</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Software</span>
+            <span class="cs-meta-value">Blender</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="cs-img cs-img-tall reveal" style="margin-bottom:64px; overflow:hidden;">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover; object-position: center 40%;">
+          <source src="images/Escapism.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- ══ STATS ══ -->
+      <div class="cs-stats reveal">
+        <div class="cs-stat">
+          <div class="cs-stat-num">∞</div>
+          <div class="cs-stat-label">Seamless loop — no visible start or end</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num">Zen</div>
+          <div class="cs-stat-label">Conceptual grounding — circular time & stillness</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num">3D</div>
+          <div class="cs-stat-label">Full scene: foliage, particle sim, soft lighting</div>
+        </div>
+      </div>
+
+      <!-- ══ 01 CONCEPT ══ -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter">
+          <span class="cs-chapter-num">01</span>
+          <div class="cs-chapter-line"></div>
+          <span class="cs-chapter-label">Concept & Inspiration</span>
+        </div>
+        <div class="cs-divider"></div>
+
+        <div class="cs-two-col">
+          <div>
+            <h2 class="cs-section-title">Time flowing in circles.</h2>
+            <p class="cs-lead">The Ouroboros — the ancient symbol of a snake consuming its own tail — became the conceptual anchor for a 3D animation about cycles: peace, return, and the beauty of things that have no end.</p>
+
+            <div class="concept-block">
+              <p class="concept-tag">The Idea</p>
+              <h3>Stillness within motion.</h3>
+              <p>
+                A willow tree resting on a floating rock, suspended in space. The scene loops endlessly — branches swaying, light shifting — evoking a sense of peace and reflection, as if time itself is breathing in circles. Inspired by Zen gardens, the kintsugi philosophy of imperfect beauty, and the ancient concept of circular time.
+              </p>
+              <p style="margin-top:12px">
+                The project asked a simple question: can motion feel still? Can a 3D animation communicate the experience of sitting quietly beside something ancient and patient, watching it breathe?
+              </p>
+            </div>
+
+            <div class="cs-challenges" style="margin-top: 0">
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">🌀</div>
+                <p><strong>The Ouroboros metaphor:</strong> the loop isn't just technical — it's the conceptual point. The animation has no beginning and no end because the scene itself embodies circular time.</p>
+              </div>
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">🪨</div>
+                <p><strong>Floating island:</strong> the rock detached from any ground, suspended in an ambiguous space — reinforcing the dreamlike, timeless quality of the scene.</p>
+              </div>
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">🌾</div>
+                <p><strong>Willow as symbol:</strong> the willow was chosen deliberately — its long, cascading branches evoke both movement and stillness, bending without breaking, rooted without rigidity.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-img-col">
+            <div class="cs-img cs-img-medium">
+              <img src="images/escapism-image1.png" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            
+            <div class="cs-img cs-img-medium">
+              <img src="images/Escapism-blender.JPG" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 02 PROCESS ══ -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter">
+          <span class="cs-chapter-num">02</span>
+          <div class="cs-chapter-line"></div>
+          <span class="cs-chapter-label">Technical Process</span>
+        </div>
+        <div class="cs-divider"></div>
+
+        <div class="cs-two-col">
+          <div>
+            <h2 class="cs-section-title">Building a scene that breathes.</h2>
+            <p class="cs-lead" style="margin-bottom:8px">Every element — the floating island, the willow canopy, the soft ambient light — had to work together to produce a loop that felt organic rather than mechanical.</p>
+
+            <div class="cs-steps">
+              <div class="cs-step">
+                <span class="cs-step-num">01</span>
+                <div>
+                  <h4>Sketching & Reference Collection</h4>
+                  <p>Sketched multiple compositions of the floating island — exploring scale relationships between the rock mass and the willow canopy — before settling on a balanced, centered arrangement that felt grounded despite being airborne.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">02</span>
+                <div>
+                  <h4>Island & Rock Modeling</h4>
+                  <p>Sculpted the floating rock using Blender's sculpt tools — rough, organic surfaces with soft underside edges to suggest something that has drifted and worn over time. Grass and moss were added using particle systems distributed across the top face.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">03</span>
+                <div>
+                  <h4>Willow Tree Construction</h4>
+                  <p>Built the willow using Blender's Sapling Tree Gen add-on as a structural base, then extended and manually adjusted branches to achieve the characteristic weeping silhouette. Long strand particles were used for the hanging foliage curtain.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">04</span>
+                <div>
+                  <h4>Animation — The Seamless Loop</h4>
+                  <p>The core technical challenge: making the loop invisible. Branch sway was achieved with wind force fields animated to return to their exact starting state at frame 1 = final frame. Particle simulations were baked and synchronized to the same cycle length to avoid any visual discontinuity.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">05</span>
+                <div>
+                  <h4>Lighting & Atmosphere</h4>
+                  <p>Used a soft HDRI sky environment combined with a low-angle sun lamp to create the impression of golden hour light — warm, diffused, and slightly hazy. A subtle fog volume beneath the island reinforced the floating, untethered feeling.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">06</span>
+                <div>
+                  <h4>Rendering & Output</h4>
+                  <p>Rendered in Cycles with denoising for clean, soft results. The final output was assembled in Blender's Video Sequence Editor and exported as a looping animation file.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technique grid -->
+            <div style="margin-top:36px; padding-top:28px; border-top:1px solid var(--border)">
+              <p class="mini" style="margin-bottom:16px">Key Techniques Used</p>
+              <div class="technique-grid">
+                <div class="technique-item">
+                  <span class="technique-icon">🪨</span>
+                  <span class="technique-name">Sculpt Mode</span>
+                  <span class="technique-desc">Organic rock & terrain shaping</span>
+                </div>
+                <div class="technique-item">
+                  <span class="technique-icon">🌿</span>
+                  <span class="technique-name">Particle Systems</span>
+                  <span class="technique-desc">Foliage, grass & moss distribution</span>
+                </div>
+                <div class="technique-item">
+                  <span class="technique-icon">💨</span>
+                  <span class="technique-name">Wind Force Fields</span>
+                  <span class="technique-desc">Cyclic branch & leaf animation</span>
+                </div>
+                <div class="technique-item">
+                  <span class="technique-icon">🌲</span>
+                  <span class="technique-name">Sapling Tree Gen</span>
+                  <span class="technique-desc">Procedural willow structure</span>
+                </div>
+                <div class="technique-item">
+                  <span class="technique-icon">💡</span>
+                  <span class="technique-name">HDRI Lighting</span>
+                  <span class="technique-desc">Soft ambient sky + sun lamp</span>
+                </div>
+                <div class="technique-item">
+                  <span class="technique-icon">🔁</span>
+                  <span class="technique-name">Seamless Loop Sync</span>
+                  <span class="technique-desc">Baked sims matching frame 0 = frame N</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
+
+              <span class="tool-item">🧊 Blender</span>
+              <span class="tool-item">🎥 Cycles Renderer</span>
+              <span class="tool-item">🌲 Sapling Tree Gen</span>
+              <span class="tool-item">🌿 Particle Systems</span>
+              <span class="tool-item">💨 Wind Fields</span>
+              <span class="tool-item">🌅 HDRI Lighting</span>
+              <span class="tool-item">✂️ Video Sequencer</span>
+            
+            </div>
+          </div>
+
+          <div class="cs-img-col" style="position:sticky; top:80px">
+            <div class="cs-img cs-img-medium">
+              <img src="images/Escapism-blender-2.JPG" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            
+            <div class="cs-img cs-img-medium">
+              <img src="images/Escapism-blender-3.JPG" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            
+            <div class="cs-img" style="height:160px">
+              <img src="images/Escapism-blender.JPG" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results banner -->
+      <div class="cs-results-banner reveal">
+        <h2>Stillness within motion.<br>A loop with no beginning.</h2>
+        <p>Concordia University — CART 361 · 2025</p>
+      </div>
+
+      <!-- ══ 03 OUTCOMES ══ -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter">
+          <span class="cs-chapter-num">03</span>
+          <div class="cs-chapter-line"></div>
+          <span class="cs-chapter-label">Outcomes</span>
+        </div>
+        <div class="cs-divider"></div>
+        <h2 class="cs-section-title">What the project achieved.</h2>
+
+        <div class="cs-result-rows">
+          <div class="cs-result-row">
+            <span class="cs-result-num">∞</span>
+            <p>A truly seamless loop — the animation plays continuously with no visible cut, snap, or discontinuity, achieving the Ouroboros concept at a technical level.</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">Full</span>
+            <p>Complete 3D scene built from scratch: sculpted floating island, procedurally generated willow tree, particle grass and moss, atmospheric fog volume, and HDRI lighting.</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">🌿</span>
+            <p>The willow's branch motion reads as organic and alive — not mechanical. The wind cycle is slow enough to feel meditative, rapid enough to maintain visual interest throughout the loop.</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">✅</span>
+            <p>Concept and execution are tightly unified — the idea of circular time isn't just described, it's literally embedded in the structure of the animation itself.</p>
+          </div>
+        </div>
+
+        <div class="cs-img-row" style="margin-top:40px">
+          <div class="cs-img cs-img-medium">
+            <img src="images/escapism-image1.png" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          
+          <div class="cs-img cs-img-medium">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+              <source src="images/Escapism.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 04 LESSONS ══ -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter">
+          <span class="cs-chapter-num">04</span>
+          <div class="cs-chapter-line"></div>
+          <span class="cs-chapter-label">Lessons Learned</span>
+        </div>
+        <div class="cs-divider"></div>
+        <h2 class="cs-section-title">What this project taught me.</h2>
+
+        <div class="cs-lessons">
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">01</div>
+            <h4>Loops are a design constraint, not a limitation</h4>
+            <p>Designing for a seamless loop forced every animation decision to serve the cycle — nothing could be added casually. That constraint produced more intentional, unified motion than an open-ended animation would have.</p>
+          </div>
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">02</div>
+            <h4>Simulation sync is the hardest part of looping</h4>
+            <p>Getting particle systems and force fields to return to their exact starting state — with no visible snap at the loop point — required baking simulations precisely to the cycle length. It taught me that seamless loops are primarily a problem of data management, not artistry.</p>
+          </div>
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">03</div>
+            <h4>Concept should drive every technical choice</h4>
+            <p>The Ouroboros idea — circular time, no beginning or end — wasn't just a title. It shaped the scene composition (floating, untethered), the lighting (golden, timeless), and the animation speed (slow, meditative). Starting with a clear concept made every subsequent decision easier.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let's build experiences together.</h3>
+          <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+        </div>
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+            <button class="btn" type="submit">Send message</button>
+            <div class="muted-block" style="margin-top:8px">
+              You can also reach me directly at
+              <a href="mailto:jeboycompuesto@gmail.com">jeboycompuesto@gmail.com</a>.
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    function handleReveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60)
+          el.classList.add('show');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', handleReveal);
+    window.addEventListener('scroll', handleReveal, { passive: true });
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const kids = entry.target.querySelectorAll(
+          '.cs-challenge,.cs-step,.cs-stat,.cs-lesson,.cs-result-row,.technique-item'
+        );
+        kids.forEach((c, i) => {
+          c.style.opacity = '0';
+          c.style.transform = 'translateY(12px)';
+          c.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+          requestAnimationFrame(() => { c.style.opacity = '1'; c.style.transform = 'none'; });
+        });
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.cs-section, .cs-stats').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

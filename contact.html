@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Portfolio — Contact</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<div class="custom-cursor"></div>
+
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+
+      <!-- Hamburger Menu Button (for mobile) -->
+      <button class="nav-toggle" aria-label="Toggle Menu">
+        &#9776; <!-- simple hamburger icon -->
+      </button>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+
+        <!-- Resume -->
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" 
+          target="_blank" 
+          rel="noopener"
+          class="nav-resume">
+          Resume
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="reveal">Contact</h1>
+      <p class="lead reveal">Collaborations, projects, or inquiries — send a message and I'll get back to you.</p>
+
+      <div style="margin-top:20px" class="card reveal">
+        <form id="contactForm">
+          <input id="name" placeholder="Your name" required>
+          <input id="email" placeholder="Email" type="email" required>
+          <input id="company" placeholder="Company / Role">
+          <textarea id="message" placeholder="Describe your project..." required></textarea>
+          <button class="btn" type="submit">Send message</button>
+          <div id="formMsg" class="muted-block" aria-live="polite"></div>
+        </form>
+      </div>
+    </main>
+
+    <footer style="margin-top:40px">
+      <div style="text-align:center" class="muted-block">All Rights Reserved. Jeboy Compuesto 2026.</div>
+    </footer>
+  </div>
+
+<script src="js/main.js" defer></script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const msg = document.getElementById('formMsg');
+    if(!name){ msg.textContent = 'Please enter your name.'; return; }
+    msg.textContent = `Thanks ${name}! This is a demo; connect a backend to send messages for real.`;
+    this.reset();
+  });
+</script>
+</body>
+</html>

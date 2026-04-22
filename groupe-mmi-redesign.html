@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Website Redesign — Groupe MMI · Jeboy Compuesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --cs-a: #2d3c6a;
+    --cs-b: #528db7;
+    --cs-c: #9ec7ef;
+  }
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); text-decoration:none; font-size:.875rem; margin-bottom:40px; transition:color .2s; }
+  .back-link:hover { color:var(--accent); }
+  .cs-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--cs-a); margin-bottom:20px; }
+  .cs-eyebrow::before { content:''; display:inline-block; width:24px; height:2px; background:var(--cs-a); border-radius:2px; }
+  .cs-title { font-size:clamp(36px,5.5vw,68px); font-weight:800; letter-spacing:-.03em; line-height:1.05; color:var(--text-main); margin-bottom:24px; }
+  .cs-title .aw { background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .cs-lead { font-size:1.05rem; line-height:1.75; color:var(--text-muted); max-width:640px; margin-bottom:28px; }
+  .cs-meta-bar { display:flex; flex-wrap:wrap; gap:32px; padding:28px 32px; background:white; border:1px solid var(--border); border-radius:var(--radius); margin-top:36px; margin-bottom:48px; box-shadow:0 4px 12px rgba(0,0,0,.05); }
+  .cs-meta-item { display:flex; flex-direction:column; gap:4px; }
+  .cs-meta-label { font-size:.65rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
+  .cs-meta-value { font-size:.9rem; font-weight:600; color:var(--text-main); }
+  .cs-category-pill { display:inline-block; font-size:.7rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:#edeaff; color:#5F59A7; margin-bottom:16px; }
+  .cs-chapter { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .cs-chapter-num { font-size:.68rem; font-weight:800; letter-spacing:.14em; color:var(--cs-a); }
+  .cs-chapter-line { width:28px; height:2px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); border-radius:2px; }
+  .cs-chapter-label { font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); }
+  .cs-divider { width:44px; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); border-radius:999px; margin-bottom:24px; }
+  .cs-section { margin-bottom:80px; }
+  .cs-section-title { font-size:clamp(24px,3.2vw,40px); font-weight:800; letter-spacing:-.025em; line-height:1.1; color:var(--text-main); margin-bottom:16px; }
+  .cs-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:72px; }
+  .cs-stat { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:32px 28px; box-shadow:0 4px 12px rgba(0,0,0,.05); position:relative; overflow:hidden; transition:transform .25s,box-shadow .25s; }
+  .cs-stat::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); }
+  .cs-stat:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.09); }
+  .cs-stat-num { font-size:clamp(32px,4vw,48px); font-weight:800; letter-spacing:-.03em; line-height:1; background:linear-gradient(135deg,var(--cs-a),var(--cs-b)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+  .cs-stat-label { font-size:.8rem; font-weight:500; color:var(--text-muted); line-height:1.4; }
+  .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+  .cs-img { border-radius:var(--radius); overflow:hidden; background:linear-gradient(135deg,#fdf4ef,#f5f0ff); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .cs-img-tall   { height:400px; }
+  .cs-img-medium { height:280px; }
+  .cs-img-short  { height:180px; }
+  .ph-icon { font-size:2rem; opacity:.22; }
+  .ph-text { font-size:.67rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); opacity:.55; }
+  .cs-img-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  .cs-img-col { display:flex; flex-direction:column; gap:16px; }
+  .cs-challenges { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .cs-challenge { display:flex; gap:16px; align-items:flex-start; background:white; border:1px solid var(--border); border-radius:12px; padding:18px 20px; box-shadow:0 2px 8px rgba(0,0,0,.04); transition:border-color .2s,box-shadow .2s; }
+  .cs-challenge:hover { border-color:color-mix(in srgb,var(--cs-a) 30%,transparent); box-shadow:0 4px 16px color-mix(in srgb,var(--cs-a) 10%,transparent); }
+  .cs-challenge-icon { width:32px;height:32px;min-width:32px; border-radius:8px; background:linear-gradient(135deg,var(--cs-a),var(--cs-b)); display:flex;align-items:center;justify-content:center; font-size:.9rem; }
+  .cs-challenge p { font-size:.875rem; line-height:1.65; color:var(--text-muted); margin:0; }
+  .cs-steps { display:flex; flex-direction:column; margin-top:8px; }
+  .cs-step { display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+  .cs-step:last-child { border-bottom:none; padding-bottom:0; }
+  .cs-step-num { font-size:.65rem; font-weight:800; letter-spacing:.1em; color:var(--cs-a); min-width:24px; padding-top:3px; }
+  .cs-step h4 { font-size:.9rem; font-weight:700; color:var(--text-main); margin-bottom:5px; }
+  .cs-step p { font-size:.85rem; color:var(--text-muted); line-height:1.65; margin:0; }
+  .cs-results-banner { background:linear-gradient(135deg,var(--cs-a) 0%,var(--cs-b) 55%,var(--cs-c) 100%); border-radius:var(--radius); padding:56px 48px; margin:16px 0 64px; position:relative; overflow:hidden; text-align:center; }
+  .cs-results-banner::before { content:'IMPACT'; position:absolute; top:50%;left:50%; transform:translate(-50%,-50%); font-size:clamp(60px,14vw,160px); font-weight:800; letter-spacing:.1em; color:rgba(255,255,255,.07); white-space:nowrap; pointer-events:none; }
+  .cs-results-banner h2 { font-size:clamp(20px,3vw,34px); font-weight:800; color:white; letter-spacing:-.02em; position:relative; margin-bottom:8px; }
+  .cs-results-banner p { color:rgba(255,255,255,.82); font-size:.95rem; position:relative; }
+  .cs-result-rows { display:flex; flex-direction:column; }
+  .cs-result-row { display:flex; align-items:center; gap:28px; padding:24px 0; border-bottom:1px solid var(--border); }
+  .cs-result-row:last-child { border-bottom:none; }
+  .cs-result-num {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background:linear-gradient(135deg,var(--cs-a),var(--cs-b));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;}
+  .cs-result-row p { font-size:.9rem; color:var(--text-muted); line-height:1.65; margin:0; }
+  .cs-lessons { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
+  .cs-lesson { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:28px; box-shadow:0 4px 12px rgba(0,0,0,.05); transition:transform .25s,box-shadow .25s; position:relative; overflow:hidden; }
+  .cs-lesson::after { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--cs-a),var(--cs-b)); opacity:0; transition:opacity .25s; }
+  .cs-lesson:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.09); }
+  .cs-lesson:hover::after { opacity:1; }
+  .cs-lesson-num { font-size:2.2rem; font-weight:800; letter-spacing:-.03em; color:var(--cs-a); opacity:.15; line-height:1; margin-bottom:10px; }
+  .cs-lesson h4 { font-size:.9rem; font-weight:700; color:var(--text-main); margin-bottom:7px; }
+  .cs-lesson p { font-size:.83rem; color:var(--text-muted); line-height:1.65; margin:0; }
+  .cs-tools-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  @media(max-width:860px){
+    .cs-two-col { grid-template-columns:1fr; }
+    .cs-stats { grid-template-columns:1fr; }
+    .cs-lessons { grid-template-columns:1fr; }
+    .cs-img-row { grid-template-columns:1fr; }
+    .cs-meta-bar { gap:20px; }
+    .cs-results-banner { padding:40px 24px; }
+  }
+</style>
+</head>
+<div class="custom-cursor"></div>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+      <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+      </nav>
+    </header>
+    <main>
+      <a href="projects.html" class="back-link reveal">← Back to projects</a>
+
+      <!-- HERO -->
+      <div class="cs-section">
+        <div class="cs-eyebrow reveal">UX & Design · 2023</div>
+        <span class="cs-category-pill reveal">UX & Design</span>
+        <h1 class="cs-title reveal"><span class="aw">Website Redesign</span> —  Groupe MMI</h1>
+        <p class="cs-lead reveal">Redesigned Groupe MMI's corporate website to modernize the visual identity, improve user engagement, and simplify navigation. The project spanned a full UX/UI cycle: audit, content strategy, redesign, user testing, and WordPress implementation — resulting in measurable improvements across engagement and bounce rate.</p>
+        <div class="cs-meta-bar reveal">
+          <div class="cs-meta-item"><span class="cs-meta-label">Client</span><span class="cs-meta-value">Groupe MMI</span></div>
+          <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-value">UX & UI Designer</span></div>
+          <div class="cs-meta-item"><span class="cs-meta-label">Year</span><span class="cs-meta-value">2023</span></div>
+          <div class="cs-meta-item"><span class="cs-meta-label">Deliverables</span><span class="cs-meta-value">Full Site Redesign · UX Audit · User Testing</span></div>
+        </div>
+      </div>
+
+      <!-- HERO IMAGE -->
+      <div class="cs-img cs-img-tall reveal" style="margin-bottom:64px">
+        <img src="images/case_study_groupe_mmi.png" alt="Groupe MMI Homepage Redesign" 
+        style="width:100%;height:100%;object-fit:cover; object-position:center 28%; border-radius:var(--radius);">
+      </div>
+
+      <!-- STATS -->
+      <div class="cs-stats reveal">
+        
+        <div class="cs-stat">
+          <div class="cs-stat-num">+30%</div>
+          <div class="cs-stat-label">Engagement increase</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num">-20%</div>
+          <div class="cs-stat-label">Bounce rate reduction</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num">Full</div>
+          <div class="cs-stat-label">UX/UI cycle</div>
+        </div>
+      </div>
+
+      <!-- 01 CHALLENGE -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter"><span class="cs-chapter-num">01</span><div class="cs-chapter-line"></div><span class="cs-chapter-label">The Challenge</span></div>
+        <div class="cs-divider"></div>
+        <div class="cs-two-col">
+          <div>
+            <h2 class="cs-section-title">The problem that needed solving.</h2>
+            <p class="cs-lead">Groupe MMI's website had an outdated design, unclear hierarchy, and poor content organization. Users struggled to navigate, leading to high bounce rates, while internal teams faced difficulties updating content in the CMS. The business needed a polished, modern website that strengthened credibility and improved user engagement.            </p>
+            <div class="cs-challenges">
+              
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">🎨</div>
+                <p>Outdated layout with unclear visual hierarchy and inconsistent styling across pages.</p>
+              </div>
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">📉</div>
+                <p>Poor content organization was causing users to drop off early — high bounce rates across key pages.</p>
+              </div>
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">⚙️</div>
+                <p>The CMS was difficult for internal teams to manage, creating delays on every content update.</p>
+              </div>
+              <div class="cs-challenge">
+                <div class="cs-challenge-icon">🏢</div>
+                <p>The business needed a more credible, polished online presence to support client acquisition and trust.</p>
+              </div>
+            </div>
+          </div>
+          <div class="cs-img-col">
+            <div class="cs-img-col">
+              <div class="cs-img cs-img-medium">
+                <img src="images/mmi-case-study-1.png" alt="Full-page Prototype & Wireframes" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 PROCESS -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter"><span class="cs-chapter-num">02</span><div class="cs-chapter-line"></div><span class="cs-chapter-label">Process & Solution</span></div>
+        <div class="cs-divider"></div>
+        <div class="cs-two-col">
+          <div>
+            <h2 class="cs-section-title">How it came together.</h2>
+            <div class="cs-steps">
+              
+              <div class="cs-step">
+                <span class="cs-step-num">01</span>
+                <div>
+                  <h4>UX Audit</h4>
+                  <p>Conducted a thorough UX audit identifying pain points, content gaps, and usability issues across the full site.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">02</span>
+                <div>
+                  <h4>Redesign</h4>
+                  <p>Rebuilt core page templates — homepage, services, about, contact — with improved hierarchy, readability, and visual consistency.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">03</span>
+                <div>
+                  <h4>Navigation</h4>
+                  <p>Restructured the navigation to reduce friction and create clearer, more intuitive user paths to key information.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">04</span>
+                <div>
+                  <h4>Content Strategy</h4>
+                  <p>Optimized content blocks for clarity, SEO, scannability, and conversion — rewriting and reorganizing key pages.</p>
+                </div>
+              </div>
+              <div class="cs-step">
+                <span class="cs-step-num">05</span>
+                <div>
+                  <h4>Testing & Launch</h4>
+                  <p>Validated redesign decisions through moderated user testing, then implemented in WordPress with CMS documentation for the internal team.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cs-tools-row" style="margin-top:12px">
+              <span class="tool-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                Figma
+              </span>
+
+              <span class="tool-item"><img src="https://cdn.simpleicons.org/wordpress/21759B" alt="Wordpress">
+                Wordpress
+              </span>
+
+              <span class="tool-item"><img src="https://cdn.simpleicons.org/googleanalytics/E37400" alt="GA4">
+                GA4
+              </span>
+            </div>
+          </div>
+          <div class="cs-img-col" style="position:sticky;top:80px">
+            <div class="cs-img cs-img-medium">
+              <img src="images/mmi-case-study-2.png" alt="Redesign of about page" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="cs-img cs-img-medium">
+              <img src="images/mmi-case-study-3.png" alt="Additional redesign changes" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS BANNER -->
+      <div class="cs-results-banner reveal">
+        <h2>The work delivered results.</h2>
+        <p>Groupe MMI · 2023</p>
+      </div>
+
+      <!-- 03 RESULTS -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter"><span class="cs-chapter-num">03</span><div class="cs-chapter-line"></div><span class="cs-chapter-label">Impact & Results</span></div>
+        <div class="cs-divider"></div>
+        <h2 class="cs-section-title">What it delivered.</h2>
+        <div class="cs-result-rows">
+          
+          <div class="cs-result-row">
+            <span class="cs-result-num">+30%</span>
+            <p>Engagement increase post-redesign</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">-20%</span>
+            <p>Bounce rate drop from clearer navigation</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">✅</span>
+            <p>Dramatically simplified CMS for internal content updates</p>
+          </div>
+          <div class="cs-result-row">
+            <span class="cs-result-num">💼</span>
+            <p>Refreshed visuals improved brand credibility and client trust</p>
+          </div>
+        </div>
+        <div class="cs-img-row" style="margin-top:40px">
+          <div class="cs-img cs-img-medium">
+            <img src="images/mmi-case-study-2.png" alt="Redesign of about page" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="cs-img cs-img-medium">
+            <img src="images/mmi-case-study-3.png" alt="Additional redesign changes" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 LESSONS -->
+      <div class="cs-section reveal">
+        <div class="cs-chapter"><span class="cs-chapter-num">04</span><div class="cs-chapter-line"></div><span class="cs-chapter-label">Lessons Learned</span></div>
+        <div class="cs-divider"></div>
+        <h2 class="cs-section-title">What this project taught me.</h2>
+        <div class="cs-lessons">
+          
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">01</div>
+            <h4>A UX audit is the most valuable first step</h4>
+            <p>Going into a redesign without understanding why the existing site was failing would have produced a prettier version of the same problems.</p>
+          </div>
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">02</div>
+            <h4>CMS design is UX too</h4>
+            <p>Making the backend easier for the internal team to manage had as much long-term impact as the visual redesign.</p>
+          </div>
+          <div class="cs-lesson">
+            <div class="cs-lesson-num">03</div>
+            <h4>User testing before launch prevents expensive rework</h4>
+            <p>Two rounds of moderated testing caught navigation assumptions that wouldn't have been obvious from the design alone.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let's build experiences together.</h3>
+          <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+        </div>
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+            <button class="btn" type="submit">Send message</button>
+            <div class="muted-block" style="margin-top:8px">
+              You can also reach me directly at <a href="mailto:jeboycompuesto@gmail.com">jeboycompuesto@gmail.com</a>.
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    function handleReveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('show');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', handleReveal);
+    window.addEventListener('scroll', handleReveal, { passive: true });
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const kids = entry.target.querySelectorAll('.cs-challenge,.cs-step,.cs-stat,.cs-lesson,.cs-result-row');
+        kids.forEach((c, i) => {
+          c.style.opacity = '0';
+          c.style.transform = 'translateY(12px)';
+          c.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+          requestAnimationFrame(() => { c.style.opacity='1'; c.style.transform='none'; });
+        });
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.cs-section,.cs-stats').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

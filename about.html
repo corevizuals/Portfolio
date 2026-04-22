@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Portfolio — About</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+
+<style>
+  /* About page visuals */
+  .about-hero { display: flex; gap: 28px; align-items: center; margin-top:36px; flex-wrap: wrap; }
+  .about-hero img { width: 200px; height: 200px; border-radius:50%; object-fit:cover; }
+  .timeline .item { display: flex; align-items: flex-start; gap: 12px; }
+  .timeline .item-icon { font-size:1.2rem; margin-top:3px; color:var(--accent); }
+  .education-cards { display: flex; gap:16px; flex-wrap:wrap; margin-top:16px; }
+  .education-card img { width:60px; height:60px; object-fit:contain; margin-bottom:12px; }
+  .skills-icons { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .skill-pill { display:flex; align-items:center; gap:6px; background:var(--glass); padding:6px 10px; border-radius:999px; font-size:0.85rem; color:var(--muted);}
+  .skill-pill img { width:16px; height:16px; object-fit:contain; }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+
+      <!-- Hamburger Menu Button (for mobile) -->
+      <button class="nav-toggle" aria-label="Toggle Menu">
+        &#9776; <!-- simple hamburger icon -->
+      </button>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+
+        <!-- Resume -->
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" 
+          target="_blank" 
+          rel="noopener"
+          class="nav-resume">
+          Resume
+        </a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- Hero / intro -->
+      <div class="about-hero reveal">
+        <div class="hero-text">
+          <h1>About — Who I am</h1>
+          <p class="lead">
+            I'm a versatile UI/UX designer and co-founder of <strong>Core Vizuals</strong>, a creative agency specializing in immersive, story-driven media. My work spans interactive media, design systems, e-commerce optimization, and digital strategy. I combine UX research, prototyping, data analytics, and front-end development to create digital experiences that are both intuitive and impactful, helping brands and organizations connect with their audiences.
+          </p>
+        </div>
+        <div class="hero-image">
+          <img src="images/nyc-John.jpg" alt="Jeboy Compuesto">
+        </div>
+      </div>
+
+      <!-- Approach + Experience -->
+      <section class="section about-cards">
+        <div class="cards-row">
+          <div class="card reveal">
+            <h3>Approach</h3>
+            <p class="muted-block">
+              I integrate research, design, and technical execution into every project. Motion, accessibility, and usability are core pillars of my work, ensuring clarity, engagement, and measurable impact.
+            </p>
+            <div class="mini">Services</div>
+            <div class="skills-icons">
+              <div class="pill">UI/UX Design</div>
+              <div class="pill">Prototyping & Wireframing</div>
+              <div class="pill">E-commerce Strategy</div>
+              <div class="pill">Front-end Dev</div>
+              <div class="pill">Data Analytics</div>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3>Experience</h3>
+            <p class="muted-block">
+              I’ve worked across tech, fashion, beauty, and entertainment industries — from startups to global brands like L’Oréal Canada and Evenko. My expertise includes UX optimization, digital integrations, and leading creative campaigns with measurable results.
+            </p>
+            <div class="mini">Tools & Stack</div>
+            <div class="skills-icons">
+              <div class="pill">Figma</div>
+              <div class="pill">Adobe Suite</div>
+              <div class="pill">HTML/CSS/JS/PYTHON</div>
+              <div class="pill">Salesforce / CMS</div>
+              <div class="pill">Cloud, Data & Analytics</div>
+              <div class="pill">E-Commerce</div>
+              <div class="pill">Content Management & Platform Tools</div>
+              <div class="pill">Photo & Video Production</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="section">
+        <h3 class="reveal">Timeline</h3>
+        <div class="timeline reveal" style="margin-top:12px">
+
+          <!-- 2025: Core Vizuals & L’Oréal -->
+          <div class="item">
+            <span class="item-icon">💼</span>
+            <strong>2025</strong> — Core Vizuals, Co-Founder & L’Oréal Canada, D2C E-commerce & UX Designer
+            <p style="margin:4px 0 0 28px; color:var(--muted); font-size:0.875rem;">
+              Led high-production campaigns at Core Vizuals; UX optimization, navigation restructuring, search experience redesign, and e-commerce data analytics at L’Oréal.
+            </p>
+          </div>
+
+          <!-- 2024: Evenko -->
+          <div class="item">
+            <span class="item-icon">💼</span>
+            <strong>2024</strong> — Evenko, UI/UX Designer & Digital Platforms Intern
+            <p style="margin:4px 0 0 28px; color:var(--muted); font-size:0.875rem;">
+              Managed digital integrations for venues and festivals, built wireframes and prototypes, and optimized platforms for audience engagement.
+            </p>
+          </div>
+
+          <!-- 2023–2024: Concordia UI/UX -->
+          <div class="item">
+            <span class="item-icon">🎓</span>
+            <strong>2023–2024</strong> — Concordia University, UI/UX Design
+            <p style="margin:4px 0 0 28px; color:var(--muted); font-size:0.875rem;">
+              Took a break from NYU to pursue a tech-art path, earning UI/UX certificates at Concordia. This specialization shaped my niche and prepared me for future internships in UX and digital product design.
+            </p>
+          </div>
+
+          <!-- 2022: NYU -->
+          <div class="item">
+            <span class="item-icon">🎓</span>
+            <strong>2022</strong> — NYU, Digital Communication & Media
+            <p style="margin:4px 0 0 28px; color:var(--muted); font-size:0.875rem;">
+              Accepted to both UBC and NYU, ultimately choosing NYU to study digital media while joining family in the U.S. This sparked my passion for storytelling and interactive design.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- Education / Accolades -->
+      <section style="margin-top:36px">
+        <h3 class="reveal">Education & Accolades</h3>
+        <div class="education-cards reveal">
+          <div class="education-card">
+            <img src="images/NYU-Logo.png" alt="NYU">
+            <strong>NYU</strong>
+            <p>BSc Digital Communication & Media</p>
+          </div>
+          <div class="education-card">
+            <img src="images/Concordia_univ_montreal_textlogo.png" alt="Concordia">
+            <strong>Concordia University</strong>
+            <p>BA Computation Arts & Computer Science</p>
+          </div>
+          <div class="education-card">
+            <img src="images/Concordia_univ_montreal_textlogo.png" alt="UX Certificate">
+            <strong>UX Design Certificate</strong>
+            <p>Interaction Design Foundation</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Featured Article -->
+      <section class="press-section reveal">
+        <h2>Featured In</h2>
+
+        <div class="press-card">
+          <img src="images/concordia-article.png" class="press-img" alt="Concordia Article">
+
+          <div class="press-content">
+            <h3>Concordia University — Feature Article</h3>
+            <p>A highlight on my creative journey, leadership at Core Vizuals, and the work I've done for big brands and major events across Montréal.</p>
+            <a href="https://www.concordia.ca/cunews/offices/provost/cce/2025/12/09/how-a-concordia-student-earned-a-ux-role-loreal-created-just-for-him.html" target="_blank" class="press-btn">
+              Read Full Article
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let’s build experiences together.</h3>
+          <p class="muted-block">
+            I create immersive digital experiences shaped by UX, media, and storytelling.
+          </p>
+        </div>
+
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+
+            <button class="btn" type="submit">Send message</button>
+
+            <div class="muted-block" style="margin-top:8px">
+              You can also reach me directly at 
+              <a href="mailto:jeboycompuesto@gmail.com">jeboycompuesto@gmail.com</a>.
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

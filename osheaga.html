@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Osheaga — Festival App & Product Design · Jeboy Compuesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+  /* ── Osheaga accent palette (decorative only) ── */
+  :root {
+    --osh-orange: #FF5C00;
+    --osh-coral:  #FF3D6B;
+    --osh-violet: #6B21FF;
+    --osh-gold:   #FFB830;
+  }
+
+  /* ── Back link ── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 40px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+
+  .ocb-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .ocb-hero-image img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  .osh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--osh-orange);
+    margin-bottom: 20px;
+  }
+  .osh-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 2px;
+    background: var(--osh-orange);
+    border-radius: 2px;
+  }
+
+  .osh-title {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text-main);
+    margin-bottom: 24px;
+  }
+  .osh-title .accent-word {
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .osh-lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+
+  .osh-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 28px 32px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-top: 36px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .osh-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .osh-meta-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .osh-meta-value { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+
+  /* ── Chapter marker ── */
+  .osh-chapter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .osh-chapter-num {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--osh-orange);
+  }
+  .osh-chapter-line {
+    width: 28px; height: 2px;
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral));
+    border-radius: 2px;
+  }
+  .osh-chapter-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .osh-divider {
+    width: 44px; height: 3px;
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral));
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  /* ── Section ── */
+  .osh-section { margin-bottom: 80px; }
+
+  .osh-section-title {
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 16px;
+  }
+
+  /* ── Stats ── */
+  .osh-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .osh-stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .osh-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral));
+  }
+  .osh-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .osh-stat-num {
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--osh-orange), var(--osh-coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .osh-stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── Two col ── */
+  .osh-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ── Image placeholders ── */
+  .osh-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, #fdf4ef 0%, #f5f0ff 100%);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .osh-img-tall   { height: 400px; }
+  .osh-img-medium { height: 280px; }
+  .osh-img-short  { height: 180px; }
+  .osh-img .ph-icon { font-size: 2rem; opacity: 0.22; }
+  .osh-img .ph-text {
+    font-size: 0.67rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); opacity: 0.55;
+  }
+  .osh-img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .osh-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  }
+
+  /* ── Challenge cards ── */
+  .osh-challenges { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .osh-challenge {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .osh-challenge:hover {
+    border-color: rgba(255,92,0,0.25);
+    box-shadow: 0 4px 16px rgba(255,92,0,0.07);
+  }
+  .osh-challenge-icon {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--osh-orange), var(--osh-coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .osh-challenge p { font-size: 0.875rem; line-height: 1.65; color: var(--text-muted); margin: 0; }
+
+  /* ── Field work block ── */
+  .osh-fieldwork {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin: 36px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .osh-fieldwork::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral), var(--osh-violet));
+  }
+  .osh-fieldwork-tag {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--osh-orange);
+    margin-bottom: 6px;
+  }
+  .osh-fieldwork h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin-bottom: 10px;
+  }
+  .osh-fieldwork p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 580px; }
+
+  .poi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .poi-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .poi-item:hover { background: white; border-color: rgba(255,92,0,0.25); }
+  .poi-emoji { font-size: 1.3rem; }
+  .poi-label {
+    font-size: 0.64rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── Steps ── */
+  .osh-steps { display: flex; flex-direction: column; margin-top: 8px; }
+  .osh-step {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .osh-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .osh-step-num {
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--osh-orange);
+    min-width: 24px;
+    padding-top: 3px;
+  }
+  .osh-step h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 5px; }
+  .osh-step p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* ── Results banner ── */
+  .osh-results-banner {
+    background: linear-gradient(135deg, var(--osh-orange) 0%, var(--osh-coral) 55%, var(--osh-violet) 100%);
+    border-radius: var(--radius);
+    padding: 56px 48px;
+    margin: 16px 0 64px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .osh-results-banner::before {
+    content: 'IMPACT';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 14vw, 160px);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.07);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .osh-results-banner h2 {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .osh-results-banner p { color: rgba(255,255,255,0.82); font-size: 0.95rem; position: relative; }
+
+  /* ── Result rows ── */
+  .osh-result-rows { display: flex; flex-direction: column; }
+  .osh-result-row {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .osh-result-row:last-child { border-bottom: none; }
+  .osh-result-num {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    min-width: 110px;
+    background: linear-gradient(135deg, var(--osh-orange), var(--osh-coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .osh-result-row p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* ── Lessons ── */
+  .osh-lessons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .osh-lesson {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .osh-lesson::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--osh-orange), var(--osh-coral));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .osh-lesson:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .osh-lesson:hover::after { opacity: 1; }
+  .osh-lesson-num {
+    font-size: 2.2rem; font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--osh-orange); opacity: 0.15;
+    line-height: 1; margin-bottom: 10px;
+  }
+  .osh-lesson h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 7px; }
+  .osh-lesson p  { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .osh-two-col { grid-template-columns: 1fr; }
+    .osh-stats   { grid-template-columns: 1fr; }
+    .poi-grid    { grid-template-columns: repeat(2, 1fr); }
+    .osh-lessons { grid-template-columns: 1fr; }
+    .osh-img-row { grid-template-columns: 1fr; }
+    .osh-meta-bar { gap: 20px; }
+    .osh-results-banner { padding: 40px 24px; }
+  }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+
+<body>
+  <div class="wrap">
+
+    <!-- ── NAV ── -->
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+      <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <a href="projects.html" class="back-link reveal">← Back to projects</a>
+
+      <!-- ══ HERO ══ -->
+      <div class="osh-section">
+        <div class="osh-eyebrow reveal">Product Design · Festival Experience · 2024</div>
+        <h1 class="osh-title reveal">
+          <span class="accent-word">Osheaga</span> —<br>
+          Festival App &<br>Product Design
+        </h1>
+        <p class="osh-lead reveal">
+          End-to-end product design for Osheaga, Ilesoniq & Lasso — from on-site field research to app UX, contest pages, and content integration. Three festivals. One summer.
+        </p>
+        <div class="osh-meta-bar reveal">
+          <div class="osh-meta-item">
+            <span class="osh-meta-label">Client</span>
+            <span class="osh-meta-value">Evenko</span>
+          </div>
+          <div class="osh-meta-item">
+            <span class="osh-meta-label">Role</span>
+            <span class="osh-meta-value">Product Designer & UX Researcher</span>
+          </div>
+          <div class="osh-meta-item">
+            <span class="osh-meta-label">Festivals</span>
+            <span class="osh-meta-value">Osheaga · Ilesoniq · Lasso</span>
+          </div>
+          <div class="osh-meta-item">
+            <span class="osh-meta-label">Year</span>
+            <span class="osh-meta-value">2024</span>
+          </div>
+          <div class="osh-meta-item">
+            <span class="osh-meta-label">Deliverables</span>
+            <span class="osh-meta-value">App UX · Maps · Contests · CMS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="osh-img osh-img-tall reveal" style="margin-bottom: 64px">
+        <img src="https://images.ctfassets.net/dv1qnlptav0x/3e0r5GoeMjWs18m70xMRS9/accd2c7459603c29162fd18f70143ae0/Ambiance_osheaga_2024_benoit_rousseau_AAA07760-Panorama.jpg?w=2000&h=779" alt="Osheaga crowd panorama">
+      </div>
+
+      <!-- ══ STATS ══ -->
+      <div class="osh-stats reveal">
+        <div class="osh-stat">
+          <div class="osh-stat-num">3</div>
+          <div class="osh-stat-label">Festivals designed end-to-end</div>
+        </div>
+        <div class="osh-stat">
+          <div class="osh-stat-num">45K+</div>
+          <div class="osh-stat-label">Contest entries generated</div>
+        </div>
+        <div class="osh-stat">
+          <div class="osh-stat-num">70%</div>
+          <div class="osh-stat-label">Increase in digital engagement</div>
+        </div>
+      </div>
+
+      <!-- ══ 01 CHALLENGE ══ -->
+      <div class="osh-section reveal">
+        <div class="osh-chapter">
+          <span class="osh-chapter-num">01</span>
+          <div class="osh-chapter-line"></div>
+          <span class="osh-chapter-label">The Challenge</span>
+        </div>
+        <div class="osh-divider"></div>
+
+        <div class="osh-two-col">
+          <div>
+            <h2 class="osh-section-title">Designing for 350k+ people who can't wait.</h2>
+            <p class="osh-lead">Festival apps live or die in the first ten minutes of opening weekend. Every map error, every broken schedule — the audience feels it immediately, live, at scale.</p>
+            <div class="osh-challenges">
+              <div class="osh-challenge">
+                <div class="osh-challenge-icon">⚡</div>
+                <p>Three major festivals ran back-to-back, compressing design, QA, and publishing timelines simultaneously — with no recovery window between events.</p>
+              </div>
+              <div class="osh-challenge">
+                <div class="osh-challenge-icon">📍</div>
+                <p>App maps needed to reflect real physical conditions — stages, bathrooms, food zones, accessibility — which couldn't be produced accurately without ground-truth on-site data.</p>
+              </div>
+              <div class="osh-challenge">
+                <div class="osh-challenge-icon">📱</div>
+                <p>Apps had to serve tens of thousands of concurrent users: outdoors, poor signal, mobile, direct sunlight. Every decision had to be optimized for those real-world conditions.</p>
+              </div>
+              <div class="osh-challenge">
+                <div class="osh-challenge-icon">🚫</div>
+                <p>All content had to be accurate on day one — no room for post-launch corrections during a live event in front of a massive, real-time audience.</p>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="osh-img osh-img-medium">
+              <img src="https://montrealrocks.ca/wp-content/uploads/2019/08/JD-Osheaga-237.jpg" alt="Festival grounds crowd">
+            </div>
+            <div class="osh-img osh-img-short">
+              <img src="images/osheaga-app-map-display-2.png" alt="Osheaga app map interface">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 02 FIELD RESEARCH ══ -->
+      <div class="osh-section reveal">
+        <div class="osh-chapter">
+          <span class="osh-chapter-num">02</span>
+          <div class="osh-chapter-line"></div>
+          <span class="osh-chapter-label">Field Research</span>
+        </div>
+        <div class="osh-divider"></div>
+
+        <h2 class="osh-section-title">I went to the festival. As research.</h2>
+        <p class="osh-lead">The most valuable design work wasn't in Figma — it was physically walking the grounds with a structured mapping template, capturing data no remote designer could produce accurately.</p>
+
+        <div class="osh-fieldwork">
+          <p class="osh-fieldwork-tag">On-Site Data Collection — Osheaga · Ilesoniq · Lasso</p>
+          <h3>From the grounds up.</h3>
+          <p>Every point of interest was logged on-site, verified against real physical conditions, and structured into datasets delivered to the dev team for integration into the live app map layer. This process became the repeatable framework used across all three festivals.</p>
+          <div class="poi-grid">
+            <div class="poi-item"><span class="poi-emoji">🎤</span><span class="poi-label">Stages</span></div>
+            <div class="poi-item"><span class="poi-emoji">🍔</span><span class="poi-label">Food Zones</span></div>
+            <div class="poi-item"><span class="poi-emoji">🚻</span><span class="poi-label">Bathrooms</span></div>
+            <div class="poi-item"><span class="poi-emoji">💧</span><span class="poi-label">Water Stations</span></div>
+            <div class="poi-item"><span class="poi-emoji">♿</span><span class="poi-label">Accessibility</span></div>
+            <div class="poi-item"><span class="poi-emoji">🚑</span><span class="poi-label">Medical Points</span></div>
+            <div class="poi-item"><span class="poi-emoji">🗺️</span><span class="poi-label">Entry Gates</span></div>
+            <div class="poi-item"><span class="poi-emoji">📦</span><span class="poi-label">Merch Areas</span></div>
+          </div>
+        </div>
+
+        <div class="osh-img-row">
+          <div class="osh-img osh-img-medium">
+            <img src="https://i.redd.it/owmgkzcqqhfb1.jpg" alt="Festival map layout">
+          </div>
+          <div class="osh-img osh-img-medium">
+            <img src="https://cultmtl.com/wp-content/uploads/2023/03/50168DA3-E4BF-4B3D-959E-7726C2EE73F0.jpeg" alt="Festival environment">
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 03 DESIGN PROCESS ══ -->
+      <div class="osh-section reveal">
+        <div class="osh-chapter">
+          <span class="osh-chapter-num">03</span>
+          <div class="osh-chapter-line"></div>
+          <span class="osh-chapter-label">Design Process</span>
+        </div>
+        <div class="osh-divider"></div>
+
+        <div class="osh-two-col">
+          <div>
+            <h2 class="osh-section-title">From field notes to finished product.</h2>
+            <p class="osh-lead">Every design decision was grounded in what real festival-goers needed — fast, outdoor, on poor signal.</p>
+
+            <div class="osh-steps">
+              <div class="osh-step">
+                <span class="osh-step-num">01</span>
+                <div>
+                  <h4>App Navigation & Interactive Map Design</h4>
+                  <p>Designed core app sections — artist schedule views, interactive stage maps, and navigation flows optimized for first-time and returning festival-goers, all informed by on-site field data.</p>
+                </div>
+              </div>
+              <div class="osh-step">
+                <span class="osh-step-num">02</span>
+                <div>
+                  <h4>Artist Schedules & Lineup Integration</h4>
+                  <p>Integrated artist lineup data into the app CMS, ensuring schedule accuracy across all stages and set times — one of the most time-sensitive sections of any festival app.</p>
+                </div>
+              </div>
+              <div class="osh-step">
+                <span class="osh-step-num">03</span>
+                <div>
+                  <h4>Homepage & Hero Redesigns</h4>
+                  <p>Redesigned homepage layouts and hero sections for each festival's web presence, maintaining brand consistency while adapting to each event's distinct visual identity.</p>
+                </div>
+              </div>
+              <div class="osh-step">
+                <span class="osh-step-num">04</span>
+                <div>
+                  <h4>Contest Pages — Club Bell</h4>
+                  <p>Designed 3 large-scale contest pages across all three festivals — entry flows, prize displays, and legal copy. Combined: 45K+ entries.</p>
+                </div>
+              </div>
+              <div class="osh-step">
+                <span class="osh-step-num">05</span>
+                <div>
+                  <h4>Sustainability & Info Pages</h4>
+                  <p>Rebuilt info pages with improved structure so users could find key information fast — optimized for real outdoor, high-distraction conditions.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
+              <p class="mini">Tools & Stack</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+                <span class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"> Figma</span>
+                <span class="tool-item"><img src="https://logo.svgcdn.com/logos/contentful.svg" alt="Contentful"> Contentful</span>
+                <span class="tool-item"><img src="https://cdn.simpleicons.org/googleanalytics/E37400" alt="GA4"> GA4</span>
+                <span class="tool-item"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Sheets"> Google Sheets</span>
+                <span class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack"> Slack</span>
+                <span class="tool-item">🗺️ On-Site Field Collection</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:80px">
+            <div class="osh-img osh-img-medium">
+              <img src="https://images.ctfassets.net/dv1qnlptav0x/6GrBlPlNPJIXU8pv1p5CUV/856cd1422f1fd70b304a2a29b847acd0/101-crowd___misc-ile_soniq_2023-day_2-photo_susan_moss__1_.jpg?w=2048&h=1365" alt="Ilesoniq crowd">
+            </div>
+            <div class="osh-img osh-img-medium">
+              <img src="images/osheaga-app-map-display-2.png" alt="Osheaga app map interface">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ RESULTS BANNER ══ -->
+      <div class="osh-results-banner reveal">
+        <h2>It shipped. It worked.<br>People felt it.</h2>
+        <p>Three festivals. One summer. Zero critical map errors at any live event.</p>
+      </div>
+
+      <!-- ══ 04 IMPACT ══ -->
+      <div class="osh-section reveal">
+        <div class="osh-chapter">
+          <span class="osh-chapter-num">04</span>
+          <div class="osh-chapter-line"></div>
+          <span class="osh-chapter-label">Impact & Results</span>
+        </div>
+        <div class="osh-divider"></div>
+        <h2 class="osh-section-title">Numbers that hit.</h2>
+
+        <div class="osh-result-rows">
+          <div class="osh-result-row">
+            <span class="osh-result-num">0</span>
+            <p>Critical map errors during any of the three live festival weekends — all field-verified location data was accurate from day one.</p>
+          </div>
+          <div class="osh-result-row">
+            <span class="osh-result-num">45K+</span>
+            <p>Combined contest entries across the Osheaga, Ilesoniq, and Lasso Club Bell contest pages.</p>
+          </div>
+          <div class="osh-result-row">
+            <span class="osh-result-num">70%</span>
+            <p>Increase in digital engagement across festival platforms following homepage redesigns and content restructuring.</p>
+          </div>
+          <div class="osh-result-row">
+            <span class="osh-result-num">3×</span>
+            <p>The on-site data collection framework I developed was reused unchanged across all three festivals — the repeatable standard for future events.</p>
+          </div>
+        </div>
+
+        <div class="osh-img-row" style="margin-top:40px">
+          <div class="osh-img osh-img-medium">
+            <img src="https://images.ctfassets.net/dv1qnlptav0x/19YWBCoFTnmDz5EhFQn3oC/d65a3b9eea4c46c25e3f08239be243a4/osheaga_club_bell_1.jpg" alt="Club Bell contest">
+          </div>
+          <div class="osh-img osh-img-medium">
+            <img src="https://montrealrocks.ca/wp-content/uploads/2019/08/JD-Osheaga-237.jpg" alt="Festival engagement crowd">
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ 05 LESSONS ══ -->
+      <div class="osh-section reveal">
+        <div class="osh-chapter">
+          <span class="osh-chapter-num">05</span>
+          <div class="osh-chapter-line"></div>
+          <span class="osh-chapter-label">Lessons Learned</span>
+        </div>
+        <div class="osh-divider"></div>
+        <h2 class="osh-section-title">What this project taught me.</h2>
+
+        <div class="osh-lessons">
+          <div class="osh-lesson">
+            <div class="osh-lesson-num">01</div>
+            <h4>Go where your users are</h4>
+            <p>Being physically present at the festivals was the most valuable research method. No remote design work could have produced the same map accuracy. Good research means going to the source.</p>
+          </div>
+          <div class="osh-lesson">
+            <div class="osh-lesson-num">02</div>
+            <h4>Design for the real moment</h4>
+            <p>Festival UX is a distinct challenge: outdoors, distracted, poor signal, moving crowds. Every decision had to optimize for real conditions — not ideal lab conditions.</p>
+          </div>
+          <div class="osh-lesson">
+            <div class="osh-lesson-num">03</div>
+            <h4>Speed at quality is a learnable skill</h4>
+            <p>Running three simultaneous product cycles taught me how to context-switch at pace without dropping quality — a skill that transfers directly to any fast-moving product team.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── FOOTER (identical to rest of portfolio) ── -->
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let's build experiences together.</h3>
+          <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+        </div>
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+            <button class="btn" type="submit">Send message</button>
+            <div class="muted-block" style="margin-top:8px">
+              You can also reach me directly at
+              <a href="mailto:jeboycompuesto@gmail.com">jeboycompuesto@gmail.com</a>.
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    // Scroll reveal — same pattern as main.js
+    function handleReveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60)
+          el.classList.add('show');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', handleReveal);
+    window.addEventListener('scroll', handleReveal, { passive: true });
+
+    // Stagger children inside sections as they enter view
+    const staggerObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const kids = entry.target.querySelectorAll(
+          '.osh-challenge, .osh-step, .osh-stat, .poi-item, .osh-lesson, .osh-result-row'
+        );
+        kids.forEach((child, i) => {
+          child.style.opacity = '0';
+          child.style.transform = 'translateY(12px)';
+          child.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+          requestAnimationFrame(() => {
+            child.style.opacity = '1';
+            child.style.transform = 'none';
+          });
+        });
+        staggerObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.osh-section, .osh-stats').forEach(el => staggerObs.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Portfolio — Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+  /* ── Filter Pills ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .filter-btn {
+    background: #f1f0fb;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--ff);
+  }
+
+  .filter-btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ── Category badge on card ── */
+  .proj-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+
+  .cat-ux       { background: #edeaff; color: #5F59A7; }
+  .cat-ecom     { background: #e3f0ff; color: #1a5fa8; }
+  .cat-dev      { background: #e0f5ee; color: #1a7a55; }
+  .cat-creative { background: #fff3e0; color: #b06000; }
+  .cat-3d       { background: #fce4ec; color: #ad1457; }
+
+  /* ── Placeholder thumb ── */
+  .thumb-placeholder {
+    height: 170px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .thumb-placeholder .ph-icon {
+    font-size: 2rem;
+    opacity: 0.35;
+  }
+
+  /* Hide filtered-out cards */
+  .project.hidden { display: none !important; }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+      <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1 class="reveal">Projects</h1>
+        <p class="lead reveal">Selected case studies — click a project to open the case page.</p>
+      </section>
+
+      <!-- ── Filter Bar ── -->
+      <div class="filter-bar reveal" style="margin-top:28px">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ux">UX/UI & Product Design</button>
+        <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+        <button class="filter-btn" data-filter="dev">Dev & Engineering</button>
+        <button class="filter-btn" data-filter="creative">Creative Technology</button>
+        <button class="filter-btn" data-filter="3d">3D & Motion</button>
+        <button class="filter-btn" data-filter="interactive">Interactive Installations</button>
+      </div>
+
+      <section class="portfolio" id="projectGrid" style="margin-top:0">
+
+        <!-- ──────── UX & Design ──────── -->
+        <article class="project reveal" tabindex="0" data-slug="loreal-ux-optimization" data-href="loreal-ux-optimization.html" data-category="ux">
+          <div class="thumb"><img src="images/kerastase-test.png" alt="L'Oréal UX Optimization"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UX & Design</span>
+            <h3 class="proj-title">A/B Testing & UX Optimization</h3>
+            <p class="proj-desc">Designed and A/B tested product benefit pictograms for Kerastase, +12% revenue per visitor and +15% total revenue.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="osheaga-product-design" data-href="osheaga.html" data-category="ux">
+          <div class="thumb"><img src="images/osheaga-app-map-display-2.png" alt="Osheaga Product Design"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UI/UX & Product Design</span>
+            <h3 class="proj-title">Osheaga — Festival App & Product Design</h3>
+            <p class="proj-desc">End-to-end product design for Osheaga, Ilesoniq & Lasso — from on-site field research and app UX to contest pages and content integration.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="loreal-user-testing" data-href="loreal-user-testing.html" data-category="ux">
+          <div class="thumb"><img src="images/LRPxKhiels.png" alt="L'Oréal User Testing"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UX & Design</span>
+            <h3 class="proj-title">User Testing Workshops</h3>
+            <p class="proj-desc">Conducted usability testing for Kiehl's & La Roche-Posay, generating data to improve navigation and menu structure.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="loreal-prototyping" data-href="loreal-prototyping.html" data-category="ux">
+          <div class="thumb"><img src="images/vente-beaute.png" alt="L'Oréal Prototyping"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UX/UI & Product Design</span>
+            <h3 class="proj-title">Wireframes & Prototyping</h3>
+            <p class="proj-desc">Designed Employee Vente Beauté platform to streamline internal browsing, checkout, and recommendations.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="evenko-wireframes" data-href="evenko-wireframes.html" data-category="ux">
+          <div class="thumb"><img src="images/mtelus.png" alt="Evenko Wireframes"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UX/UI & Product Design</span>
+            <h3 class="proj-title">Wireframes — MTELUS</h3>
+            <p class="proj-desc">Created "Mon espace/client Salesforce" wireframes for MTELUS to improve access to personalized event data.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="groupe-mmi-redesign" data-href="groupe-mmi-redesign.html" data-category="ux">
+          <div class="thumb"><img src="images/case_study_groupe_mmi.png" alt="Groupe MMI Redesign"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ux">UUI & Product Design</span>
+            <h3 class="proj-title">Website Redesign — Groupe MMI</h3>
+            <p class="proj-desc">Redesigned website, improving engagement by 30% and bounce rate by 20%, including content optimization and user testing.</p>
+          </div>
+        </article>
+
+        <!-- ──────── E-Commerce ──────── -->
+        <article class="project reveal" tabindex="0" data-slug="loreal-ecommerce" data-href="loreal-ecommerce.html" data-category="ecommerce">
+          <div class="thumb"><img src="https://alloy.ai/wp-content/uploads/2019/09/Amazon-banner.jpg" alt="L'Oréal Amazon Analytics"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ecom">E-Commerce</span>
+            <h3 class="proj-title">Amazon Storefront Analytics</h3>
+            <p class="proj-desc">Consolidated multi-source Amazon L'Oréal data to optimize performance for high-impact sales events like Prime Day.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="evenko-integrations" data-href="evenko-integrations.html" data-category="ecommerce">
+          <div class="thumb"><img src="images/case_study_evenko.png" alt="Evenko Integrations"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ecom">E-Commerce</span>
+            <h3 class="proj-title">Show & Events Integrations</h3>
+            <p class="proj-desc">Managed digital integrations for 6+ venues, 100+ shows, and major events attracting 1M+ attendees annually.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="evenko-migration" data-href="evenko-migration.html" data-category="ecommerce">
+          <div class="thumb"><img src="images/montreal-en-lumieres.png" alt="Evenko Migration"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-ecom">E-Commerce</span>
+            <h3 class="proj-title">Platform Migration — Montréal en Lumières</h3>
+            <p class="proj-desc">Led migration of 1000+ events for Montréal en Lumière, ensuring data continuity and accuracy across platforms.</p>
+          </div>
+        </article>
+
+        <!-- ──────── Dev & Engineering ──────── -->
+        <article class="project reveal" tabindex="0" data-slug="breathe-easy" data-href="breathe-easy.html" data-category="dev">
+          <div class="thumb"><img src="images/weather-image.jpg" alt="weather" style="width:100%;height:100%;object-fit:cover;object-position: center 30%;"></div>
+
+          <div class="proj-body">
+            <span class="proj-category cat-dev">Dev & Engineering</span>
+            <h3 class="proj-title">Breathe Easy — Air Quality Explorer</h3>
+            <p class="proj-desc">Python CLI app fetching live AQI data via public API, rendering colorized emoji-driven terminal output across global cities.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="collective-garden" data-href="collective-garden.html" data-category="dev">
+          <div class="thumb"><img src="images/collective-garden-cover.png" alt="garden image" style="width:100%;height:100%;object-fit:cover;object-position: center 40%;"></div>
+
+          <div class="proj-body">
+            <span class="proj-category cat-dev">Dev & Engineering</span>
+            <h3 class="proj-title">The Collective Garden</h3>
+            <p class="proj-desc">Real-time multiplayer browser app — Flask + MongoDB Atlas + Socket.IO backend with p5.js canvas rendering and live collaborative chat.</p>
+          </div>
+        </article>
+
+        <!-- ──────── Creative Technology ──────── -->
+
+        <article class="project reveal" tabindex="0" data-slug="sports-soundscape" data-href="sports-soundscape.html" data-category="creative">
+          <div class="thumb">
+            <img 
+              src="https://www.hoopshq.com/wp-content/uploads/sites/3/2025/05/ncaa-revenuesharing-hero1.jpg?w=1200" 
+              alt="Interactive Sports Soundscape"
+              style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div class="proj-body">
+            <span class="proj-category cat-creative">Creative Technology</span>
+            <h3 class="proj-title">Interactive Sports Soundscape</h3>
+            <p class="proj-desc">Generative audio environment in Max/MSP using NCAA field recordings, probabilistic event triggers, and a 2D interactive spatial visualizer.</p>
+          </div>
+        </article>
+
+        <article class="project reveal" tabindex="0" data-slug="core-vizuals-showcase" data-href="core-vizuals-showcase.html" data-category="creative">
+          <div class="thumb"><img src="images/core-vizuals-showcase-image.jpg" alt="Core Vizuals Showcase"></div>
+          <div class="proj-body">
+            <span class="proj-category cat-creative">Creative Technology</span>
+            <h3 class="proj-title">Core Vizuals Showcase</h3>
+            <p class="proj-desc">A showcase of interactive media and digital experiences across music, fashion, sports, and beauty — as Founder & CEO of Core Vizuals.</p>
+          </div>
+        </article>
+
+        <!-- ──────── 3D & Motion ──────── -->
+        <article class="project reveal" tabindex="0" data-slug="surface-tensions" data-href="surface-tensions.html" data-category="3d">
+          <div class="thumb"><img src="images/ring-image1.PNG" alt="3D animation ring" style="width:100%;height:100%;object-fit:cover;object-position: center 30%;"></div>
+
+          <div class="proj-body">
+            <span class="proj-category cat-3d">3D & Motion</span>
+            <h3 class="proj-title">Surface Tensions — Blender</h3>
+            <p class="proj-desc">Low-poly hard-surface ring with cracked iridescent inner core — a material study in resilience, imperfection, and symbolic storytelling.</p>
+          </div>
+        </article>
+        <article class="project reveal" tabindex="0" data-slug="ouroboros" data-href="ouroboros.html" data-category="3d">
+          <div class="thumb"><img src="images/escapism-image1.png" alt="3D animation"></div>
+
+          <div class="proj-body">
+            <span class="proj-category cat-3d">3D & Motion</span>
+            <h3 class="proj-title">Ouroboros — Looping 3D Animation</h3>
+            <p class="proj-desc">A seamlessly looping Blender animation of a willow tree on a floating rock — exploring stillness within motion, circular time, and Zen aesthetics.</p>
+          </div>
+        </article>
+
+
+        <!-- ──────── Interactive Installations ──────── -->
+        <article class="project reveal" tabindex="0" data-slug="ndako-bukas" data-href="ndako-bukas.html" data-category="interactive">
+          <div class="thumb"><img src="images/Ndako_Bukas-1.png" alt="Ndako Bukas — Tomorrow House" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;"></div>
+          <div class="proj-body">
+            <span class="proj-category" style="background:#f0e8ff;color:#6b2e9c;">🎛️ Interactive Installation · CART 360</span>
+            <h3 class="proj-title">Ndako Bukas — Tomorrow House</h3>
+            <p class="proj-desc">Proximity-reactive installation combining 12 servo motors, NeoPixel LEDs, and an ultrasonic sensor. Human presence controls mechanical roof panels and light — house music meets architecture.</p>
+          </div>
+        </article>
+
+
+      </section>
+
+      <section class="media-feature reveal" style="margin-top:30px">
+        <div class="card" style="padding:20px">
+          <h3 style="margin:0 0 8px">Featured By Concordia University</h3>
+          <p class="muted-block" style="margin-bottom:10px">
+            Recognized for my work in UI/UX & Product Design, digital storytelling, and founding Core Vizuals.
+          </p>
+          <a href="https://www.concordia.ca/cunews/offices/provost/cce/2025/12/09/how-a-concordia-student-earned-a-ux-role-loreal-created-just-for-him.html" class="pill" target="_blank">Read the Article →</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let's build experiences together.</h3>
+          <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+        </div>
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+            <button class="btn" type="submit">Send message</button>
+            <div class="muted-block" style="margin-top:8px">
+              You can also reach me directly at <a href="/cdn-cgi/l/email-protection#93f9f6f1fceaf0fcfee3e6f6e0e7fcd3f4fef2faffbdf0fcfe"><span class="__cf_email__" data-cfemail="274d4245485e44484a57524254534867404a464e4b0944484a">[email&#160;protected]</span></a>.
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js" defer></script>
+  <script>
+    // ── Filter logic ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects   = document.querySelectorAll('.project');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        projects.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    // ── Card click → case page ──
+    projects.forEach(card => {
+      card.addEventListener('click', () => {
+        const href = card.dataset.href;
+        if (href) {
+          window.location.href = href;
+        } else {
+          window.location.href = `case.html?slug=${card.dataset.slug}`;
+        }
+      });
+      card.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          const href = card.dataset.href;
+          window.location.href = href || `case.html?slug=${card.dataset.slug}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

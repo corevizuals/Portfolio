@@ -1,0 +1,1624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>OnCall Balance — Case Study · Jeboy Compuesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --cl-sand:   #D4A853;
+    --cl-rust:   #C2643A;
+    --cl-brown:  #8B4E2A;
+    --cl-cream:  #F5EFE6;
+    --cl-dark:   #1A1108;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 40px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--cl-sand); }
+
+  /* EYEBROW */
+  .ocb-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cl-sand);
+    margin-bottom: 20px;
+  }
+  .ocb-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 2px;
+    background: var(--cl-sand);
+    border-radius: 2px;
+  }
+
+  /* HERO TITLE */
+  .ocb-title {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text-main);
+    margin-bottom: 24px;
+  }
+  .ocb-title .accent-word {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+  }
+
+  .ocb-lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+
+  /* META BAR */
+  .ocb-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 28px 32px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-top: 36px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .ocb-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .ocb-meta-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .ocb-meta-value { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+
+  /* WINNER BADGE inside meta bar */
+  .winner-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEF9EC;
+    border: 1px solid #D4A800;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #7A5F00;
+    padding: 4px 12px;
+    margin-top: 2px;
+    width: fit-content;
+  }
+
+  /* CHAPTER MARKER */
+  .ocb-chapter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .ocb-chapter-num {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--cl-sand);
+  }
+  .ocb-chapter-line {
+    width: 28px; height: 2px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+    border-radius: 2px;
+  }
+  .ocb-chapter-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .ocb-divider-bar {
+    width: 44px; height: 3px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .ocb-section { margin-bottom: 80px; }
+
+  .ocb-section-title {
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 16px;
+  }
+
+  /* STATS */
+  .ocb-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .ocb-stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .ocb-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+  }
+  .ocb-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .ocb-stat-num {
+    font-size: clamp(30px, 3.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--cl-sand), var(--cl-rust));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .ocb-stat-label { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); line-height: 1.4; }
+
+  /* TWO COL */
+  .ocb-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* IMAGE BLOCKS */
+  .ocb-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--cl-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ocb-img-tall   { height: 360px; }
+  .ocb-img-medium { height: 260px; }
+  .ocb-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+  /* CHALLENGE CARDS */
+  .ocb-challenges { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .ocb-challenge {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .ocb-challenge:hover {
+    border-color: rgba(212,168,83,0.3);
+    box-shadow: 0 4px 16px rgba(212,168,83,0.09);
+  }
+  .ocb-challenge-icon {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--cl-sand), var(--cl-rust));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .ocb-challenge p { font-size: 0.875rem; line-height: 1.65; color: var(--text-muted); margin: 0; }
+
+  /* STEPS */
+  .ocb-steps { display: flex; flex-direction: column; margin-top: 8px; }
+  .ocb-step {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .ocb-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .ocb-step-num {
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--cl-sand);
+    min-width: 24px;
+    padding-top: 3px;
+  }
+  .ocb-step h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 5px; }
+  .ocb-step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* INTERACTIVE ARCH FLOW */
+  .ocb-arch-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 28px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .ocb-arch-step {
+    padding: 22px 18px;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .ocb-arch-step:last-child { border-right: none; }
+  .ocb-arch-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .ocb-arch-step:hover { background: var(--bg); }
+  .ocb-arch-step:hover::before, .ocb-arch-step.sel::before { opacity: 1; }
+  .ocb-arch-step.sel { background: var(--bg); }
+  .ocb-arch-num {
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em;
+    color: var(--cl-sand); margin-bottom: 8px;
+  }
+  .ocb-arch-badge {
+    display: inline-block;
+    font-size: 0.65rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 5px;
+    margin-bottom: 10px;
+    background: rgba(212,168,83,0.12);
+    color: var(--cl-rust);
+    border: 1px solid rgba(212,168,83,0.25);
+  }
+  .ocb-arch-step h4 { font-size: 0.82rem; font-weight: 700; margin: 0 0 4px; color: var(--text-main); }
+  .ocb-arch-step p { font-size: 0.72rem; color: var(--text-muted); margin: 0; line-height: 1.45; }
+  .ocb-arch-detail {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 20px 22px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    min-height: 72px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: opacity 0.2s;
+  }
+  .ocb-arch-detail strong { color: var(--text-main); font-weight: 700; }
+
+  /* RISK DEMO */
+  .ocb-risk-demo {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  .ocb-risk-demo::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+  }
+  .ocb-risk-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ocb-risk-tag {
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cl-sand); margin-bottom: 4px;
+  }
+  .ocb-risk-header h3 {
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--text-main); margin-bottom: 4px;
+    letter-spacing: -0.015em;
+  }
+  .ocb-risk-header p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+  .ocb-risk-controls { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; border-bottom: 1px solid var(--border); }
+  .ocb-slider-row { display: flex; align-items: center; gap: 12px; }
+  .ocb-slider-row label {
+    font-size: 0.82rem; color: var(--text-muted);
+    min-width: 160px; flex-shrink: 0;
+  }
+  .ocb-slider-row input[type=range] { flex: 1; accent-color: var(--cl-sand); }
+  .ocb-slider-val {
+    font-size: 0.85rem; font-weight: 700;
+    min-width: 36px; text-align: right;
+    color: var(--text-main);
+  }
+  .ocb-risk-output { padding: 20px 24px; }
+  .ocb-risk-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .ocb-risk-badge {
+    padding: 4px 14px; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
+  }
+  .risk-low  { background: #edfaf3; color: #1a5c38; }
+  .risk-med  { background: #fff8e6; color: #7a5000; }
+  .risk-high { background: #fef1f1; color: #9b1c1c; }
+  .ocb-risk-score-label { font-size: 0.78rem; color: var(--text-muted); margin-left: auto; }
+  .ocb-score-bar { height: 6px; background: var(--border); border-radius: 999px; margin-bottom: 14px; overflow: hidden; }
+  .ocb-score-fill { height: 100%; border-radius: 999px; transition: width 0.4s, background 0.4s; }
+  .ocb-risk-rec {
+    font-size: 0.85rem; color: var(--text-muted);
+    line-height: 1.7; padding: 14px 16px;
+    background: var(--bg); border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .ocb-risk-rec strong { color: var(--text-main); font-weight: 700; }
+
+  /* RESULTS BANNER */
+  .ocb-results-banner {
+    background: linear-gradient(135deg, var(--cl-brown) 0%, var(--cl-rust) 55%, var(--cl-sand) 100%);
+    border-radius: var(--radius);
+    padding: 56px 48px;
+    margin: 16px 0 64px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .ocb-results-banner::before {
+    content: 'IMPACT';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 14vw, 160px);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.07);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .ocb-results-banner h2 {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .ocb-results-banner p { color: rgba(255,255,255,0.82); font-size: 0.95rem; position: relative; margin: 0; }
+
+  /* RESULT ROWS */
+  .ocb-result-rows { display: flex; flex-direction: column; }
+  .ocb-result-row {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ocb-result-row:last-child { border-bottom: none; }
+  .ocb-result-num {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    min-width: 130px;
+    background: linear-gradient(135deg, var(--cl-sand), var(--cl-rust));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .ocb-result-row p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* ETHICS GRID */
+  .ocb-ethics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .ocb-ethics-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .ocb-ethics-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .ocb-ethics-card.do::after  { background: #22c55e; }
+  .ocb-ethics-card.dont::after { background: #ef4444; }
+  .ocb-ethics-card.risk::after { background: #f59e0b; }
+  .ocb-ethics-card.do { border-top: 3px solid #22c55e; }
+  .ocb-ethics-card.dont { border-top: 3px solid #ef4444; }
+  .ocb-ethics-card.risk { border-top: 3px solid #f59e0b; }
+  .ocb-ethics-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .ocb-ethics-card:hover::after { opacity: 1; }
+  .ocb-ethics-num {
+    font-size: 2rem; font-weight: 800;
+    letter-spacing: -0.03em;
+    opacity: 0.12; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text-main);
+  }
+  .ocb-ethics-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
+  .ocb-ethics-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .ocb-ethics-card ul li { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* LESSONS */
+  .ocb-lessons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .ocb-lesson {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ocb-lesson::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cl-sand), var(--cl-rust));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .ocb-lesson:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .ocb-lesson:hover::after { opacity: 1; }
+  .ocb-lesson-num {
+    font-size: 2.2rem; font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--cl-sand); opacity: 0.2;
+    line-height: 1; margin-bottom: 10px;
+  }
+  .ocb-lesson h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 7px; }
+  .ocb-lesson p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* TOOL PILLS */
+  .tool-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tool-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--text-muted);
+    transition: border-color 0.2s;
+  }
+  .tool-tag:hover { border-color: rgba(212,168,83,0.4); color: var(--text-main); }
+
+  /* EXT LINKS */
+  .ocb-ext-links {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 2rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .ocb-ext-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 10px 18px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text-main);
+    transition: all 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .ocb-ext-btn:hover { border-color: rgba(212,168,83,0.5); background: #FEFBF5; color: var(--cl-rust); }
+  .ocb-ext-btn.primary {
+    background: linear-gradient(135deg, var(--cl-sand), var(--cl-rust));
+    color: white;
+    border-color: transparent;
+  }
+  .ocb-ext-btn.primary:hover { opacity: 0.88; color: white; }
+
+  /* DEVICE DEMO TABS */
+  .dev-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    font-family: var(--ff, inherit);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 6px 4px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .dev-tab:hover { color: var(--text-main); background: var(--border); }
+  .dev-tab.active { background: white; color: var(--text-main); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .app-screen { display: flex; flex-direction: column; }
+
+  /* MOBILE */
+  @media (max-width: 860px) {
+    .ocb-two-col { grid-template-columns: 1fr; }
+    .ocb-stats { grid-template-columns: 1fr 1fr; }
+    .ocb-arch-flow { grid-template-columns: 1fr 1fr; }
+    .ocb-ethics { grid-template-columns: 1fr; }
+    .ocb-lessons { grid-template-columns: 1fr; }
+    .ocb-results-banner { padding: 40px 24px; }
+    .ocb-meta-bar { gap: 20px; }
+    .ocb-slider-row { flex-wrap: wrap; }
+    .ocb-slider-row label { min-width: 100%; }
+  }
+  /* Device demo mobile */
+  @media (max-width: 600px) {
+    .ocb-img-tall   { height: 220px; }
+    .ocb-img-medium { height: 180px; }
+    #device-demo { flex-direction: column; align-items: center; padding: 32px 20px; gap: 20px; }
+    #device-demo > div { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    /* hide the arrow on mobile, replace with a down cue */
+    #arrow-wrapper { transform: rotate(90deg); margin: 0 auto; }
+    .dev-tab { font-size: 0.68rem; padding: 5px 3px; }
+    .ocb-ext-links { flex-direction: column; }
+    .ocb-ext-btn { width: 100%; justify-content: center; }
+    .footer-inner { flex-direction: column !important; gap: 24px !important; }
+    .footer-inner > div { flex: unset !important; width: 100%; }
+  }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <div class="brand">Jeboy Compuesto</div>
+    <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <a href="projects.html" class="back-link reveal">← Back to projects</a>
+
+    <!-- HERO -->
+    <div class="ocb-section">
+      <div class="ocb-eyebrow reveal">AI Engineering · Neuroscience & Mental Health · 2026</div>
+      <h1 class="ocb-title reveal">
+        <span class="accent-word">OnCall Balance</span><br>
+        Engineer Wellbeing AI
+      </h1>
+      <p class="ocb-lead reveal">
+        A privacy-first iOS app that correlates Apple Watch health signals with Rootly on-call data to detect burnout risk entirely on-device. No employer access. No diagnosis. Just early warning for the engineers keeping systems running.
+      </p>
+      <div class="ocb-meta-bar reveal">
+        <div class="ocb-meta-item">
+          <span class="ocb-meta-label">Event</span>
+          <span class="ocb-meta-value">CBC McGill Hackathon 2026</span>
+        </div>
+        <div class="ocb-meta-item">
+          <span class="ocb-meta-label">Result</span>
+          <div class="winner-meta">🏆 1st place: Rootly Sub-Challenge</div>
+        </div>
+        <div class="ocb-meta-item">
+          <span class="ocb-meta-label">Track</span>
+          <span class="ocb-meta-value">Neuroscience & Mental Health</span>
+        </div>
+        <div class="ocb-meta-item">
+          <span class="ocb-meta-label">Team</span>
+          <span class="ocb-meta-value">Jeboy · Séphorah · David</span>
+        </div>
+        <div class="ocb-meta-item">
+          <span class="ocb-meta-label">Duration</span>
+          <span class="ocb-meta-value">8 hours · April 4, 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="ocb-img ocb-img-tall reveal" style="margin-bottom:64px">
+      <img src="images/OCB-image-cover.png" alt="OCB mockup image" style= "object-position:center 22%;">
+    </div>
+
+    <!-- STATS -->
+    <div class="ocb-stats reveal">
+      <div class="ocb-stat">
+        <div class="ocb-stat-num">140</div>
+        <div class="ocb-stat-label">Curated participants competed across 5 tracks</div>
+      </div>
+      <div class="ocb-stat">
+        <div class="ocb-stat-num">8h</div>
+        <div class="ocb-stat-label">Build window, start to submission</div>
+      </div>
+      <div class="ocb-stat">
+        <div class="ocb-stat-num">65%</div>
+        <div class="ocb-stat-label">Sleep weight in the risk model, 35% work burden</div>
+      </div>
+      <div class="ocb-stat">
+        <div class="ocb-stat-num">0</div>
+        <div class="ocb-stat-label">Health bytes sent to any server. Ever.</div>
+      </div>
+    </div>
+
+    <!-- 01 PROBLEM -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">01</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">The Problem</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <div class="ocb-two-col">
+        <div>
+          <h2 class="ocb-section-title">Burnout that never shows up in a Jira ticket.</h2>
+          <p class="ocb-lead">On-call engineers get paged at 2 AM, absorb post-incident stress, lose sleep, and none of it gets tracked anywhere. The 2025 SRE Report, published by Catchpoint, based on a survey of 301 engineers, confirmed what everyone already felt.</p>
+          <div class="ocb-challenges">
+            <div class="ocb-challenge">
+              <div class="ocb-challenge-icon">🌙</div>
+              <p>On-call pages fire at 2 AM. Sleep gets cut short. There's no recovery window built into the schedule. The next shift starts regardless.</p>
+            </div>
+            <div class="ocb-challenge">
+              <div class="ocb-challenge-icon">📉</div>
+              <p>14% of engineers report higher stress post-incident. Support available to them drops from 55% to 44% the moment the incident closes. (SRE Report 2025)</p>
+            </div>
+            <div class="ocb-challenge">
+              <div class="ocb-challenge-icon">🔒</div>
+              <p>The engineers who need help most won't accept employer surveillance of their health. Any solution that touches HR data is dead on arrival.</p>
+            </div>
+            <div class="ocb-challenge">
+              <div class="ocb-challenge-icon">🔁</div>
+              <p>Existing company mental health resources require the engineer to self-identify and reach out. Nobody in crisis does that. Detection has to be proactive.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;gap:16px">
+          
+          <div class="ocb-img ocb-img-medium">
+            <img 
+              src="images/CBC-Jeboy.JPG" 
+              alt="Behind the scenes coding during the CBC McGill Hackathon"
+              style="object-fit:cover; object-position:center 12%; width:100%; height:100%;">
+          </div>
+          
+          <div class="ocb-img ocb-img-medium">
+            <img 
+              src="images/CBC-backend-photo.JPG" 
+              alt="Behind the scenes coding during the CBC McGill Hackathon"
+              style="object-fit:cover; object-position:center 30%; width:100%; height:100%;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 PROCESS -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">02</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">Research & Process</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <h2 class="ocb-section-title">Research before a single line of code.</h2>
+      <p class="ocb-lead">We grounded everything in real SRE data and validated the UX in FigJam before touching Flutter. Not because it was required, because we needed to know we were solving the right problem.</p>
+
+      <div class="ocb-two-col" style="margin-top:8px">
+        <div>
+          <div class="ocb-steps">
+            <div class="ocb-step">
+              <span class="ocb-step-num">01</span>
+              <div>
+                <h4>SRE stress journey mapping</h4>
+                <p>Started with the 2025 SRE Report (Catchpoint, n=301) and mapped the full engineer stress arc, from on-call assignment through incident, resolution, and the invisible recovery gap that follows.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">02</span>
+              <div>
+                <h4>Data pairing validation</h4>
+                <p>Validated that Apple Watch sleep signals and Rootly workload data could be meaningfully correlated. Found that Rootly's open-source On-Call Health model already had research-backed weights we could build on.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">03</span>
+              <div>
+                <h4>FigJam ideation: team of 3</h4>
+                <p>Ran collaborative ideation in FigJam before any prototyping. The key architectural decision made here: separate the risk model from the AI layer entirely. Deterministic scoring first, language second.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">04</span>
+              <div>
+                <h4>Figma prototyping: all 4 screens</h4>
+                <p>Wireframed Dashboard, Trends, Resources, and Support before writing Flutter. This made the build window clean, no design decisions mid-coding, no wasted time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="position:sticky;top:80px">
+
+          <div class="ocb-img ocb-img-tall reveal" style="margin-bottom:64px">
+            <img src="images/CBC-figjam-project.png" alt="Figjam Process">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 HOW IT WORKS — INTERACTIVE -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">03</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">Architecture</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <h2 class="ocb-section-title">Click the steps. Explore the flow.</h2>
+      <p class="ocb-lead">The core architectural call was separating deterministic risk computation from generative AI. Claude generates the words. The StressCorrelator owns the judgment.</p>
+
+      <div class="ocb-arch-flow">
+        <div class="ocb-arch-step sel" data-step="0" onclick="selectStep(0)">
+          <div class="ocb-arch-num">01</div>
+          <div class="ocb-arch-badge">SRC</div>
+          <h4>Data sources</h4>
+          <p>HealthKit + Rootly API</p>
+        </div>
+        <div class="ocb-arch-step" data-step="1" onclick="selectStep(1)">
+          <div class="ocb-arch-num">02</div>
+          <div class="ocb-arch-badge">SEC</div>
+          <h4>Local layer</h4>
+          <p>On-device only</p>
+        </div>
+        <div class="ocb-arch-step" data-step="2" onclick="selectStep(2)">
+          <div class="ocb-arch-num">03</div>
+          <div class="ocb-arch-badge">AI</div>
+          <h4>Risk + Claude</h4>
+          <p>Score, then language</p>
+        </div>
+        <div class="ocb-arch-step" data-step="3" onclick="selectStep(3)">
+          <div class="ocb-arch-num">04</div>
+          <div class="ocb-arch-badge">OUT</div>
+          <h4>Insight + action</h4>
+          <p>Dashboard & resources</p>
+        </div>
+      </div>
+      <div class="ocb-arch-detail" id="arch-detail">
+        <strong>Apple Watch / HealthKit</strong> provides sleep duration and sleep fragmentation count. <strong>Rootly API</strong> provides on-call shifts, incident severity, and after-hours pages. Both feed a local data layer. Nothing is transmitted externally at this stage.
+      </div>
+
+      <!-- LIVE RISK DEMO -->
+      <div class="ocb-risk-demo" style="margin-top:40px">
+        <div class="ocb-risk-header">
+          <p class="ocb-risk-tag">Live demo: StressCorrelator</p>
+          <h3>Try the actual risk model</h3>
+          <p>Sleep is weighted 65%, work burden 35%, based on Rootly's open-source On-Call Health methodology. Adjust the sliders to see how the score and recommendation shift.</p>
+        </div>
+        <div class="ocb-risk-controls">
+          <div class="ocb-slider-row">
+            <label>Sleep last night</label>
+            <input type="range" min="2" max="10" step="0.5" value="7" id="sleep-slider" oninput="updateRisk()">
+            <span class="ocb-slider-val" id="sleep-val">7h</span>
+          </div>
+          <div class="ocb-slider-row">
+            <label>Incidents this week</label>
+            <input type="range" min="0" max="10" step="1" value="1" id="inc-slider" oninput="updateRisk()">
+            <span class="ocb-slider-val" id="inc-val">1</span>
+          </div>
+          <div class="ocb-slider-row">
+            <label>After-hours pages</label>
+            <input type="range" min="0" max="8" step="1" value="0" id="pages-slider" oninput="updateRisk()">
+            <span class="ocb-slider-val" id="pages-val">0</span>
+          </div>
+        </div>
+        <div class="ocb-risk-output">
+          <div class="ocb-risk-row">
+            <span style="font-size:0.82rem;color:var(--text-muted)">Risk level:</span>
+            <span class="ocb-risk-badge risk-low" id="risk-badge">Low</span>
+            <span class="ocb-risk-score-label" id="risk-score">Score: 12 / 100</span>
+          </div>
+          <div class="ocb-score-bar"><div class="ocb-score-fill" id="risk-fill" style="width:12%;background:#22c55e"></div></div>
+          <div class="ocb-risk-rec" id="risk-rec">Your sleep and workload are both in a healthy range. Keep it up, recovery is as important as response time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 PRODUCT -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">04</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">The Product</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <div class="ocb-two-col">
+        <div>
+          <h2 class="ocb-section-title">Four screens. One purpose.</h2>
+          <p class="ocb-lead">Dashboard, Trends, Resources, Support. Every screen designed around what an on-call engineer actually needs, not what looks impressive in a pitch deck.</p>
+
+          <div class="ocb-steps">
+            <div class="ocb-step">
+              <span class="ocb-step-num">01</span>
+              <div>
+                <h4>Dashboard</h4>
+                <p>Heart rate, HRV, sleep duration, incident severity, on-call status, all in one view. The AI-generated daily insight ties your actual numbers into one plain-English sentence.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">02</span>
+              <div>
+                <h4>Trends</h4>
+                <p>On-call spike detection, mid-week drift patterns, context switching cost analysis. Shows you what's building before you feel it.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">03</span>
+              <div>
+                <h4>Resources</h4>
+                <p>Mindfulness, breathing, confidential counseling links. In high-risk states, Crisis Services Canada surfaces directly, not buried in a menu, not replaced by a breathing exercise.</p>
+              </div>
+            </div>
+            <div class="ocb-step">
+              <span class="ocb-step-num">04</span>
+              <div>
+                <h4>Support</h4>
+                <p>Anonymous peer matching, verified mentor profiles. Zero biometric data shared. Opt-in only, nothing fires automatically.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
+            <p style="font-size:0.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px">
+              Stack
+            </p>
+          
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          
+              <span class="tool-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg">
+                Flutter / Dart
+              </span>
+          
+              <span class="tool-item">
+                <img src="https://cdn.simpleicons.org/apple/000000">
+                iOS / HealthKit
+              </span>
+          
+              <span class="tool-item">
+                <img src="https://avatars.githubusercontent.com/u/65914461?s=200&v=4">
+                Rootly API
+              </span>
+          
+              <span class="tool-item">
+                <img src="https://cdn.simpleicons.org/anthropic">
+                Claude Sonnet API
+              </span>
+          
+              <span class="tool-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg">
+                Figma
+              </span>
+          
+              <span class="tool-item">
+                🧠 FigJam
+              </span>
+          
+              <span class="tool-item">
+                🔒 PIPEDA · PHIPA
+              </span>        
+            </div>
+          </div>
+        </div>
+
+        <!-- right col: static phone dashboard preview -->
+        <div style="position:sticky;top:80px">
+          <div class="ocb-img ocb-img-tall" style="background:linear-gradient(160deg,#1A1108,#4A2810)">
+            <div style="padding:28px;width:100%">
+              <p style="color:rgba(255,255,255,0.35);font-size:0.65rem;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px">Dashboard: today's insight</p>
+              <p style="color:rgba(255,255,255,0.9);font-size:0.88rem;font-weight:600;line-height:1.55;margin:0 0 18px">"Your workload this week is high and your sleep is low. Consider mindfulness exercises before your next deployment."</p>
+              <div style="display:flex;gap:8px;margin-bottom:12px">
+                <div style="background:rgba(212,168,83,0.15);border:1px solid rgba(212,168,83,0.25);border-radius:8px;padding:8px 10px;text-align:center;flex:1">
+                  <p style="color:#D4A853;font-size:1.1rem;font-weight:800;margin:0;line-height:1">72</p>
+                  <p style="color:rgba(255,255,255,0.4);font-size:0.6rem;margin:3px 0 0;letter-spacing:.04em;text-transform:uppercase">HRV</p>
+                </div>
+                <div style="background:rgba(212,168,83,0.15);border:1px solid rgba(212,168,83,0.25);border-radius:8px;padding:8px 10px;text-align:center;flex:1">
+                  <p style="color:#D4A853;font-size:1.1rem;font-weight:800;margin:0;line-height:1">5.2h</p>
+                  <p style="color:rgba(255,255,255,0.4);font-size:0.6rem;margin:3px 0 0;letter-spacing:.04em;text-transform:uppercase">Sleep</p>
+                </div>
+                <div style="background:rgba(194,100,58,0.2);border:1px solid rgba(194,100,58,0.3);border-radius:8px;padding:8px 10px;text-align:center;flex:1">
+                  <p style="color:#C2643A;font-size:1.1rem;font-weight:800;margin:0;line-height:1">HIGH</p>
+                  <p style="color:rgba(255,255,255,0.4);font-size:0.6rem;margin:3px 0 0;letter-spacing:.04em;text-transform:uppercase">Risk</p>
+                </div>
+              </div>
+              <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;display:flex;gap:8px">
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:7px 10px;text-align:center;flex:1"><p style="color:rgba(255,255,255,0.5);font-size:0.6rem;margin:0;letter-spacing:.04em;text-transform:uppercase">Commits</p><p style="color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:700;margin:2px 0 0">124</p></div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:7px 10px;text-align:center;flex:1"><p style="color:rgba(255,255,255,0.5);font-size:0.6rem;margin:0;letter-spacing:.04em;text-transform:uppercase">Open PRs</p><p style="color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:700;margin:2px 0 0">8</p></div>
+                <div style="background:rgba(194,100,58,0.15);border:1px solid rgba(194,100,58,0.25);border-radius:7px;padding:7px 10px;text-align:center;flex:1"><p style="color:rgba(255,255,255,0.5);font-size:0.6rem;margin:0;letter-spacing:.04em;text-transform:uppercase">Incidents</p><p style="color:#C2643A;font-size:0.85rem;font-weight:700;margin:2px 0 0">4</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04b INTERACTIVE DEVICE DEMO -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">05</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">Live Demo</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <h2 class="ocb-section-title">The full app. tap around.</h2>
+      <p class="ocb-lead">Switch between all four screens using the tabs. When you're ready, tap the Apple Watch face to trigger a HIGH risk alert, and watch iOS push the notification to the phone.</p>
+
+      <!-- screen tab nav -->
+      <div style="display:flex;gap:3px;margin-bottom:20px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:4px;max-width:420px">
+        <button class="dev-tab active" data-screen="dashboard" onclick="switchAppScreen('dashboard')">Dashboard</button>
+        <button class="dev-tab" data-screen="trends"    onclick="switchAppScreen('trends')">Trends</button>
+        <button class="dev-tab" data-screen="resources" onclick="switchAppScreen('resources')">Resources</button>
+        <button class="dev-tab" data-screen="support"   onclick="switchAppScreen('support')">Support</button>
+      </div>
+
+      <div id="device-demo" style="display:flex;align-items:flex-end;justify-content:center;gap:40px;padding:56px 32px;background:linear-gradient(160deg,#1A1108 0%,#2E1A08 50%,#4A2810 100%);border-radius:var(--radius);position:relative;overflow:hidden;flex-wrap:wrap">
+
+        <!-- bg glow -->
+        <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(212,168,83,0.06);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
+
+        <!-- APPLE WATCH -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+          <p style="color:rgba(255,255,255,0.3);font-size:0.6rem;letter-spacing:.1em;text-transform:uppercase;margin:0">Apple Watch</p>
+
+          <div id="watch-body" onclick="triggerAlert()" style="cursor:pointer;position:relative;width:120px;height:144px;background:#111;border-radius:34px;border:2px solid #2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 8px 32px rgba(0,0,0,0.5)" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(212,168,83,0.2)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.5)'">
+            <div style="position:absolute;right:-6px;top:38px;width:6px;height:24px;background:#1e1e1e;border-radius:3px;border:1px solid #333"></div>
+
+            <!-- WATCH FACE: dashboard (default) -->
+            <div id="wf-dashboard" class="watch-face-view" style="width:100%;text-align:center">
+              <p style="color:rgba(255,255,255,0.4);font-size:8px;margin:0 0 1px;letter-spacing:.05em">FRI APR 4</p>
+              <p id="watch-time" style="color:#fff;font-size:26px;font-weight:800;margin:0;line-height:1;letter-spacing:-.02em">10:09</p>
+              <div style="margin:5px 0 3px;padding:2px 7px;background:rgba(212,168,83,0.18);border:1px solid rgba(212,168,83,0.3);border-radius:999px;display:inline-flex;align-items:center;gap:4px">
+                <div id="watch-dot" style="width:5px;height:5px;border-radius:50%;background:#4ade80;transition:background 0.3s"></div>
+                <p id="watch-label" style="color:#D4A853;font-size:8px;font-weight:700;margin:0;transition:all 0.3s">Resilience</p>
+                <p id="watch-score" style="color:#fff;font-size:8px;font-weight:800;margin:0;transition:all 0.3s">84</p>
+              </div>
+              <div style="display:flex;justify-content:center;gap:5px;margin-top:2px">
+                <div style="text-align:center"><p id="w-bpm" style="color:#ef4444;font-size:11px;font-weight:800;margin:0;transition:all 0.3s">72</p><p style="color:rgba(255,255,255,0.3);font-size:6px;margin:0">BPM</p></div>
+                <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
+                <div style="text-align:center"><p id="w-hrv" style="color:#60a5fa;font-size:11px;font-weight:800;margin:0;transition:all 0.3s">62</p><p style="color:rgba(255,255,255,0.3);font-size:6px;margin:0">HRV</p></div>
+                <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
+                <div style="text-align:center"><p id="w-sleep" style="color:#a78bfa;font-size:11px;font-weight:800;margin:0;transition:all 0.3s">5.2</p><p style="color:rgba(255,255,255,0.3);font-size:6px;margin:0">SLEEP</p></div>
+              </div>
+            </div>
+
+            <!-- WATCH FACE: trends -->
+            <div id="wf-trends" class="watch-face-view" style="width:100%;display:none">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;margin:0 0 3px;letter-spacing:.05em">TRENDS</p>
+              <svg viewBox="0 0 90 38" style="width:100%;height:34px">
+                <polyline points="0,34 14,26 28,30 42,18 56,8 70,14 84,6 90,20" fill="none" stroke="#C2643A" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="56" cy="8" r="2.5" fill="#C2643A"/>
+                <text x="56" y="5" fill="rgba(255,255,255,0.5)" font-size="5" text-anchor="middle">spike</text>
+              </svg>
+              <p style="color:rgba(255,255,255,0.4);font-size:7.5px;margin:3px 0 0;line-height:1.4">Sleep deficit: 2.1h this week</p>
+            </div>
+
+            <!-- WATCH FACE: resources -->
+            <div id="wf-resources" class="watch-face-view" style="width:100%;display:none">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;margin:0 0 4px;letter-spacing:.05em">RESOURCES</p>
+              <div style="background:rgba(194,100,58,0.2);border:1px solid rgba(194,100,58,0.4);border-radius:7px;padding:5px 7px;margin-bottom:4px">
+                <p style="color:#C2643A;font-size:8px;font-weight:700;margin:0 0 2px">High risk</p>
+                <p style="color:rgba(255,255,255,0.5);font-size:7px;margin:0;line-height:1.3">Support available now</p>
+              </div>
+              <p style="color:rgba(255,255,255,0.3);font-size:7px;margin:0">Tap to open iPhone</p>
+            </div>
+
+            <!-- WATCH FACE: support -->
+            <div id="wf-support" class="watch-face-view" style="width:100%;display:none">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;margin:0 0 4px;letter-spacing:.05em">SUPPORT</p>
+              <div style="background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.2);border-radius:7px;padding:5px 7px;margin-bottom:4px">
+                <p style="color:#4ade80;font-size:8px;font-weight:700;margin:0 0 1px">Maya K. available</p>
+                <p style="color:rgba(255,255,255,0.45);font-size:7px;margin:0">SRE mentor</p>
+              </div>
+              <p style="color:rgba(255,255,255,0.25);font-size:7px;margin:0">No health data shared</p>
+            </div>
+
+          </div>
+
+          <div style="width:56px;height:28px;background:#1a1a1a;border-radius:0 0 10px 10px;border:1px solid #2a2a2a;border-top:none"></div>
+          <p id="watch-hint" style="color:rgba(212,168,83,0.7);font-size:0.68rem;font-weight:600;letter-spacing:.04em;margin:0;transition:opacity 0.3s">Tap to trigger alert</p>
+        </div>
+
+        <!-- ARROW -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:32px">
+          <div id="arrow-line" style="width:48px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;position:relative;transition:background 0.4s">
+            <div id="arrow-pulse" style="position:absolute;left:0;top:-1px;height:4px;width:0%;background:linear-gradient(90deg,#D4A853,#C2643A);border-radius:2px;transition:width 0.6s ease-out"></div>
+          </div>
+          <p id="arrow-label" style="color:rgba(255,255,255,0.2);font-size:0.6rem;letter-spacing:.06em;margin:0;transition:color 0.4s">iOS mirrors</p>
+        </div>
+
+        <!-- iPHONE -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+          <p style="color:rgba(255,255,255,0.3);font-size:0.6rem;letter-spacing:.1em;text-transform:uppercase;margin:0">iPhone</p>
+
+          <div style="position:relative;width:160px;height:310px;background:#0f0f0f;border-radius:36px;border:2px solid #2a2a2a;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.5)">
+            <!-- dynamic island -->
+            <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:50px;height:10px;background:#000;border-radius:999px;z-index:10"></div>
+
+            <!-- STATUS BAR -->
+            <div style="position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:6px 16px 0;z-index:9">
+              <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:600">10:09</span>
+              <div style="display:flex;gap:3px;align-items:center">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="rgba(255,255,255,0.6)"><rect x="0" y="3" width="2" height="6" rx="0.5"/><rect x="3" y="2" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="9" rx="0.5"/></svg>
+                <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><rect x="0.5" y="0.5" width="11" height="8" rx="2" stroke="rgba(255,255,255,0.5)"/><rect x="1.5" y="1.5" width="7.5" height="5" rx="1" fill="rgba(255,255,255,0.6)"/><rect x="12" y="2.5" width="0.8" height="3" rx="0.4" fill="rgba(255,255,255,0.4)"/></svg>
+              </div>
+            </div>
+
+            <!-- SCREEN: dashboard -->
+            <div id="phone-dashboard" class="app-screen" style="position:absolute;inset:0;padding:28px 12px 50px;transition:opacity .2s;display:flex;flex-direction:column">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 3px">DASHBOARD</p>
+              <p style="color:#fff;font-size:12px;font-weight:700;margin:0 0 9px;line-height:1.2">Good morning,<br>Engineer.</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px">
+                <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:7px 9px">
+                  <p style="color:#C2643A;font-size:13px;font-weight:800;margin:0;line-height:1">72 <span style="font-size:8px;font-weight:500">bpm</span></p>
+                  <p style="color:rgba(255,255,255,0.3);font-size:7.5px;margin:1px 0 0;letter-spacing:.03em">Heart Rate</p>
+                  <p style="color:#4ade80;font-size:7px;margin:1px 0 0">Normal</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:7px 9px">
+                  <p style="color:#D4A853;font-size:13px;font-weight:800;margin:0;line-height:1">72 <span style="font-size:8px;font-weight:500">ms</span></p>
+                  <p style="color:rgba(255,255,255,0.3);font-size:7.5px;margin:1px 0 0;letter-spacing:.03em">HRV</p>
+                  <p style="color:#4ade80;font-size:7px;margin:1px 0 0">Optimal</p>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:7px 9px;display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                <svg width="30" height="30" viewBox="0 0 36 36" style="flex-shrink:0"><circle cx="18" cy="18" r="13" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="4"/><circle cx="18" cy="18" r="13" fill="none" stroke="#D4A853" stroke-width="4" stroke-dasharray="58 82" stroke-dashoffset="20" stroke-linecap="round" transform="rotate(-90 18 18)"/><text x="18" y="22" text-anchor="middle" fill="#D4A853" font-size="9" font-weight="800">72</text></svg>
+                <div><p style="color:#D4A853;font-size:9px;font-weight:700;margin:0">Stress Meter (HRV)</p><p style="color:rgba(255,255,255,0.4);font-size:7.5px;margin:2px 0 0;line-height:1.3">High resilience today</p></div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:6px">
+                <div style="background:rgba(255,255,255,0.05);border-radius:7px;padding:5px 6px;text-align:center"><p style="color:#fff;font-size:11px;font-weight:800;margin:0">124</p><p style="color:rgba(255,255,255,0.3);font-size:6.5px;margin:1px 0 0">Commits</p></div>
+                <div style="background:rgba(255,255,255,0.05);border-radius:7px;padding:5px 6px;text-align:center"><p style="color:#fff;font-size:11px;font-weight:800;margin:0">8</p><p style="color:rgba(255,255,255,0.3);font-size:6.5px;margin:1px 0 0">Open PRs</p></div>
+                <div style="background:rgba(194,100,58,0.2);border:1px solid rgba(194,100,58,0.3);border-radius:7px;padding:5px 6px;text-align:center"><p style="color:#C2643A;font-size:11px;font-weight:800;margin:0">2</p><p style="color:rgba(255,255,255,0.3);font-size:6.5px;margin:1px 0 0">Incidents</p></div>
+              </div>
+              <div style="background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.18);border-radius:8px;padding:7px 9px;flex:1">
+                <p style="color:#D4A853;font-size:7px;font-weight:700;margin:0 0 2px;letter-spacing:.05em">TODAY'S INSIGHT</p>
+                <p style="color:rgba(255,255,255,0.75);font-size:8px;line-height:1.5;margin:0">"Your workload this week is high and your sleep is low, consider mindfulness before your next deployment."</p>
+              </div>
+            </div>
+
+            <!-- SCREEN: trends -->
+            <div id="phone-trends" class="app-screen" style="position:absolute;inset:0;padding:28px 12px 50px;transition:opacity .2s;display:none;flex-direction:column">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 8px">TRENDS</p>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:9px 10px;margin-bottom:6px">
+                <p style="color:rgba(255,255,255,0.4);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;margin:0 0 5px">On-call spike detection</p>
+                <svg viewBox="0 0 130 36" style="width:100%;height:36px">
+                  <polyline points="0,30 16,25 32,27 48,18 64,8 80,12 96,6 112,14 130,18" fill="none" stroke="#C2643A" stroke-width="1.5" stroke-linejoin="round"/>
+                  <circle cx="64" cy="8" r="3" fill="#C2643A"/>
+                  <text x="64" y="5" fill="rgba(255,255,255,0.5)" font-size="5.5" text-anchor="middle">spike</text>
+                </svg>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:9px 10px;margin-bottom:6px">
+                <p style="color:rgba(255,255,255,0.4);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;margin:0 0 5px">Sleep vs workload</p>
+                <svg viewBox="0 0 130 36" style="width:100%;height:36px">
+                  <polyline points="0,8 18,10 36,6 54,14 72,24 90,28 108,26 130,30" fill="none" stroke="#C2643A" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="4,2"/>
+                  <polyline points="0,30 18,24 36,26 54,22 72,14 90,8 108,12 130,6" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                <div style="display:flex;gap:10px;margin-top:3px">
+                  <div style="display:flex;align-items:center;gap:3px"><div style="width:10px;height:2px;background:#C2643A;border-radius:1px"></div><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:0">Workload</p></div>
+                  <div style="display:flex;align-items:center;gap:3px"><div style="width:10px;height:2px;background:#4ade80;border-radius:1px"></div><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:0">Sleep</p></div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:9px 10px">
+                <p style="color:rgba(255,255,255,0.4);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px">Context switching</p>
+                <div style="display:flex;gap:3px;align-items:flex-end;height:28px">
+                  <div style="flex:1;background:#D4A853;border-radius:2px 2px 0 0;height:35%"></div>
+                  <div style="flex:1;background:#D4A853;border-radius:2px 2px 0 0;height:55%"></div>
+                  <div style="flex:1;background:#C2643A;border-radius:2px 2px 0 0;height:85%"></div>
+                  <div style="flex:1;background:#C2643A;border-radius:2px 2px 0 0;height:100%"></div>
+                  <div style="flex:1;background:#8B4E2A;border-radius:2px 2px 0 0;height:65%"></div>
+                  <div style="flex:1;background:#D4A853;border-radius:2px 2px 0 0;height:45%"></div>
+                  <div style="flex:1;background:#D4A853;border-radius:2px 2px 0 0;height:25%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCREEN: resources -->
+            <div id="phone-resources" class="app-screen" style="position:absolute;inset:0;padding:28px 12px 50px;transition:opacity .2s;display:none;flex-direction:column">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 8px">RESOURCES</p>
+              <div style="background:rgba(194,100,58,0.18);border:1px solid rgba(194,100,58,0.35);border-radius:8px;padding:8px 10px;margin-bottom:6px">
+                <p style="color:#C2643A;font-size:8.5px;font-weight:700;margin:0 0 2px">Risk level: HIGH</p>
+                <p style="color:rgba(255,255,255,0.5);font-size:7.5px;margin:0;line-height:1.4">Real support is available. You don't have to handle this alone.</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;align-items:center;gap:8px">
+                <div style="width:26px;height:26px;background:rgba(212,168,83,0.15);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px">🧘</div>
+                <div><p style="color:#fff;font-size:8.5px;font-weight:600;margin:0">4-7-8 Breathing</p><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:1px 0 0">5 min · evidence-based</p></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;align-items:center;gap:8px">
+                <div style="width:26px;height:26px;background:rgba(212,168,83,0.15);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px">🚶</div>
+                <div><p style="color:#fff;font-size:8.5px;font-weight:600;margin:0">Micro-walk reset</p><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:1px 0 0">10 min · stress relief</p></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;align-items:center;gap:8px">
+                <div style="width:26px;height:26px;background:rgba(212,168,83,0.15);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px">💬</div>
+                <div><p style="color:#fff;font-size:8.5px;font-weight:600;margin:0">Confidential counseling</p><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:1px 0 0">Connect privately</p></div>
+              </div>
+              <div style="background:rgba(194,100,58,0.12);border:1px solid rgba(194,100,58,0.3);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px">
+                <div style="width:26px;height:26px;background:rgba(194,100,58,0.2);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px">🆘</div>
+                <div><p style="color:#C2643A;font-size:8.5px;font-weight:700;margin:0">Crisis Services Canada</p><p style="color:rgba(255,255,255,0.35);font-size:7px;margin:1px 0 0">1-833-456-4566 · 24/7</p></div>
+              </div>
+            </div>
+
+            <!-- SCREEN: support -->
+            <div id="phone-support" class="app-screen" style="position:absolute;inset:0;padding:28px 12px 50px;transition:opacity .2s;display:none;flex-direction:column">
+              <p style="color:rgba(255,255,255,0.35);font-size:7px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 5px">SUPPORT</p>
+              <p style="color:rgba(255,255,255,0.45);font-size:8px;line-height:1.5;margin:0 0 9px">Connect with verified engineer mentors. Your health data is never shared.</p>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;gap:9px;align-items:center">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(212,168,83,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#D4A853;font-size:10px;font-weight:700">MK</span></div>
+                <div style="flex:1"><p style="color:#fff;font-size:9px;font-weight:600;margin:0">Maya K.</p><p style="color:rgba(255,255,255,0.35);font-size:7.5px;margin:1px 0 0">SRE @ Shopify · 4 yrs on-call</p></div>
+                <div style="background:rgba(74,222,128,0.15);border-radius:5px;padding:2px 6px"><p style="color:#4ade80;font-size:7.5px;font-weight:600;margin:0">Available</p></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;gap:9px;align-items:center">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(194,100,58,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#C2643A;font-size:10px;font-weight:700">JR</span></div>
+                <div style="flex:1"><p style="color:#fff;font-size:9px;font-weight:600;margin:0">James R.</p><p style="color:rgba(255,255,255,0.35);font-size:7.5px;margin:1px 0 0">Platform Eng · burnout survivor</p></div>
+                <div style="background:rgba(212,168,83,0.15);border-radius:5px;padding:2px 6px"><p style="color:#D4A853;font-size:7.5px;font-weight:600;margin:0">Away</p></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;margin-bottom:9px;display:flex;gap:9px;align-items:center">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(139,78,42,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#8B4E2A;font-size:10px;font-weight:700">SL</span></div>
+                <div style="flex:1"><p style="color:#fff;font-size:9px;font-weight:600;margin:0">Sophie L.</p><p style="color:rgba(255,255,255,0.35);font-size:7.5px;margin:1px 0 0">Backend · mental health advocate</p></div>
+                <div style="background:rgba(74,222,128,0.15);border-radius:5px;padding:2px 6px"><p style="color:#4ade80;font-size:7.5px;font-weight:600;margin:0">Available</p></div>
+              </div>
+              <div style="background:rgba(212,168,83,0.08);border:1px solid rgba(212,168,83,0.15);border-radius:7px;padding:6px 9px;text-align:center">
+                <p style="color:rgba(255,255,255,0.35);font-size:7.5px;margin:0">Zero biometric data is shared when you connect</p>
+              </div>
+            </div>
+
+            <!-- ALERT OVERLAY (tap-watch state) -->
+            <div id="phone-alert" style="position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0.4s;padding:28px 12px 12px">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65)"></div>
+              <div id="notif-banner" style="position:relative;z-index:2;background:#1c1c1e;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:11px 13px;transform:translateY(-20px);opacity:0;transition:transform 0.4s cubic-bezier(.34,1.56,.64,1),opacity 0.3s">
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+                  <div style="width:18px;height:18px;background:#D4A853;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#1A1108;font-size:6px;font-weight:800">OCB</span></div>
+                  <p style="color:rgba(255,255,255,0.5);font-size:8px;font-weight:600;margin:0;flex:1">OnCall Balance</p>
+                  <p style="color:rgba(255,255,255,0.25);font-size:7px;margin:0">now</p>
+                </div>
+                <p style="color:#fff;font-size:9.5px;font-weight:700;margin:0 0 2px">Risk level: HIGH</p>
+                <p style="color:rgba(255,255,255,0.6);font-size:8.5px;line-height:1.5;margin:0">Sleep &lt;6h + 4 incidents + 3 after-hours pages. Significant recovery debt building.</p>
+              </div>
+              <div id="alert-card" style="position:relative;z-index:2;margin-top:9px;background:rgba(194,100,58,0.1);border:1px solid rgba(194,100,58,0.3);border-radius:12px;padding:11px 13px;transform:translateY(10px);opacity:0;transition:transform 0.4s 0.15s cubic-bezier(.34,1.2,.64,1),opacity 0.3s 0.15s">
+                <p style="color:#C2643A;font-size:7.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin:0 0 4px">Claude's recommendation</p>
+                <p style="color:rgba(255,255,255,0.75);font-size:8.5px;line-height:1.55;margin:0 0 9px">"You're showing signs of significant recovery debt. Protect your sleep tonight. Talk to someone today."</p>
+                <div style="display:flex;gap:5px">
+                  <div style="background:rgba(212,168,83,0.15);border:1px solid rgba(212,168,83,0.25);border-radius:6px;padding:5px 8px;flex:1;text-align:center"><p style="color:#D4A853;font-size:7.5px;font-weight:600;margin:0">Resources</p></div>
+                  <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:5px 8px;flex:1;text-align:center"><p style="color:rgba(255,255,255,0.5);font-size:7.5px;font-weight:600;margin:0">Get support</p></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- bottom nav bar -->
+            <div id="phone-nav-bar" style="position:absolute;bottom:0;left:0;right:0;display:flex;background:rgba(15,15,15,0.97);padding:7px 0 10px;border-top:1px solid rgba(255,255,255,0.07);z-index:8">
+              <div onclick="switchAppScreen('dashboard')" id="pnav-dashboard" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="#D4A853"><rect x="2" y="10" width="6" height="8" rx="1"/><rect x="10" y="2" width="8" height="16" rx="1"/></svg>
+                <p style="font-size:6.5px;margin:0;color:#D4A853" id="pnav-lbl-dashboard">Dashboard</p>
+              </div>
+              <div onclick="switchAppScreen('trends')" id="pnav-trends" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"><polyline points="2,16 6,10 10,13 14,6 18,8"/></svg>
+                <p style="font-size:6.5px;margin:0;color:rgba(255,255,255,0.3)" id="pnav-lbl-trends">Trends</p>
+              </div>
+              <div onclick="switchAppScreen('resources')" id="pnav-resources" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="7" x2="10" y2="10"/><circle cx="10" cy="13" r="0.8" fill="rgba(255,255,255,0.3)"/></svg>
+                <p style="font-size:6.5px;margin:0;color:rgba(255,255,255,0.3)" id="pnav-lbl-resources">Resources</p>
+              </div>
+              <div onclick="switchAppScreen('support')" id="pnav-support" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"><circle cx="10" cy="7" r="3"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+                <p style="font-size:6.5px;margin:0;color:rgba(255,255,255,0.3)" id="pnav-lbl-support">Support</p>
+              </div>
+            </div>
+          </div>
+
+          <button id="reset-btn" onclick="resetDemo()" style="display:none;background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-size:0.7rem;padding:6px 14px;border-radius:999px;cursor:pointer;transition:all 0.2s;font-family:inherit" onmouseenter="this.style.borderColor='rgba(212,168,83,0.4)';this.style.color='rgba(212,168,83,0.8)'" onmouseleave="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.5)'">Reset alert</button>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;font-size:0.78rem;color:var(--text-muted);margin-top:16px">The watch reads HealthKit data and Rootly incidents locally. When thresholds cross, <code style="font-size:0.75rem;background:var(--bg);padding:1px 5px;border-radius:4px;border:1px solid var(--border)">flutter_local_notifications</code> fires, and iOS mirrors it to your wrist automatically.</p>
+    </div>
+
+    <!-- RESULTS BANNER -->
+    <div class="ocb-results-banner reveal">
+      <h2>1st place.<br>8 hours. 140 competitors.</h2>
+      <p>Won the Rootly Sub-Challenge and the Neuroscience & Mental Health track at CBC McGill Hackathon 2026.</p>
+    </div>
+
+    <!-- 05 ETHICS -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">06</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">Ethics & Privacy</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <h2 class="ocb-section-title">The commitments we made before writing any code.</h2>
+
+      <div class="ocb-ethics">
+        <div class="ocb-ethics-card do">
+          <div class="ocb-ethics-num">01</div>
+          <h4>What we do</h4>
+          <ul>
+            <li>Process all data on-device only</li>
+            <li>Fully opt-in, user controls everything</li>
+            <li>Evidence-based resource suggestions</li>
+            <li>Surface real human support in crisis states, not just breathing tips</li>
+            <li>Make every AI insight explainable</li>
+            <li>PHIPA, PIPEDA and HIPAA-compliant architecture</li>
+          </ul>
+        </div>
+        <div class="ocb-ethics-card dont">
+          <div class="ocb-ethics-num">02</div>
+          <h4>What we don't do</h4>
+          <ul>
+            <li>Share data with employers or third parties</li>
+            <li>Diagnose medical or mental health conditions</li>
+            <li>Replace therapists or professional care</li>
+            <li>Auto-escalate without user consent</li>
+            <li>Track without the user's full awareness</li>
+            <li>Make decisions on behalf of the engineer</li>
+          </ul>
+        </div>
+        <div class="ocb-ethics-card risk">
+          <div class="ocb-ethics-num">03</div>
+          <h4>How we mitigated risk</h4>
+          <ul>
+            <li>False positives: context-aware thresholds</li>
+            <li>Over-reliance: prompt professional referrals</li>
+            <li>Stigma: private-first, no sharing defaults</li>
+            <li>Data gaps: graceful degradation</li>
+            <li>Crisis states: immediate human resources surfaced</li>
+            <li>Misinterpretation: every insight explained</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 LESSONS -->
+    <div class="ocb-section reveal">
+      <div class="ocb-chapter">
+        <span class="ocb-chapter-num">07</span>
+        <div class="ocb-chapter-line"></div>
+        <span class="ocb-chapter-label">What I Learned</span>
+      </div>
+      <div class="ocb-divider-bar"></div>
+
+      <h2 class="ocb-section-title">What this project taught me.</h2>
+
+      <div class="ocb-lessons">
+        <div class="ocb-lesson">
+          <div class="ocb-lesson-num">01</div>
+          <h4>Separate the AI from the judgment</h4>
+          <p>Letting Claude compute the risk score would make the system a black box. Using a deterministic model first, then having Claude translate it into language, made everything explainable, testable, and defensible, especially in a health context.</p>
+        </div>
+        <div class="ocb-lesson">
+          <div class="ocb-lesson-num">02</div>
+          <h4>Ethics is a design constraint, not an afterthought</h4>
+          <p>Building in a mental health space forces you to think about what happens when someone is vulnerable and relying on your output. Every feature decision had to pass a "what if they're actually in crisis" test. That thinking made the product stronger.</p>
+        </div>
+        <div class="ocb-lesson">
+          <div class="ocb-lesson-num">03</div>
+          <h4>Research before code is always worth it</h4>
+          <p>Spending the first hour and a half on FigJam instead of Flutter felt risky in an 8-hour hackathon. It paid off. We built the right thing cleanly, instead of building fast and course-correcting the whole way through.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXT LINKS -->
+    <div class="ocb-ext-links reveal">
+      <a href="https://devpost.com/software/oncall-balance" target="_blank" rel="noopener" class="ocb-ext-btn primary">View on Devpost &nearr;</a>
+      <a href="https://github.com/sephorah/cbc-hackathon" target="_blank" rel="noopener" class="ocb-ext-btn">GitHub &nearr;</a>
+      <a href="https://www.figma.com/board/fuUgF6dy0v6COu1rrZLYaw/OnCall-Balance---CBC-AI-Hackathon?node-id=0-1&t=k29RgKHcEs9s6bHf-1" target="_blank" rel="noopener" class="ocb-ext-btn">FigJam board &nearr;</a>
+      <a href="projects.html" class="ocb-ext-btn">&larr; All projects</a>
+    </div>
+
+  </main>
+
+  <footer style="margin-top:48px">
+    <div class="footer-inner" style="display:flex;align-items:flex-start;gap:28px;margin-top:26px;flex-wrap:wrap">
+      <div style="flex:1">
+        <h3>Let's build experiences together.</h3>
+        <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+      </div>
+      <div style="flex:1.2">
+        <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+          <input name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input name="company" placeholder="Company / Role">
+          <textarea name="message" placeholder="Describe your project..." required></textarea>
+          <button class="btn" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+<script>
+  const archDetails = [
+    "<strong>Apple Watch / HealthKit</strong> provides sleep duration and sleep fragmentation count. <strong>Rootly API</strong> provides on-call shifts, incident severity, and after-hours pages. Both feed a local data layer, nothing is transmitted externally at this stage.",
+    "All correlation logic runs locally on the device. HealthKit stores health data natively on-device by Apple. We don't persist anything ourselves. No custom backend means no attack surface and no pathway for employer access.",
+    "<strong>StressCorrelator</strong> computes a deterministic risk score using weighted thresholds (sleep 65%, work burden 35%) from Rootly's open-source On-Call Health methodology. <strong>Claude Sonnet</strong> then receives that score and generates a short, context-specific recommendation. The AI communicates the result. It does not decide it.",
+    "The dashboard surfaces your daily insight immediately. The trends view shows patterns over time. In standard risk states, resources are suggested. In high-risk states, real human support surfaces directly. The engineer stays in control at every step."
+  ];
+
+  function selectStep(i) {
+    document.querySelectorAll('.ocb-arch-step').forEach((s, idx) => {
+      s.classList.toggle('sel', idx === i);
+    });
+    const detail = document.getElementById('arch-detail');
+    detail.style.opacity = '0';
+    setTimeout(() => {
+      detail.innerHTML = archDetails[i];
+      detail.style.opacity = '1';
+    }, 120);
+  }
+
+  function updateRisk() {
+    const sleep = parseFloat(document.getElementById('sleep-slider').value);
+    const inc   = parseInt(document.getElementById('inc-slider').value);
+    const pages = parseInt(document.getElementById('pages-slider').value);
+
+    document.getElementById('sleep-val').textContent = sleep + 'h';
+    document.getElementById('inc-val').textContent   = inc;
+    document.getElementById('pages-val').textContent = pages;
+
+    const sleepScore = Math.max(0, Math.min(100, (8 - sleep) / 6 * 100));
+    const workScore  = Math.min(100, inc * 8 + pages * 12);
+    const total      = Math.round(sleepScore * 0.65 + workScore * 0.35);
+
+    document.getElementById('risk-score').textContent = 'Score: ' + total + ' / 100';
+
+    const fill  = document.getElementById('risk-fill');
+    const badge = document.getElementById('risk-badge');
+    const rec   = document.getElementById('risk-rec');
+    fill.style.width = total + '%';
+
+    let level, cls, color, msg;
+    if (total < 35) {
+      level = 'Low'; cls = 'risk-low'; color = '#22c55e';
+      msg = 'Your sleep and workload are both in a healthy range. Keep it up. Recovery is as important as response time.';
+    } else if (total < 65) {
+      level = 'Moderate'; cls = 'risk-med'; color = '#f59e0b';
+      msg = sleep < 6
+        ? 'Sleep is low this week. Try to protect the next few nights, especially before any on-call shifts. A short wind-down routine before bed can make a real difference.'
+        : 'Workload is elevated. Pace yourself between incidents and consider flagging to your team if the volume stays high.';
+    } else {
+      level = 'High'; cls = 'risk-high'; color = '#ef4444';
+      msg = '<strong>You\'re showing signs of significant recovery debt.</strong> Sleep is low and incident load is high. Talk to someone today: a peer, a manager, or reach out to Crisis Services Canada (1-833-456-4566) if you need immediate support.';
+    }
+
+    fill.style.background = color;
+    badge.textContent     = level;
+    badge.className       = 'ocb-risk-badge ' + cls;
+    rec.innerHTML         = msg;
+  }
+
+  function handleReveal() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 60)
+        el.classList.add('show');
+    });
+  }
+  document.addEventListener('DOMContentLoaded', handleReveal);
+  window.addEventListener('scroll', handleReveal, { passive: true });
+
+  const staggerObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const kids = entry.target.querySelectorAll(
+        '.ocb-challenge, .ocb-step, .ocb-stat, .ocb-lesson, .ocb-result-row, .ocb-ethics-card'
+      );
+      kids.forEach((child, i) => {
+        child.style.opacity = '0';
+        child.style.transform = 'translateY(12px)';
+        child.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+        requestAnimationFrame(() => {
+          child.style.opacity = '1';
+          child.style.transform = 'none';
+        });
+      });
+      staggerObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.ocb-section').forEach(s => staggerObs.observe(s));
+
+  updateRisk();
+
+  // Live watch clock
+  function tickClock() {
+    const now = new Date();
+    const h = now.getHours(), m = now.getMinutes();
+    const el = document.getElementById('watch-time');
+    if (el) el.textContent = h + ':' + String(m).padStart(2,'0');
+  }
+  tickClock();
+  setInterval(tickClock, 10000);
+
+  const SCREENS = ['dashboard','trends','resources','support'];
+
+  // Watch face data per screen
+  const watchFaces = {
+    dashboard: null, // uses default wf-dashboard div
+    trends: 'wf-trends',
+    resources: 'wf-resources',
+    support: 'wf-support'
+  };
+
+  let currentScreen = 'dashboard';
+  let alertFired = false;
+
+  function switchAppScreen(name) {
+    currentScreen = name;
+
+    // Top tabs
+    document.querySelectorAll('.dev-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.screen === name);
+    });
+
+    // Phone screens
+    SCREENS.forEach(s => {
+      const el = document.getElementById('phone-' + s);
+      if (el) el.style.display = s === name ? 'flex' : 'none';
+    });
+
+    // Watch face
+    document.querySelectorAll('.watch-face-view').forEach(wf => wf.style.display = 'none');
+    const targetWF = document.getElementById('wf-' + name);
+    if (targetWF) targetWF.style.display = 'block';
+
+    // Bottom phone nav highlight
+    SCREENS.forEach(s => {
+      const lbl = document.getElementById('pnav-lbl-' + s);
+      if (!lbl) return;
+      const isActive = s === name;
+      const navItem = document.getElementById('pnav-' + s);
+      if (navItem) {
+        const svg = navItem.querySelector('svg');
+        if (svg) {
+          svg.setAttribute('fill', isActive ? '#D4A853' : 'none');
+          svg.setAttribute('stroke', isActive ? 'none' : 'rgba(255,255,255,0.3)');
+          // for dashboard icon which uses fill-only
+          if (s === 'dashboard') svg.setAttribute('fill', isActive ? '#D4A853' : 'rgba(255,255,255,0.3)');
+        }
+        lbl.style.color = isActive ? '#D4A853' : 'rgba(255,255,255,0.3)';
+      }
+    });
+  }
+
+  let alertFiredGlobal = false;
+  function triggerAlert() {
+    if (alertFiredGlobal) return;
+    alertFiredGlobal = true;
+    alertFired = true;
+
+    // Watch: go red
+    document.getElementById('watch-dot').style.background = '#ef4444';
+    document.getElementById('watch-label').textContent = 'Risk';
+    document.getElementById('watch-score').textContent = 'HIGH';
+    document.getElementById('watch-score').style.color = '#ef4444';
+    document.getElementById('w-hrv').style.color = '#ef4444';
+    document.getElementById('watch-hint').style.opacity = '0';
+
+    // Arrow pulse
+    setTimeout(() => {
+      document.getElementById('arrow-line').style.background = 'rgba(212,168,83,0.3)';
+      document.getElementById('arrow-label').style.color = 'rgba(212,168,83,0.7)';
+      document.getElementById('arrow-pulse').style.width = '100%';
+    }, 200);
+
+    // Phone: hide all app screens, show alert
+    setTimeout(() => {
+      SCREENS.forEach(s => {
+        const el = document.getElementById('phone-' + s);
+        if (el) el.style.opacity = '0';
+      });
+      const alert = document.getElementById('phone-alert');
+      alert.style.opacity = '1';
+      alert.style.pointerEvents = 'auto';
+      // Slide in notification
+      setTimeout(() => {
+        const nb = document.getElementById('notif-banner');
+        nb.style.transform = 'translateY(0)';
+        nb.style.opacity = '1';
+        setTimeout(() => {
+          const ac = document.getElementById('alert-card');
+          ac.style.transform = 'translateY(0)';
+          ac.style.opacity = '1';
+          document.getElementById('reset-btn').style.display = 'block';
+        }, 300);
+      }, 80);
+    }, 700);
+  }
+
+  function resetDemo() {
+    alertFiredGlobal = false;
+    alertFired = false;
+
+    // Reset watch
+    document.getElementById('watch-dot').style.background = '#4ade80';
+    document.getElementById('watch-label').textContent = 'Resilience';
+    document.getElementById('watch-score').textContent = '84';
+    document.getElementById('watch-score').style.color = '#fff';
+    document.getElementById('w-hrv').style.color = '#60a5fa';
+    document.getElementById('watch-hint').style.opacity = '1';
+
+    // Reset arrow
+    document.getElementById('arrow-line').style.background = 'rgba(255,255,255,0.1)';
+    document.getElementById('arrow-label').style.color = 'rgba(255,255,255,0.2)';
+    document.getElementById('arrow-pulse').style.width = '0%';
+
+    // Reset phone
+    const alert = document.getElementById('phone-alert');
+    alert.style.opacity = '0';
+    alert.style.pointerEvents = 'none';
+    document.getElementById('notif-banner').style.transform = 'translateY(-20px)';
+    document.getElementById('notif-banner').style.opacity = '0';
+    document.getElementById('alert-card').style.transform = 'translateY(10px)';
+    document.getElementById('alert-card').style.opacity = '0';
+    document.getElementById('reset-btn').style.display = 'none';
+
+    // Restore current screen
+    SCREENS.forEach(s => {
+      const el = document.getElementById('phone-' + s);
+      if (el) el.style.opacity = '1';
+    });
+    switchAppScreen(currentScreen);
+  }
+</script>
+</body>
+</html>
