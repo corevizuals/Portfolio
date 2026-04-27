@@ -81,6 +81,7 @@ document.querySelectorAll('.skills .pill').forEach(pill => {
 const titles = [
   "UI/UX Designer & Founder Core Vizuals",
   "Product Designer",
+  "Product Data Scientist",
   "Product Engineer",
   "Front-End Developer",
   "Data Analytics",
