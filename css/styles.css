@@ -857,10 +857,12 @@ footer form.card button.btn {
     transform-origin: center center;
   }
 
-  /* Stack footer content */
+  /* Stack footer content. The row carries an inline align-items:flex-start,
+     which would otherwise shrink the form to its content width. */
   footer > div {
     flex-direction: column;
     gap: 24px;
+    align-items: stretch !important;
   }
 
   /* Make form single column */
@@ -875,6 +877,12 @@ footer form.card button.btn {
   footer form.card button {
     grid-column: 1 / 2;
     width: 100%;
+  }
+
+  /* button.btn is more specific than the rule above, so it keeps spanning to a
+     column that no longer exists and opens an empty implicit track. */
+  footer form.card button.btn {
+    grid-column: 1 / 2;
   }
 
   /* Textarea height adjustment */
