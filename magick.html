@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Magick — Sticker Rescue Tool · Jeboy Compuesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --mg-purple:  #7F77DD;
+    --mg-pink:    #F093FB;
+    --mg-violet:  #534AB7;
+    --mg-soft:    #EEEDFE;
+    --mg-dark:    #1a0a2e;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 40px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--mg-purple); }
+
+  /* EYEBROW */
+  .mg-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mg-purple);
+    margin-bottom: 20px;
+  }
+  .mg-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 2px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    border-radius: 2px;
+  }
+
+  /* TITLE */
+  .mg-title {
+    font-size: clamp(38px, 6vw, 70px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text-main);
+    margin-bottom: 24px;
+  }
+  .mg-title .aw {
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .mg-lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+
+  /* CATEGORY PILL */
+  .mg-category-pill {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--mg-soft);
+    color: var(--mg-violet);
+    margin-bottom: 16px;
+  }
+
+  /* META BAR */
+  .mg-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 28px 32px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-top: 36px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .mg-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .mg-meta-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .mg-meta-value { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+
+  /* CHAPTER MARKER */
+  .mg-chapter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .mg-chapter-num {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--mg-purple);
+  }
+  .mg-chapter-line {
+    width: 28px; height: 2px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    border-radius: 2px;
+  }
+  .mg-chapter-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .mg-divider {
+    width: 44px; height: 3px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .mg-section { margin-bottom: 80px; }
+
+  .mg-section-title {
+    font-size: clamp(24px, 3.2vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 16px;
+  }
+
+  /* HERO IMAGE */
+  .mg-hero-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--mg-dark) 0%, #302b63 50%, #24243e 100%);
+    height: 440px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .mg-hero-img-inner {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 32px;
+  }
+  .mg-phone-mock {
+    width: 120px;
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 2px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+  .mg-phone-notch {
+    height: 16px;
+    background: #1a1a2e;
+    margin: 0 32px;
+    border-radius: 0 0 10px 10px;
+  }
+  .mg-phone-screen {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .mg-screen-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--mg-soft);
+  }
+  .mg-screen-hero {
+    height: 48px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+  .mg-screen-btn {
+    height: 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--mg-pink), #f5576c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    font-weight: 700;
+    color: white;
+  }
+  .mg-phone-footer {
+    height: 24px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+  }
+  .mg-tab-dot {
+    width: 12px; height: 12px;
+    border-radius: 2px;
+    background: #e9e9e9;
+  }
+  .mg-tab-dot.active { background: var(--mg-purple); }
+  .mg-hero-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: var(--mg-soft);
+    border: 1px solid rgba(127,119,221,0.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--mg-violet);
+    letter-spacing: 0.05em;
+  }
+
+  /* STATS */
+  .mg-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .mg-stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .mg-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+  }
+  .mg-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .mg-stat-num {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--mg-purple), var(--mg-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .mg-stat-label { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); line-height: 1.4; }
+
+  /* TWO COL */
+  .mg-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* IMAGE BLOCKS */
+  .mg-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--mg-soft), #f5f0ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mg-img-tall { height: 380px; }
+  .mg-img-medium { height: 260px; }
+  .mg-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ph-icon { font-size: 2rem; opacity: 0.22; }
+  .ph-text { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); opacity: 0.55; }
+
+  /* CHALLENGES */
+  .mg-challenges { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .mg-challenge {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .mg-challenge:hover {
+    border-color: rgba(127,119,221,0.3);
+    box-shadow: 0 4px 16px rgba(127,119,221,0.1);
+  }
+  .mg-challenge-icon {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--mg-purple), var(--mg-pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .mg-challenge p { font-size: 0.875rem; line-height: 1.65; color: var(--text-muted); margin: 0; }
+  .mg-challenge strong { color: var(--text-main); }
+
+  /* STEPS */
+  .mg-steps { display: flex; flex-direction: column; margin-top: 8px; }
+  .mg-step {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .mg-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .mg-step-num {
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--mg-purple);
+    min-width: 24px;
+    padding-top: 3px;
+  }
+  .mg-step h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 5px; }
+  .mg-step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* PRINCIPLE GRID */
+  .mg-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .mg-principle {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .mg-principle::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .mg-principle:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .mg-principle:hover::after { opacity: 1; }
+  .mg-principle-icon { font-size: 1.4rem; margin-bottom: 10px; }
+  .mg-principle h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+  .mg-principle p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* PROCESS FLOW */
+  .mg-process-flow {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 28px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .mg-process-step {
+    padding: 20px 16px;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .mg-process-step:last-child { border-right: none; }
+  .mg-process-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .mg-process-step:hover { background: var(--mg-soft); }
+  .mg-process-step:hover::before { opacity: 1; }
+  .mg-process-num {
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em;
+    color: var(--mg-purple); margin-bottom: 8px;
+  }
+  .mg-process-name { font-size: 0.78rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+  .mg-process-detail { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ITERATION CARDS */
+  .mg-iterations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .mg-iteration {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .mg-iteration:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .mg-iteration-header {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ih-1 { background: linear-gradient(135deg, #FAEEDA, #fde68a); }
+  .ih-2 { background: linear-gradient(135deg, var(--mg-soft), #ddd6fe); }
+  .ih-3 { background: linear-gradient(135deg, #E1F5EE, #a7f3d0); }
+  .mg-iteration-num { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.6; }
+  .ih-1 .mg-iteration-num { color: #633806; }
+  .ih-2 .mg-iteration-num { color: var(--mg-violet); }
+  .ih-3 .mg-iteration-num { color: #085041; }
+  .mg-iteration h3 { font-size: 0.95rem; font-weight: 700; margin: 0; }
+  .ih-1 h3 { color: #633806; }
+  .ih-2 h3 { color: var(--mg-violet); }
+  .ih-3 h3 { color: #085041; }
+  .mg-iteration-body { padding: 18px 20px; background: white; }
+  .mg-iteration-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+  .mg-iteration-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mg-tool-pill {
+    font-size: 0.65rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--mg-soft); color: var(--mg-violet);
+    border: 1px solid rgba(127,119,221,0.2);
+  }
+
+  /* RESEARCH CARDS */
+  .mg-interviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .mg-interview {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .mg-interview-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .mg-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--mg-purple), var(--mg-pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .mg-interview-name { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+  .mg-interview-role { font-size: 0.72rem; color: var(--text-muted); }
+  .mg-quote {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.65;
+    border-left: 2px solid var(--mg-soft);
+    padding-left: 10px;
+    margin: 0 0 8px;
+  }
+  .mg-insight-tag {
+    display: inline-block;
+    font-size: 0.65rem; font-weight: 600;
+    padding: 2px 8px; border-radius: 999px;
+    background: var(--mg-soft); color: var(--mg-violet);
+  }
+
+  /* HMW BLOCK */
+  .mg-hmw-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .mg-hmw-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .mg-hmw-card::before {
+    content: 'HMW';
+    position: absolute;
+    top: 8px; right: 10px;
+    font-size: 0.6rem; font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--mg-purple); opacity: 0.3;
+  }
+  .mg-hmw-card:hover { border-color: rgba(127,119,221,0.4); }
+  .mg-hmw-card strong { color: var(--text-main); }
+
+  /* BANNER */
+  .mg-banner {
+    background: linear-gradient(135deg, var(--mg-dark) 0%, #302b63 50%, var(--mg-violet) 100%);
+    border-radius: var(--radius);
+    padding: 56px 48px;
+    margin: 16px 0 64px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .mg-banner::before {
+    content: 'MAGICK';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 14vw, 160px);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.05);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .mg-banner h2 {
+    font-size: clamp(20px, 3vw, 34px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .mg-banner p { color: rgba(255,255,255,0.75); font-size: 0.95rem; position: relative; }
+
+  /* RESULT ROWS */
+  .mg-result-rows { display: flex; flex-direction: column; }
+  .mg-result-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mg-result-row:last-child { border-bottom: none; }
+  .mg-result-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--mg-purple), var(--mg-pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .mg-result-row h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 0 0 4px; }
+  .mg-result-row p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* LESSONS */
+  .mg-lessons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .mg-lesson {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .mg-lesson::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mg-purple), var(--mg-pink));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .mg-lesson:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+  .mg-lesson:hover::after { opacity: 1; }
+  .mg-lesson-num {
+    font-size: 2.2rem; font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mg-purple); opacity: 0.12;
+    line-height: 1; margin-bottom: 10px;
+  }
+  .mg-lesson h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 7px; }
+  .mg-lesson p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  /* TOOLS ROW */
+  .mg-tools-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .mg-tool {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.75rem; font-weight: 500;
+    padding: 5px 12px; border-radius: 999px;
+    background: white; border: 1px solid var(--border);
+    color: var(--text-muted);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  /* LIVE DEMO CTA */
+  .mg-demo-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .mg-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--mg-purple), var(--mg-pink));
+    color: white;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(127,119,221,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .mg-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(127,119,221,0.45); }
+  .mg-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--mg-violet);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: 2px solid rgba(127,119,221,0.3);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .mg-btn-secondary:hover {
+    border-color: var(--mg-purple);
+    box-shadow: 0 4px 16px rgba(127,119,221,0.15);
+  }
+
+  /* AFFINITY GRID */
+  .mg-affinity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .mg-affinity-card {
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+  }
+  .af-1 { background: #fdf4ff; border-color: rgba(127,119,221,0.2); }
+  .af-2 { background: #fef9ef; border-color: rgba(240,163,8,0.2); }
+  .af-3 { background: #f0fdf9; border-color: rgba(29,158,117,0.2); }
+  .af-4 { background: #fff5f5; border-color: rgba(220,38,38,0.15); }
+  .mg-affinity-card h4 { font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin: 0 0 8px; }
+  .mg-affinity-card ul { margin: 0; padding-left: 16px; }
+  .mg-affinity-card li { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 3px; }
+
+  /* SCREEN GRID */
+  .mg-screen-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .mg-screen-card {
+    background: var(--mg-dark);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+  .mg-screen-card:hover { transform: translateY(-4px); }
+  .mg-screen-notch {
+    height: 10px;
+    background: #2a1a3e;
+    margin: 0 24px;
+    border-radius: 0 0 8px 8px;
+  }
+  .mg-screen-content {
+    padding: 8px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mg-screen-label {
+    text-align: center;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 8px 0 0;
+    letter-spacing: 0.04em;
+  }
+
+  /* NORTH STAR */
+  .mg-north-star {
+    border-left: 4px solid var(--mg-purple);
+    padding: 20px 24px;
+    background: linear-gradient(135deg, var(--mg-soft), white);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 32px;
+  }
+  .mg-north-star p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .mg-two-col { grid-template-columns: 1fr; }
+    .mg-stats { grid-template-columns: repeat(2, 1fr); }
+    .mg-principles { grid-template-columns: 1fr 1fr; }
+    .mg-lessons { grid-template-columns: 1fr; }
+    .mg-iterations { grid-template-columns: 1fr; }
+    .mg-interviews { grid-template-columns: 1fr; }
+    .mg-hmw-grid { grid-template-columns: 1fr 1fr; }
+    .mg-process-flow { grid-template-columns: repeat(3, 1fr); }
+    .mg-screen-grid { grid-template-columns: repeat(3, 1fr); }
+    .mg-affinity-grid { grid-template-columns: 1fr; }
+    .mg-meta-bar { gap: 20px; }
+    .mg-banner { padding: 40px 24px; }
+  }
+</style>
+</head>
+
+<div class="custom-cursor"></div>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">Jeboy Compuesto</div>
+      <button class="nav-toggle" aria-label="Toggle Menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume/Jeboy_Compuesto_-_Resume_(2026).pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="projects.html" class="back-link reveal">← Back to projects</a>
+
+      <!-- ── HERO ── -->
+      <div class="mg-section">
+        <div class="mg-eyebrow reveal">UX & Product Design · 2025</div>
+        <span class="mg-category-pill reveal">UX / Product Design</span>
+        <h1 class="mg-title reveal"><span class="aw">Magick</span> — Sticker Rescue Tool</h1>
+        <p class="mg-lead reveal">A two-stage rescue tool that restores fading stickers and preserves the memories behind them. Physical pen meets AI-powered app meets global sticker community — built from personal pain, validated through user research, and shipped as a fully functional prototype.</p>
+        <div class="mg-meta-bar reveal">
+          <div class="mg-meta-item"><span class="mg-meta-label">Context</span><span class="mg-meta-value">Concordia University / UX 310</span></div>
+          <div class="mg-meta-item"><span class="mg-meta-label">Role</span><span class="mg-meta-value">UX Researcher, Product Designer, Developer</span></div>
+          <div class="mg-meta-item"><span class="mg-meta-label">Year</span><span class="mg-meta-value">2025</span></div>
+          <div class="mg-meta-item"><span class="mg-meta-label">Deliverables</span><span class="mg-meta-value">Research · Prototype · Coded App · Case Study</span></div>
+          <div class="mg-meta-item"><span class="mg-meta-label">Iterations</span><span class="mg-meta-value">3 full iterations</span></div>
+        </div>
+      </div>
+
+      <!-- ── HERO IMAGE ── -->
+      <div class="mg-img reveal" style="height:500px;margin-bottom:64px;background:#0a0a1a;">
+        <img src="images/Magick.png" alt="Magick — Sticker Rescue Tool hero" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
+
+      <!-- ── STATS ── -->
+      <div class="mg-stats reveal">
+        <div class="mg-stat">
+          <div class="mg-stat-num">5</div>
+          <div class="mg-stat-label">User interviews conducted</div>
+        </div>
+        <div class="mg-stat">
+          <div class="mg-stat-num">3</div>
+          <div class="mg-stat-label">Full prototype iterations</div>
+        </div>
+        <div class="mg-stat">
+          <div class="mg-stat-num">10</div>
+          <div class="mg-stat-label">Interactive screens built</div>
+        </div>
+        <div class="mg-stat">
+          <div class="mg-stat-num">0</div>
+          <div class="mg-stat-label">Competing products in the restore space</div>
+        </div>
+      </div>
+
+      <!-- ── 01 PROBLEM ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">01</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">The Problem</span>
+        </div>
+        <div class="mg-divider"></div>
+        <div class="mg-two-col">
+          <div>
+            <h2 class="mg-section-title">A small grief nobody talks about.</h2>
+            <p class="mg-lead">I carry my water bottle everywhere. People hear me coming before they see me because of the clanking. Every sticker on it is intentional — a night market in Bangkok, a tiny venue before the band was famous, a shop in a city I might never go back to.</p>
+            <p style="color:var(--text-muted);line-height:1.75;font-size:0.95rem;margin-bottom:24px;">When a sticker starts to fade, there is nothing you can do. I googled how to fix it. Nothing. That absence became the entire design brief.</p>
+            <div class="mg-challenges">
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">🔬</div>
+                <p><strong>The science:</strong> UV radiation permanently destroys dye molecules — photodegradation. The molecule is structurally destroyed. You cannot chemically reverse it. But you can optically restore the appearance and stop further damage.</p>
+              </div>
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">🏪</div>
+                <p><strong>The gap:</strong> Every existing solution either prevents fading before it starts (UV sprays, laminating) or replaces the sticker entirely (reprint services). Nothing helps when fading has already begun. That gap is Magick's entire market.</p>
+              </div>
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">💔</div>
+                <p><strong>The emotion:</strong> The sticker from a place you cannot return to. The one from an artist who stopped selling. The gift from someone who mattered. These are not cosmetic problems — they are small griefs.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="mg-img mg-img-tall">
+              <img src="images/Magick 6.png" alt="Magick product — different use cases" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+              <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.12);border-radius:10px;padding:12px;">
+                <div style="font-size:0.7rem;font-weight:700;color:#dc2626;margin-bottom:4px;">TYPE 1</div>
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text-main);">Color fading</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);">UV photodegradation</div>
+              </div>
+              <div style="background:#fff9ed;border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:12px;">
+                <div style="font-size:0.7rem;font-weight:700;color:#d97706;margin-bottom:4px;">TYPE 2</div>
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text-main);">Adhesive failure</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);">Edges lift and curl</div>
+              </div>
+              <div style="background:#f0fdf4;border:1px solid rgba(34,197,94,0.15);border-radius:10px;padding:12px;">
+                <div style="font-size:0.7rem;font-weight:700;color:#16a34a;margin-bottom:4px;">TYPE 3</div>
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text-main);">Physical damage</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);">Tears and scratches</div>
+              </div>
+              <div style="background:#eff6ff;border:1px solid rgba(59,130,246,0.15);border-radius:10px;padding:12px;">
+                <div style="font-size:0.7rem;font-weight:700;color:#2563eb;margin-bottom:4px;">TYPE 4</div>
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text-main);">Surface haze</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);">Oils and oxidation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 02 RESEARCH ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">02</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">User Research</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">5 interviews. 4 themes. 1 clear gap.</h2>
+        <p style="color:var(--text-muted);line-height:1.75;font-size:0.95rem;margin-bottom:24px;max-width:640px;">Semi-structured interviews, direct observation, and one think-aloud prototype session. Conducted March 5 to 10 with participants from university campus and personal network.</p>
+
+        <div class="mg-interviews reveal">
+          <div class="mg-interview">
+            <div class="mg-interview-header">
+              <div class="mg-avatar">JL</div>
+              <div>
+                <div class="mg-interview-name">Jade L., 21 — Student</div>
+                <div class="mg-interview-role">Bottle collector · 14 stickers on her Stanley</div>
+              </div>
+            </div>
+            <p class="mg-quote">"People in my program know me by my bottle. It shows up before I do. If that one fades I honestly do not know what I would do."</p>
+            <span class="mg-insight-tag">Think-aloud tester</span>
+          </div>
+          <div class="mg-interview">
+            <div class="mg-interview-header">
+              <div class="mg-avatar">MR</div>
+              <div>
+                <div class="mg-interview-name">Marcus R., 23 — Student</div>
+                <div class="mg-interview-role">Laptop + iPhone case collector</div>
+              </div>
+            </div>
+            <p class="mg-quote">"I have googled this like three times. Every result is either how to make stickers or how to remove them. Nothing about saving one that is already going."</p>
+            <span class="mg-insight-tag">Power user persona</span>
+          </div>
+          <div class="mg-interview">
+            <div class="mg-interview-header">
+              <div class="mg-avatar">SP</div>
+              <div>
+                <div class="mg-interview-name">Sofia P., 24 — Graduate student</div>
+                <div class="mg-interview-role">Traveler · stickers only from in-person finds</div>
+              </div>
+            </div>
+            <p class="mg-quote">"A reprint means nothing. The point is that I was there and I found it and I chose it."</p>
+            <span class="mg-insight-tag">Memory keeper persona</span>
+          </div>
+          <div class="mg-interview">
+            <div class="mg-interview-header">
+              <div class="mg-avatar">AL</div>
+              <div>
+                <div class="mg-interview-name">Aisha L., 25 — Designer</div>
+                <div class="mg-interview-role">Gives and receives stickers as meaningful gifts</div>
+              </div>
+            </div>
+            <p class="mg-quote">"I did not know you could fix this. Why does this not exist already?"</p>
+            <span class="mg-insight-tag">Key validation quote</span>
+          </div>
+        </div>
+
+        <!-- Affinity map -->
+        <div style="margin-top:40px;">
+          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:6px;">Affinity map — 4 themes</h3>
+          <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:0;">Clustered from interview quotes and observations.</p>
+          <div class="mg-affinity-grid">
+            <div class="mg-affinity-card af-1">
+              <h4>Identity and meaning</h4>
+              <ul>
+                <li>"Stickers are intentional — each one took thought"</li>
+                <li>"This is basically me at this point"</li>
+                <li>Stickers as a visual diary of places, moments, people</li>
+                <li>The bottle as a personal brand object</li>
+              </ul>
+            </div>
+            <div class="mg-affinity-card af-2">
+              <h4>Irreplaceability</h4>
+              <ul>
+                <li>"I cannot find it again" — artist stopped selling</li>
+                <li>Stickers from countries they are not returning to</li>
+                <li>Gift stickers carry the giver's emotional weight</li>
+                <li>A digital copy or reprint would not feel the same</li>
+              </ul>
+            </div>
+            <div class="mg-affinity-card af-3">
+              <h4>Current workarounds (all fail)</h4>
+              <ul>
+                <li>Clear tape — "looked worse"</li>
+                <li>Nail polish — "turned cloudy"</li>
+                <li>Googling — no useful results found</li>
+                <li>Most assumed fading was simply inevitable</li>
+              </ul>
+            </div>
+            <div class="mg-affinity-card af-4">
+              <h4>Willingness to act</h4>
+              <ul>
+                <li>Would pay for restoration of an irreplaceable sticker</li>
+                <li>Surprise that restoration was even possible</li>
+                <li>Pain activates for specific stickers, not all equally</li>
+                <li>Strong reaction to before/after demo — "satisfying"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research FigJam screenshot -->
+        <div class="mg-img reveal" style="height:380px;margin-top:32px;">
+          <img src="images/research-magick.png" alt="Research documentation on FigJam — interviews and affinity map" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        </div>
+      </div> -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">03</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">How Might We</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">25 questions. One north star.</h2>
+        <div class="mg-north-star">
+          <p>"How might we build a universal rescue tool that restores fading sticker color and preserves the memory behind it — so people never have to lose a sticker they love?"</p>
+        </div>
+        <div class="mg-hmw-grid reveal">
+          <div class="mg-hmw-card"><strong>Core:</strong> How might we help people restore a fading sticker so it looks the way it did when they first got it?</div>
+          <div class="mg-hmw-card"><strong>Memory:</strong> How might we preserve the story behind a sticker even after the physical sticker is gone?</div>
+          <div class="mg-hmw-card"><strong>Identity:</strong> How might we help people maintain the personal identity expressed through the stickers on their everyday objects?</div>
+          <div class="mg-hmw-card"><strong>Tech:</strong> How might we use AI to reconstruct what a sticker originally looked like from a faded or damaged version?</div>
+          <div class="mg-hmw-card"><strong>Community:</strong> How might we build a social platform around sticker culture that does not feel like Instagram?</div>
+          <div class="mg-hmw-card"><strong>Physical:</strong> How might we design a tool that anyone can use in under 2 minutes with no prior knowledge?</div>
+        </div>
+      </div>
+
+        </div>
+        <!-- Product overview FigJam screenshot -->
+        <div class="mg-img reveal" style="height:360px;margin-top:32px;">
+          <img src="images/Product_Overview-magick.png" alt="Product overview documented on FigJam" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        </div>
+      </div>
+
+      <!-- ── 04 DESIGN PRINCIPLES ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">04</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Design Principles</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">Six principles from the research.</h2>
+        <p style="color:var(--text-muted);line-height:1.75;font-size:0.95rem;margin-bottom:0;max-width:600px;">Every screen, interaction, and product decision traces back to these six.</p>
+        <div class="mg-principles reveal">
+          <div class="mg-principle">
+            <div class="mg-principle-icon">🔄</div>
+            <h4>Never replace, only restore</h4>
+            <p>The original sticker always stays. Magick works on top of what is there, not instead of it.</p>
+          </div>
+          <div class="mg-principle">
+            <div class="mg-principle-icon">🌐</div>
+            <h4>Universal, not proprietary</h4>
+            <p>Works on any sticker from any source on any surface. We do not sell stickers or require our own ecosystem.</p>
+          </div>
+          <div class="mg-principle">
+            <div class="mg-principle-icon">🤝</div>
+            <h4>Honest about what is possible</h4>
+            <p>UV damage cannot be chemically reversed. Magick restores appearance and prevents further loss — a real promise.</p>
+          </div>
+          <div class="mg-principle">
+            <div class="mg-principle-icon">💾</div>
+            <h4>Memory is the product</h4>
+            <p>The Sticker Vault is the long-term value. Even when a sticker is gone, the reconstructed original remains.</p>
+          </div>
+          <div class="mg-principle">
+            <div class="mg-principle-icon">🎁</div>
+            <h4>Interaction requires generosity</h4>
+            <p>To react to someone's sticker you give one of your own. Every action costs something real.</p>
+          </div>
+          <div class="mg-principle">
+            <div class="mg-principle-icon">🗺️</div>
+            <h4>Discovery through geography</h4>
+            <p>The world map replaces the feed. You find things by curiosity and place, not by algorithm.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 05 PROCESS ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">05</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Design Process</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">From sticky note to shipped app.</h2>
+        <div class="mg-process-flow reveal">
+          <div class="mg-process-step">
+            <div class="mg-process-num">01</div>
+            <div class="mg-process-name">Discover</div>
+            <div class="mg-process-detail">Secondary research, competitive landscape, community immersion</div>
+          </div>
+          <div class="mg-process-step">
+            <div class="mg-process-num">02</div>
+            <div class="mg-process-name">Define</div>
+            <div class="mg-process-detail">5 user interviews, affinity mapping, personas, HMW</div>
+          </div>
+          <div class="mg-process-step">
+            <div class="mg-process-num">03</div>
+            <div class="mg-process-name">Ideate</div>
+            <div class="mg-process-detail">15+ ideas, decision matrix, concept selection</div>
+          </div>
+          <div class="mg-process-step">
+            <div class="mg-process-num">04</div>
+            <div class="mg-process-name">Frame</div>
+            <div class="mg-process-detail">Journey map, system map, 6 design principles</div>
+          </div>
+          <div class="mg-process-step">
+            <div class="mg-process-num">05</div>
+            <div class="mg-process-name">Prototype</div>
+            <div class="mg-process-detail">Lo-fi, Figma Make hi-fi, React coded app</div>
+          </div>
+          <div class="mg-process-step">
+            <div class="mg-process-num">06</div>
+            <div class="mg-process-name">Test</div>
+            <div class="mg-process-detail">Think-aloud, usability findings, iteration</div>
+          </div>
+        </div>
+      </div>
+
+        </div>
+
+        <!-- Ideation FigJam screenshot -->
+        <div class="mg-img reveal" style="height:380px;margin-top:32px;">
+          <img src="images/ideation-magick.png" alt="Ideation process on FigJam — concept cards and decision matrix" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        </div>
+      </div>
+
+      <!-- ── 06 SOLUTION ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">06</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">The Solution</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">Two stages. One product.</h2>
+        <div class="mg-two-col reveal">
+          <div>
+            <div class="mg-steps">
+              <div class="mg-step">
+                <span class="mg-step-num">01</span>
+                <div>
+                  <h4>The pen — Stage 1 physical rescue</h4>
+                  <p>A dual-tip pen. One end re-adheres lifting edges and curled corners. The other applies a UV-blocking revival coat that optically restores remaining color and seals the sticker against future fading. Under two minutes. No app needed. Works on any sticker, any surface, from any source.</p>
+                </div>
+              </div>
+              <div class="mg-step">
+                <span class="mg-step-num">02</span>
+                <div>
+                  <h4>The app — Stage 2 AI reconstruction</h4>
+                  <p>Point your camera at any sticker. The app detects the boundary, corrects for surface curvature — bottle, laptop, helmet — and AI rebuilds the original colors using color deconvolution and inpainting. A before and after drag comparison. Saved permanently to your Sticker Vault.</p>
+                </div>
+              </div>
+              <div class="mg-step">
+                <span class="mg-step-num">03</span>
+                <div>
+                  <h4>The overlay — optional reprint</h4>
+                  <p>For severely damaged stickers, the AI reconstruction becomes a print file. A translucent adhesive film cut to exact dimensions ships to you. AR guides precise placement. The original sticker stays underneath. Its story is preserved.</p>
+                </div>
+              </div>
+              <div class="mg-step">
+                <span class="mg-step-num">04</span>
+                <div>
+                  <h4>The community — world map</h4>
+                  <p>Every sticker pinned to where it came from. City sticker walls, chaotic and layered. Matching with people who have the same sticker. Interactions that replace likes with something real — to react, you give one of your own stickers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="mg-img mg-img-medium">
+              <img src="images/Magick 3.png" alt="Person using the Magick rescue tool" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="mg-img mg-img-medium">
+              <img src="images/Magick 4.png" alt="Person using Magick on their bottle" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 07 ITERATIONS ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">07</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Prototyping</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">Three iterations. Each one informed by the last.</h2>
+        <div class="mg-iterations reveal">
+          <div class="mg-iteration">
+            <div class="mg-iteration-header ih-1">
+              <span class="mg-iteration-num">ITERATION 1 — MARCH 25</span>
+              <h3>Lo-fi sketches</h3>
+            </div>
+            <div class="mg-iteration-body">
+              <p>15+ ideas brainstormed. Decision matrix scored each on desirability, feasibility, viability, novelty. Two-stage rescue tool selected. Key pivot: rejected "magic sticker" concept in favour of a rescue tool that works on any sticker anyone already owns.</p>
+              <div class="mg-iteration-tools">
+                <span class="mg-tool-pill">Concept cards</span>
+                <span class="mg-tool-pill">Decision matrix</span>
+                <span class="mg-tool-pill">Journey map</span>
+              </div>
+            </div>
+          </div>
+          <div class="mg-iteration">
+            <div class="mg-iteration-header ih-2">
+              <span class="mg-iteration-num">ITERATION 2 — APRIL 1</span>
+              <h3>Figma Make prototype</h3>
+            </div>
+            <div class="mg-iteration-body">
+              <p>High-fidelity interactive prototype. All 4 flows, 10+ screens. Loading screen sticker wall added. "Slap it on" replaced generic likes. Sticker Vault became a permanent memory archive. World map replaced social feed. Think-aloud session with Jade revealed scan screen confusion and delight on before/after slider.</p>
+              <div class="mg-iteration-tools">
+                <span class="mg-tool-pill">Figma Make</span>
+                <span class="mg-tool-pill">Think-aloud test</span>
+                <span class="mg-tool-pill">10 screens</span>
+              </div>
+            </div>
+          </div>
+          <div class="mg-iteration">
+            <div class="mg-iteration-header ih-3">
+              <span class="mg-iteration-num">ITERATION 3 — APRIL 8</span>
+              <h3>React coded app</h3>
+            </div>
+            <div class="mg-iteration-body">
+              <p>Fully functional React app. Real routing, localStorage persistence, draggable before/after slider, interactive SVG world map, sticker creator, order flow. Tested on real mobile device via local network. Deployable to Vercel. Scan screen labeling clarified based on think-aloud findings.</p>
+              <div class="mg-iteration-tools">
+                <span class="mg-tool-pill">React</span>
+                <span class="mg-tool-pill">Vite</span>
+                <span class="mg-tool-pill">Tailwind</span>
+                <span class="mg-tool-pill">Vercel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workflow FigJam screenshot -->
+        <div class="mg-img reveal" style="height:400px;margin-top:32px;">
+          <img src="images/product_workflow-user_flow.png" alt="Product workflow and user flow diagrams on FigJam" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        </div>
+
+        <!-- Features screenshot -->
+        <div style="margin-top:12px;">
+          <h3 style="font-size:0.85rem;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">All screens — Figma Make</h3>
+          <div class="mg-img reveal" style="height:420px;">
+            <img src="images/features.png" alt="Full feature set — all screens in Figma Make" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+          </div>
+        </div>
+
+        <!-- App screens grid -->
+        <div style="margin-top:32px;">
+          <h3 style="font-size:0.85rem;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">App screens</h3>
+          <div class="mg-screen-grid reveal">
+            <div class="mg-screen-card">
+              <div class="mg-screen-notch"></div>
+              <div class="mg-screen-content" style="background:linear-gradient(135deg,#ff9de2,#c4b5fd,#93c5fd);">
+                <div style="text-align:center;padding-top:8px;font-size:22px;">✨</div>
+                <div style="background:rgba(255,255,255,0.3);border-radius:8px;height:20px;margin:4px 0;"></div>
+                <div style="background:linear-gradient(90deg,#f093fb,#f5576c);border-radius:99px;height:16px;"></div>
+              </div>
+              <div class="mg-screen-label">Onboarding</div>
+            </div>
+            <div class="mg-screen-card">
+              <div class="mg-screen-notch"></div>
+              <div class="mg-screen-content" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+                <div style="background:rgba(255,255,255,0.15);border-radius:8px;height:50px;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;">magi<span style="opacity:0.6">ck</span> ✨</div>
+                <div style="background:linear-gradient(90deg,#f093fb,#f5576c);border-radius:99px;height:14px;"></div>
+                <div style="background:rgba(255,255,255,0.1);border-radius:8px;height:40px;"></div>
+              </div>
+              <div class="mg-screen-label">Home</div>
+            </div>
+            <div class="mg-screen-card">
+              <div class="mg-screen-notch"></div>
+              <div class="mg-screen-content" style="background:linear-gradient(135deg,#a8edea,#fed6e3);">
+                <div style="text-align:center;font-size:24px;padding-top:8px;">🖊️</div>
+                <div style="background:rgba(255,255,255,0.4);border-radius:8px;height:12px;"></div>
+                <div style="background:rgba(255,255,255,0.4);border-radius:8px;height:12px;width:80%;"></div>
+                <div style="background:rgba(127,119,221,0.6);border-radius:99px;height:14px;"></div>
+              </div>
+              <div class="mg-screen-label">Rescue guide</div>
+            </div>
+            <div class="mg-screen-card">
+              <div class="mg-screen-notch"></div>
+              <div class="mg-screen-content" style="background:#0a0a1a;">
+                <div style="border:1.5px solid #f093fb;border-radius:4px;height:60px;margin:4px;display:flex;align-items:center;justify-content:center;font-size:18px;">🔍</div>
+                <div style="background:#f093fb;border-radius:99px;height:12px;width:70%;margin:0 auto;"></div>
+              </div>
+              <div class="mg-screen-label">Scan</div>
+            </div>
+            <div class="mg-screen-card">
+              <div class="mg-screen-notch"></div>
+              <div class="mg-screen-content" style="background:white;">
+                <div style="display:flex;height:60px;border-radius:6px;overflow:hidden;margin-bottom:4px;">
+                  <div style="flex:1;background:linear-gradient(135deg,#e5e7eb,#d1d5db);display:flex;align-items:center;justify-content:center;font-size:12px;opacity:0.5;">B</div>
+                  <div style="flex:1;background:linear-gradient(135deg,#EEEDFE,#c4b5fd);display:flex;align-items:center;justify-content:center;font-size:12px;">A</div>
+                </div>
+                <div style="background:linear-gradient(90deg,#f093fb,#f5576c);border-radius:99px;height:12px;"></div>
+              </div>
+              <div class="mg-screen-label">Reconstruct</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 08 LIVE DEMO ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">08</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Live Demo</span>
+        </div>
+        <div class="mg-divider"></div>
+        <div class="mg-two-col">
+          <div>
+            <h2 class="mg-section-title">From static design to working app.</h2>
+            <p style="color:var(--text-muted);line-height:1.75;font-size:0.95rem;margin-bottom:24px;">Built and tested a functional prototype across devices using a local network environment, bridging design and real-world interaction. Developed and ran the application locally using a Vite development server.</p>
+            <div class="mg-challenges" style="margin-bottom:24px;">
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">💻</div>
+                <p><strong>Local dev:</strong> Running on http://localhost:5173. Environment: local dev (Mac). Purpose: rapid iteration and real-time updates during development.</p>
+              </div>
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">📱</div>
+                <p><strong>Mobile testing:</strong> Accessed via local network IP. Same WiFi connection between laptop and phone. Enabled using the --host configuration flag.</p>
+              </div>
+              <div class="mg-challenge">
+                <div class="mg-challenge-icon">🚀</div>
+                <p><strong>Outcome:</strong> Successfully moved from static design to a functional prototype and validated the experience across both desktop and mobile devices.</p>
+              </div>
+            </div>
+            <div class="mg-demo-cta">
+              <a href="https://www.figma.com/make/4HQh4sfV1OsBvvoQl9Th8q/Sticker-Rescue-Tool?fullscreen=1" target="_blank" class="mg-btn-primary">✨ Figma Make Demo</a>
+              <a href="projects.html" class="mg-btn-secondary">← All projects</a>
+            </div>
+          </div>
+          <div class="mg-img mg-img-tall">
+              <img src="images/live-demo-magick.png" alt="Magick live demo — all screens working" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+            </div>
+        </div>
+      </div>
+
+      <!-- ── RESULT BANNER ── -->
+      <div class="mg-banner reveal">
+        <h2>A world where nothing you love has to disappear just because time got to it first.</h2>
+        <p>Magick is a rescue tool, a memory archive, and a declaration that the small things are worth saving.</p>
+      </div>
+
+      <!-- ── 09 RESULTS ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">09</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Key Outcomes</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">What the project delivered.</h2>
+        <div class="mg-result-rows reveal">
+          <div class="mg-result-row">
+            <div class="mg-result-icon">🔬</div>
+            <div>
+              <h4>Validated a real, uncontested market gap</h4>
+              <p>Zero existing products restore a sticker that is already fading. Every participant confirmed workarounds failed. "Why does this not exist already?" — Participant 5, unprompted.</p>
+            </div>
+          </div>
+          <div class="mg-result-row">
+            <div class="mg-result-icon">✦</div>
+            <div>
+              <h4>Full end-to-end UX process documented</h4>
+              <p>Discovery, 5 user interviews, affinity mapping, 25 HMW questions, 6 design principles, product overview, workflow, wireframes, and 3 prototype iterations — all from scratch.</p>
+            </div>
+          </div>
+          <div class="mg-result-row">
+            <div class="mg-result-icon">📱</div>
+            <div>
+              <h4>Functional coded prototype — 10 screens, real device tested</h4>
+              <p>React + Vite app with real routing, localStorage persistence, draggable before/after slider, interactive world map, AR-guided order flow. Tested on iPhone via local network.</p>
+            </div>
+          </div>
+          <div class="mg-result-row">
+            <div class="mg-result-icon">🌍</div>
+            <div>
+              <h4>Anti-Instagram community model</h4>
+              <p>Replaced likes, comments, and follows with "slap it on," geography-first discovery, and a matching system. Every interaction costs something real — generosity is built into the mechanic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 10 LESSONS ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">10</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Lessons Learned</span>
+        </div>
+        <div class="mg-divider"></div>
+        <h2 class="mg-section-title">What I would do differently.</h2>
+        <div class="mg-lessons reveal">
+          <div class="mg-lesson">
+            <div class="mg-lesson-num">01</div>
+            <h4>The pivot is the product</h4>
+            <p>Moving from "magic sticker" to "rescue tool" changed everything. The reframe happened because of research — not instinct. That is what user research is actually for.</p>
+          </div>
+          <div class="mg-lesson">
+            <div class="mg-lesson-num">02</div>
+            <h4>Test earlier, test scrappier</h4>
+            <p>The think-aloud session with Jade revealed the scan screen confusion in 10 minutes. A paper prototype would have found it even faster. Earlier testing means more time to fix.</p>
+          </div>
+          <div class="mg-lesson">
+            <div class="mg-lesson-num">03</div>
+            <h4>Personal experience is valid data</h4>
+            <p>The clanking bottle, the sticker from a market I might not return to — that personal origin story was not anecdote. It was the clearest articulation of the user problem.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TOOLS ── -->
+      <div class="mg-section reveal">
+        <div class="mg-chapter">
+          <span class="mg-chapter-num">11</span>
+          <div class="mg-chapter-line"></div>
+          <span class="mg-chapter-label">Tools & Stack</span>
+        </div>
+        <div class="mg-divider"></div>
+        <div class="mg-tools-row">
+          <span class="mg-tool">✦ Figma Make</span>
+          <span class="mg-tool">⚛ React</span>
+          <span class="mg-tool">⚡ Vite</span>
+          <span class="mg-tool">🎨 Tailwind CSS</span>
+          <span class="mg-tool">🧩 shadcn/ui</span>
+          <span class="mg-tool">🚀 Vercel</span>
+          <span class="mg-tool">📋 FigJam</span>
+          <span class="mg-tool">🗣️ User interviews</span>
+          <span class="mg-tool">🔍 Think-aloud testing</span>
+          <span class="mg-tool">🗺️ Affinity mapping</span>
+        </div>
+      </div>
+
+    </main>
+
+    <footer style="margin-top:48px">
+      <div style="display:flex;align-items:flex-start;gap:28px;margin-top:26px">
+        <div style="flex:1">
+          <h3>Let's build experiences together.</h3>
+          <p class="muted-block">I create immersive digital experiences shaped by UX, media, and storytelling.</p>
+        </div>
+        <div style="flex:1.2">
+          <form class="card" action="https://formspree.io/f/mpwbjkvk" method="POST">
+            <input name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input name="company" placeholder="Company / Role">
+            <textarea name="message" placeholder="Describe your project..." required></textarea>
+            <button class="btn" type="submit">Send message</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
