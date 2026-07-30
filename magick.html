@@ -310,6 +310,34 @@
   .mg-img-tall { height: 380px; }
   .mg-img-medium { height: 260px; }
   .mg-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Boards, flows and full-screen exports: show the whole artifact rather than
+     cropping a slice out of the middle. Height is driven by the image itself,
+     capped so a very tall board cannot run away down the page. */
+  .mg-doc {
+    height: auto;
+    max-height: 760px;
+    padding: 12px;
+    background: #fbfaff;
+  }
+  .mg-doc img {
+    width: 100%;
+    height: auto;
+    max-height: 736px;
+    object-fit: contain;
+  }
+  /* These boards carry more detail than fits inline, so they open full size. */
+  .mg-doc-zoom { display: block; width: 100%; cursor: zoom-in; }
+  .mg-doc-caption {
+    margin: 8px 2px 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .mg-doc-caption a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border); }
+  .mg-doc-caption a:hover { color: var(--mg-purple); }
   .ph-icon { font-size: 2rem; opacity: 0.22; }
   .ph-text { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); opacity: 0.55; }
 
@@ -814,8 +842,8 @@
       </div>
 
       <!-- ── HERO IMAGE ── -->
-      <div class="mg-img reveal" style="height:500px;margin-bottom:64px;background:#0a0a1a;">
-        <img src="images/Magick.png" alt="Magick — Sticker Rescue Tool hero" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      <div class="mg-img mg-doc reveal" style="margin-bottom:64px;">
+        <img src="images/Magick.png" alt="Magick — product overview: the app screens and the dual-tip rescue pen, with its glue side and protection side labelled">
       </div>
 
       <!-- ── STATS ── -->
@@ -867,10 +895,7 @@
             </div>
           </div>
           <div>
-            <div class="mg-img mg-img-tall">
-              <img src="images/Magick 6.png" alt="Magick product — different use cases" style="width:100%;height:100%;object-fit:cover;">
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
               <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.12);border-radius:10px;padding:12px;">
                 <div style="font-size:0.7rem;font-weight:700;color:#dc2626;margin-bottom:4px;">TYPE 1</div>
                 <div style="font-size:0.8rem;font-weight:600;color:var(--text-main);">Color fading</div>
@@ -999,10 +1024,13 @@
         </div>
 
         <!-- Research FigJam screenshot -->
-        <div class="mg-img reveal" style="height:380px;margin-top:32px;">
-          <img src="images/research-magick.png" alt="Research documentation on FigJam — interviews and affinity map" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <div class="mg-img mg-doc reveal" style="margin-top:32px;">
+          <a class="mg-doc-zoom" href="images/research-magick.png" target="_blank" rel="noopener">
+            <img src="images/research-magick.png" alt="Research documentation on FigJam — interviews and affinity map">
+          </a>
         </div>
-      </div> -->
+        <p class="mg-doc-caption"><a href="images/research-magick.png" target="_blank" rel="noopener">Open research board full size &#8599;</a></p>
+      </div>
       <div class="mg-section reveal">
         <div class="mg-chapter">
           <span class="mg-chapter-num">03</span>
@@ -1021,13 +1049,6 @@
           <div class="mg-hmw-card"><strong>Tech:</strong> How might we use AI to reconstruct what a sticker originally looked like from a faded or damaged version?</div>
           <div class="mg-hmw-card"><strong>Community:</strong> How might we build a social platform around sticker culture that does not feel like Instagram?</div>
           <div class="mg-hmw-card"><strong>Physical:</strong> How might we design a tool that anyone can use in under 2 minutes with no prior knowledge?</div>
-        </div>
-      </div>
-
-        </div>
-        <!-- Product overview FigJam screenshot -->
-        <div class="mg-img reveal" style="height:360px;margin-top:32px;">
-          <img src="images/Product_Overview-magick.png" alt="Product overview documented on FigJam" style="width:100%;height:100%;object-fit:cover;object-position:top;">
         </div>
       </div>
 
@@ -1116,14 +1137,14 @@
             <div class="mg-process-detail">Think-aloud, usability findings, iteration</div>
           </div>
         </div>
-      </div>
-
-        </div>
 
         <!-- Ideation FigJam screenshot -->
-        <div class="mg-img reveal" style="height:380px;margin-top:32px;">
-          <img src="images/ideation-magick.png" alt="Ideation process on FigJam — concept cards and decision matrix" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <div class="mg-img mg-doc reveal" style="margin-top:32px;">
+          <a class="mg-doc-zoom" href="images/ideation-magick.png" target="_blank" rel="noopener">
+            <img src="images/ideation-magick.png" alt="Ideation process on FigJam — concept cards and decision matrix">
+          </a>
         </div>
+        <p class="mg-doc-caption"><a href="images/ideation-magick.png" target="_blank" rel="noopener">Open ideation board full size &#8599;</a></p>
       </div>
 
       <!-- ── 06 SOLUTION ── -->
@@ -1177,6 +1198,19 @@
             </div>
           </div>
         </div>
+
+        <!-- Product in use — three scenarios -->
+        <div class="mg-img mg-doc reveal" style="margin-top:32px;">
+          <img src="images/Magick 6.png" alt="Magick in use — the pen and app on a suitcase, a notebook and a laptop">
+        </div>
+
+        <!-- Product overview FigJam board -->
+        <div class="mg-img mg-doc reveal" style="margin-top:32px;">
+          <a class="mg-doc-zoom" href="images/Product_Overview-magick.png" target="_blank" rel="noopener">
+            <img src="images/Product_Overview-magick.png" alt="Product overview documented on FigJam">
+          </a>
+        </div>
+        <p class="mg-doc-caption"><a href="images/Product_Overview-magick.png" target="_blank" rel="noopener">Open product overview full size &#8599;</a></p>
       </div>
 
       <!-- ── 07 ITERATIONS ── -->
@@ -1235,16 +1269,22 @@
         </div>
 
         <!-- Workflow FigJam screenshot -->
-        <div class="mg-img reveal" style="height:400px;margin-top:32px;">
-          <img src="images/product_workflow-user_flow.png" alt="Product workflow and user flow diagrams on FigJam" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <div class="mg-img mg-doc reveal" style="margin-top:32px;">
+          <a class="mg-doc-zoom" href="images/product_workflow-user_flow.png" target="_blank" rel="noopener">
+            <img src="images/product_workflow-user_flow.png" alt="Product workflow and user flow diagrams on FigJam">
+          </a>
         </div>
+        <p class="mg-doc-caption"><a href="images/product_workflow-user_flow.png" target="_blank" rel="noopener">Open workflow diagrams full size &#8599;</a></p>
 
         <!-- Features screenshot -->
         <div style="margin-top:12px;">
           <h3 style="font-size:0.85rem;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">All screens — Figma Make</h3>
-          <div class="mg-img reveal" style="height:420px;">
-            <img src="images/features.png" alt="Full feature set — all screens in Figma Make" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+          <div class="mg-img mg-doc reveal">
+            <a class="mg-doc-zoom" href="images/features.png" target="_blank" rel="noopener">
+              <img src="images/features.png" alt="Full feature set — all screens in Figma Make">
+            </a>
           </div>
+          <p class="mg-doc-caption"><a href="images/features.png" target="_blank" rel="noopener">Open full screen set &#8599;</a></p>
         </div>
 
         <!-- App screens grid -->
@@ -1333,9 +1373,12 @@
               <a href="projects.html" class="mg-btn-secondary">← All projects</a>
             </div>
           </div>
-          <div class="mg-img mg-img-tall">
-              <img src="images/live-demo-magick.png" alt="Magick live demo — all screens working" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+          <div class="mg-img mg-doc">
+              <a class="mg-doc-zoom" href="images/live-demo-magick.png" target="_blank" rel="noopener">
+                <img src="images/live-demo-magick.png" alt="Magick live demo — all screens working">
+              </a>
             </div>
+            <p class="mg-doc-caption"><a href="images/live-demo-magick.png" target="_blank" rel="noopener">Open demo screens full size &#8599;</a></p>
         </div>
       </div>
 

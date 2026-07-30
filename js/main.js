@@ -1,9 +1,33 @@
 // small reveal on scroll + simple nav active highlight
 function handleReveal(){
-  document.querySelectorAll('.reveal').forEach(el=>{
-    const rect = el.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 60) el.classList.add('show');
-  });
+  const els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries, obs)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {rootMargin:'0px 0px -60px 0px'});
+    els.forEach(el=>io.observe(el));
+    return;
+  }
+
+  // fallback for browsers without IntersectionObserver: one check per frame
+  let ticking = false;
+  const check = ()=>{
+    document.querySelectorAll('.reveal:not(.show)').forEach(el=>{
+      if(el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('show');
+    });
+    ticking = false;
+  };
+  check();
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){ ticking = true; requestAnimationFrame(check); }
+  }, {passive:true});
 }
 
 function setActiveNav(){
@@ -19,7 +43,6 @@ function setActiveNav(){
 document.addEventListener('DOMContentLoaded', ()=>{
   handleReveal();
   setActiveNav();
-  window.addEventListener('scroll', handleReveal, {passive:true});
 
   // -----------------------------
   // Load More Projects
