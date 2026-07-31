@@ -351,4 +351,29 @@
 
         const filter = btn.dataset.filter;
         projects.forEach(card => {
-          const match = fi
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    // ── Card click → case page ──
+    projects.forEach(card => {
+      card.addEventListener('click', () => {
+        const href = card.dataset.href;
+        if (href) {
+          window.location.href = href;
+        } else {
+          window.location.href = `case.html?slug=${card.dataset.slug}`;
+        }
+      });
+      card.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          const href = card.dataset.href;
+          window.location.href = href || `case.html?slug=${card.dataset.slug}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
