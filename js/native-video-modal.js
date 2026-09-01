@@ -68,7 +68,7 @@ if (techRow) {
 }
 if (techRow && founderRow) {
   const inhandCard = techRow.children[2];
-  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[1] || null);
+  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[2] || null);
 }
 if (lifeRow) {
   lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
@@ -108,7 +108,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
 const visibleTitles = [
   'Product Designers vs Developers', 'Corgi Cafe', 'Dolly Hackathon Demo', 'Startup Week',
   '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap',
-  'Startup Week', 'Inhand Demo Video', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
+  'Startup Week', 'Toronto Tech Week', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Renn Jewelry'
 ];
 
 document.querySelectorAll('.netflix-card').forEach((card, index) => {
