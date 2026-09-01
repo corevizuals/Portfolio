@@ -108,7 +108,7 @@ if (clientWorkRow) {
 
 const modal = document.createElement('dialog');
 modal.className = 'native-video-modal';
-modal.innerHTML = '<button class="native-close" aria-label="Close video">×</button><video controls playsinline preload="metadata"></video><iframe class="vimeo-modal-player" title="Core Vizuals video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe><a class="native-source" target="_blank" rel="noopener">Open original post ↗</a>';
+modal.innerHTML = '<button class="native-close" aria-label="Close video">×</button><video controls playsinline preload="metadata"></video><iframe class="vimeo-modal-player" title="Client video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe><a class="native-source" target="_blank" rel="noopener">Open original post ↗</a>';
 document.body.appendChild(modal);
 
 const modalVideo = modal.querySelector('video');
@@ -122,13 +122,16 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const vimeoId = card.dataset.vimeo;
   const youtubeId = card.dataset.youtube;
   if (vimeoId || youtubeId) {
+    // YouTube rejects embeds without an HTTP origin (Error 153), which is the
+    // case when this portfolio is previewed directly from a local file.
+    if (youtubeId && window.location.protocol === 'file:') return;
     card.addEventListener('click', event => {
       event.preventDefault();
       modalVideo.hidden = true;
       modalFrame.hidden = false;
       modalFrame.src = vimeoId
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=1&dnt=1&title=0&byline=0&portrait=0`
-        : `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`;
+        : `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&origin=${encodeURIComponent(window.location.origin)}`;
       modalSource.href = card.href;
       modalSource.textContent = vimeoId ? 'Open on Vimeo ↗' : 'Open on YouTube ↗';
       modal.showModal();
