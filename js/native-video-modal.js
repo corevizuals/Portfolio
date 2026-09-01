@@ -26,6 +26,7 @@ const originalTitles = {
 
 const thumbnailByVideo = {
   'product-designers-vs-developers.mp4': 'DaDkTh_u3FL.jpg',
+  'inhand-demo-video.mp4': 'inhand-demo-video.png',
   '4th-of-july.mp4': 'DanmgzNulTB.jpg',
   'renn-jewelry.mp4': 'DaIzAoYuklT.jpg',
   'spiderman.mp4': 'DbtDjXzOtMM.jpg',
