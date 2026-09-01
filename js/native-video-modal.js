@@ -68,7 +68,7 @@ if (techRow) {
 }
 if (techRow && founderRow) {
   const inhandCard = techRow.children[2];
-  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[2] || null);
+  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[1] || null);
 }
 if (lifeRow) {
   lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
