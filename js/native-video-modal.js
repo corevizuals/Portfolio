@@ -6,7 +6,6 @@ const nativeVideoByPoster = {
   'DcU87i9xpJk.jpg': '4th-of-july.mp4',
   'DZpw2imOyVN.jpg': '24-hrs-in-nyc.mp4',
   'DanmgzNulTB.jpg': 'spiderman.mp4',
-  'DbtDjXzOtMM.jpg': 'renn-jewelry.mp4',
   'CBC-backend-photo.JPG': 'Toronto-tech-week.mp4',
   'core-vizuals-showcase-image.jpg': 'renn-jewelry.mp4'
 };
@@ -27,6 +26,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const posterName = image && image.getAttribute('src').split('/').pop();
   const nativeVideo = nativeVideoByPoster[posterName];
   if (!nativeVideo) return;
+  image.src = `images/video-posters/${nativeVideo}.png`;
   card.classList.add('native-preview');
   card.addEventListener('click', event => {
     event.preventDefault();
