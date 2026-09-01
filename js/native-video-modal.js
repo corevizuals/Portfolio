@@ -127,6 +127,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const vimeoId = card.dataset.vimeo;
   const youtubeId = card.dataset.youtube;
   if (vimeoId || youtubeId) {
+    card.classList.add('video-preview-card');
     card.addEventListener('click', event => {
       event.preventDefault();
       modalVideo.hidden = true;
@@ -152,7 +153,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   if (thumbnailByVideo[nativeVideo]) image.src = `images/video-thumbs/${thumbnailByVideo[nativeVideo]}`;
   const label = card.querySelector('span');
   if (label) label.textContent = originalTitles[nativeVideo];
-  card.classList.add('native-preview');
+  card.classList.add('native-preview', 'video-preview-card');
   card.addEventListener('click', event => {
     event.preventDefault();
     modalVideo.src = `videos/${nativeVideo}`;
