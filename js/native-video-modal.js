@@ -107,6 +107,8 @@ if (clientWorkRow) {
   ).join('');
   const nbaCard = '<a class="netflix-card" href="https://www.instagram.com/corevizuals/p/DW2EJN2Fg_J/" target="_blank" rel="noopener"><img src="images/video-thumbs/nba-g-league.jpg?v=2" alt="NBA G League Montreal Recap"><span>NBA G League Montreal Recap</span></a>';
   clientWorkRow.innerHTML = youtubeCards + nbaCard + vimeoCards;
+  const asapRockyCard = lifeRow && lifeRow.querySelector('a[href="videos/asap-rock.mp4"]');
+  if (asapRockyCard) clientWorkRow.prepend(asapRockyCard);
 }
 
 const modal = document.createElement('dialog');
