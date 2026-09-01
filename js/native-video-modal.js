@@ -122,16 +122,15 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const vimeoId = card.dataset.vimeo;
   const youtubeId = card.dataset.youtube;
   if (vimeoId || youtubeId) {
-    // YouTube rejects embeds without an HTTP origin (Error 153), which is the
-    // case when this portfolio is previewed directly from a local file.
-    if (youtubeId && window.location.protocol === 'file:') return;
     card.addEventListener('click', event => {
       event.preventDefault();
       modalVideo.hidden = true;
       modalFrame.hidden = false;
       modalFrame.src = vimeoId
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=1&dnt=1&title=0&byline=0&portrait=0`
-        : `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&origin=${encodeURIComponent(window.location.origin)}`;
+        : window.location.protocol === 'file:'
+          ? `https://jeboycompuesto.github.io/Portfolio/youtube-player.html?video=${youtubeId}`
+          : `youtube-player.html?video=${youtubeId}`;
       modalSource.href = card.href;
       modalSource.textContent = vimeoId ? 'Open on Vimeo ↗' : 'Open on YouTube ↗';
       modal.showModal();
