@@ -120,7 +120,7 @@ const modalVideo = modal.querySelector('video');
 const modalFrame = modal.querySelector('.vimeo-modal-player');
 const modalSource = modal.querySelector('.native-source');
 modal.querySelector('.native-close').addEventListener('click', () => modal.close());
-modal.addEventListener('close', () => { modalVideo.pause(); modalVideo.removeAttribute('src'); modalVideo.load(); modalFrame.removeAttribute('src'); modalFrame.hidden = true; modalVideo.hidden = false; });
+modal.addEventListener('close', () => { modalVideo.pause(); modalVideo.removeAttribute('src'); modalVideo.load(); modalFrame.removeAttribute('src'); modalFrame.hidden = true; modalVideo.hidden = false; document.dispatchEvent(new CustomEvent('portfolio:video-close')); });
 modal.addEventListener('click', event => { if (event.target === modal) modal.close(); });
 
 document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
@@ -138,6 +138,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
           : `youtube-player.html?video=${youtubeId}`;
       modalSource.href = card.href;
       modalSource.textContent = vimeoId ? 'Open on Vimeo ↗' : 'Open on YouTube ↗';
+      document.dispatchEvent(new CustomEvent('portfolio:video-open'));
       modal.showModal();
     });
     return;
@@ -159,6 +160,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
     modalFrame.hidden = true;
     modalSource.href = sourceUrlByVideo[nativeVideo] || card.href;
     modalSource.textContent = 'Open original post ↗';
+    document.dispatchEvent(new CustomEvent('portfolio:video-open'));
     modal.showModal();
     modalVideo.play().catch(() => {});
   });
