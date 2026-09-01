@@ -30,7 +30,7 @@ const originalTitles = {
 
 const thumbnailByVideo = {
   'product-designers-vs-developers.mp4': 'DaDkTh_u3FL.jpg',
-  'inhand-demo-video.mp4': 'inhand-demo-video.png',
+  'inhand-demo-video.mp4': 'inhand-demo-video.jpg',
   '4th-of-july.mp4': 'DanmgzNulTB.jpg',
   'renn-jewelry.mp4': 'DaIzAoYuklT.jpg',
   'spiderman.mp4': 'DbtDjXzOtMM.jpg',
@@ -64,10 +64,11 @@ const lifeRow = videoRows[1];
 const founderRow = videoRows[2];
 if (techRow) {
   techRow.insertAdjacentHTML('afterbegin', '<a class="netflix-card" href="https://www.instagram.com/jeboymotion/reel/DcU87i9xpJk/"><img src="images/video-thumbs/corgi-cafe.jpg" alt="Corgi Cafe"><span>Corgi Cafe</span></a>');
+  techRow.insertBefore(techRow.firstElementChild, techRow.children[2]);
 }
 if (techRow && founderRow) {
   const inhandCard = techRow.children[2];
-  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[1] || null);
+  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[2] || null);
 }
 if (lifeRow) {
   lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
