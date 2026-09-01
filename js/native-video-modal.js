@@ -62,8 +62,8 @@ if (feature) {
 
 const videoRows = document.querySelectorAll('.netflix-row');
 const techRow = videoRows[0];
-const lifeRow = videoRows[1];
-const founderRow = videoRows[2];
+const founderRow = videoRows[1];
+const lifeRow = videoRows[2];
 if (techRow) {
   techRow.insertAdjacentHTML('afterbegin', '<a class="netflix-card" href="https://www.instagram.com/jeboymotion/reel/DcU87i9xpJk/"><img src="images/video-thumbs/corgi-cafe.jpg" alt="Corgi Cafe"><span>Corgi Cafe</span></a>');
   techRow.insertBefore(techRow.firstElementChild, techRow.children[2]);
