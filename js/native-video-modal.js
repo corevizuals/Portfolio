@@ -36,7 +36,7 @@ const thumbnailByVideo = {
   'renn-jewelry.mp4': 'DaIzAoYuklT.jpg',
   'spiderman.mp4': 'DbtDjXzOtMM.jpg',
   'dolly-hackathon-demo.mp4': 'DbVvhLrMIWG.jpg',
-  'Toronto-tech-week.mp4': 'DZ23zLDxdpp.jpg',
+  'Toronto-tech-week.mp4': 'DZ23zLDxdpp.jpg?v=2',
   'Startup-week.mp4': 'Da0SbkrOvi7.jpg'
 };
 
