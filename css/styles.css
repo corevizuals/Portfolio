@@ -66,7 +66,7 @@ button:hover ~ .custom-cursor {
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 20px}
 
-.header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;position:relative;z-index:100}
 .brand{font-weight:800;letter-spacing:-0.02em}
 .nav a {
   color: var(--text-muted);
@@ -824,6 +824,11 @@ footer form.card button.btn {
     visibility: hidden;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 101;
+  }
+
+  .netflix-page .nav {
+    background: #1a1a20;
   }
 
   .nav.show {
