@@ -9,7 +9,8 @@ const nativeVideoByPoster = {
   'DbtDjXzOtMM.jpg': 'renn-jewelry.mp4',
   'CBC-backend-photo.JPG': 'Toronto-tech-week.mp4',
   'core-vizuals-showcase-image.jpg': 'renn-jewelry.mp4',
-  'product-designers-vs-developers.mp4.png': 'product-designers-vs-developers.mp4'
+  'product-designers-vs-developers.mp4.png': 'product-designers-vs-developers.mp4',
+  'asap-rock.jpg': 'asap-rock.mp4'
 };
 
 const originalTitles = {
@@ -21,7 +22,8 @@ const originalTitles = {
   'renn-jewelry.mp4': 'Renn Jewelry',
   'spiderman.mp4': 'Spiderman',
   'Startup-week.mp4': 'Startup Week',
-  'Toronto-tech-week.mp4': 'Toronto Tech Week'
+  'Toronto-tech-week.mp4': 'Toronto Tech Week',
+  'asap-rock.mp4': 'ASAP Rocky Recap'
 };
 
 const thumbnailByVideo = {
@@ -52,6 +54,11 @@ if (feature) {
   feature.querySelector('h1').textContent = originalTitles['product-designers-vs-developers.mp4'];
   feature.querySelector('.netflix-hero-content > p:not(.netflix-eyebrow)').textContent = 'A native portfolio video by Jeboy Compuesto.';
   feature.querySelector('.netflix-play').href = 'videos/product-designers-vs-developers.mp4';
+}
+
+const lifeRow = document.querySelectorAll('.netflix-row')[1];
+if (lifeRow) {
+  lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
 }
 
 const modal = document.createElement('dialog');
@@ -86,7 +93,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
 
 const visibleTitles = [
   'Product Designers vs Developers', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Startup Week',
-  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry',
+  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap',
   'Startup Week', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
 ];
 
