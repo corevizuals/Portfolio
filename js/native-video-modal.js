@@ -30,14 +30,16 @@ const originalTitles = {
 };
 
 const thumbnailByVideo = {
-  'product-designers-vs-developers.mp4': 'DaDkTh_u3FL.jpg',
+  'product-designers-vs-developers.mp4': 'product-designers-no-play.jpg',
+  'corgi-cafe.mp4': 'corgi-cafe-no-play.jpg',
   'inhand-demo-video.mp4': 'inhand-demo-video.jpg',
-  '4th-of-july.mp4': 'DanmgzNulTB.jpg',
-  'renn-jewelry.mp4': 'DaIzAoYuklT.jpg',
-  'spiderman.mp4': 'DbtDjXzOtMM.jpg',
-  'dolly-hackathon-demo.mp4': 'DbVvhLrMIWG.jpg',
+  '4th-of-july.mp4': '4th-july-no-play.jpg',
+  '24-hrs-in-nyc.mp4': '24-hrs-nyc-no-play.jpg',
+  'renn-jewelry.mp4': 'renn-jewelry-no-play.jpg',
+  'spiderman.mp4': 'spiderman-no-play.jpg',
+  'dolly-hackathon-demo.mp4': 'dolly-hackathon-no-play.jpg',
   'Toronto-tech-week.mp4': 'DZ23zLDxdpp.jpg?v=4',
-  'Startup-week.mp4': 'Da0SbkrOvi7.jpg'
+  'Startup-week.mp4': 'startup-week-no-play.jpg'
 };
 
 const sourceUrlByVideo = {
@@ -53,7 +55,7 @@ const sourceUrlByVideo = {
 
 const feature = document.querySelector('.netflix-hero');
 if (feature) {
-  feature.querySelector('img').src = 'images/video-thumbs/DaDkTh_u3FL.jpg';
+  feature.querySelector('img').src = 'images/video-thumbs/product-designers-no-play.jpg';
   feature.querySelector('img').alt = 'Product Designers vs Developers';
   feature.querySelector('h1').textContent = originalTitles['product-designers-vs-developers.mp4'];
   feature.querySelector('.netflix-hero-content > p:not(.netflix-eyebrow)').textContent = 'A native portfolio video by Jeboy Compuesto.';
