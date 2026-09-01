@@ -26,7 +26,7 @@ const originalTitles = {
 
 const feature = document.querySelector('.netflix-hero');
 if (feature) {
-  feature.querySelector('img').src = 'images/video-posters/product-designers-vs-developers.mp4.png';
+  feature.querySelector('img').src = 'images/video-thumbs/Da0SbkrOvi7.jpg';
   feature.querySelector('img').alt = 'Product Designers vs Developers';
   feature.querySelector('h1').textContent = originalTitles['product-designers-vs-developers.mp4'];
   feature.querySelector('.netflix-hero-content > p:not(.netflix-eyebrow)').textContent = 'A native portfolio video by Jeboy Compuesto.';
@@ -49,7 +49,6 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const posterName = image && image.getAttribute('src').split('/').pop();
   const nativeVideo = nativeVideoByPoster[posterName];
   if (!nativeVideo) return;
-  image.src = `images/video-posters/${nativeVideo}.png`;
   const label = card.querySelector('span');
   if (label) label.textContent = originalTitles[nativeVideo];
   card.classList.add('native-preview');
