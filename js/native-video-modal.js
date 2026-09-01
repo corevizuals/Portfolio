@@ -10,7 +10,8 @@ const nativeVideoByPoster = {
   'CBC-backend-photo.JPG': 'Toronto-tech-week.mp4',
   'core-vizuals-showcase-image.jpg': 'renn-jewelry.mp4',
   'product-designers-vs-developers.mp4.png': 'product-designers-vs-developers.mp4',
-  'asap-rock.jpg': 'asap-rock.mp4'
+  'asap-rock.jpg': 'asap-rock.mp4',
+  'corgi-cafe.jpg': 'corgi-cafe.mp4'
 };
 
 const originalTitles = {
@@ -23,7 +24,8 @@ const originalTitles = {
   'spiderman.mp4': 'Spiderman',
   'Startup-week.mp4': 'Startup Week',
   'Toronto-tech-week.mp4': 'Toronto Tech Week',
-  'asap-rock.mp4': 'ASAP Rocky Recap'
+  'asap-rock.mp4': 'ASAP Rocky Recap',
+  'corgi-cafe.mp4': 'Corgi Cafe'
 };
 
 const thumbnailByVideo = {
@@ -59,6 +61,7 @@ if (feature) {
 const lifeRow = document.querySelectorAll('.netflix-row')[1];
 if (lifeRow) {
   lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
+  lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="https://www.instagram.com/jeboymotion/reel/DcU87i9xpJk/"><img src="images/video-thumbs/corgi-cafe.jpg" alt="Corgi Cafe"><span>Corgi Cafe</span></a>');
 }
 
 const modal = document.createElement('dialog');
@@ -93,7 +96,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
 
 const visibleTitles = [
   'Product Designers vs Developers', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Startup Week',
-  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap',
+  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap', 'Corgi Cafe',
   'Startup Week', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
 ];
 
