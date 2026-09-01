@@ -172,9 +172,19 @@ if (feature) {
   heroVideo.src = 'videos/product-designers-vs-developers.mp4';
   heroVideo.autoplay = true;
   heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
   heroVideo.loop = true;
   heroVideo.playsInline = true;
+  heroVideo.preload = 'auto';
+  heroVideo.setAttribute('autoplay', '');
+  heroVideo.setAttribute('muted', '');
+  heroVideo.setAttribute('playsinline', '');
+  heroVideo.setAttribute('webkit-playsinline', '');
   heroVideo.setAttribute('aria-label', 'Product Designers vs Developers preview');
   heroImage.replaceWith(heroVideo);
-  heroVideo.play().catch(() => {});
+  const playHeroPreview = () => heroVideo.play().catch(() => {});
+  heroVideo.addEventListener('canplay', playHeroPreview, { once: true });
+  document.addEventListener('touchstart', playHeroPreview, { once: true, passive: true });
+  document.addEventListener('pointerdown', playHeroPreview, { once: true, passive: true });
+  playHeroPreview();
 }
