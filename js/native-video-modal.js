@@ -37,7 +37,7 @@ const thumbnailByVideo = {
   '24-hrs-in-nyc.mp4': '24-hrs-nyc-no-play.jpg',
   'renn-jewelry.mp4': 'renn-jewelry-no-play.jpg',
   'spiderman.mp4': 'spiderman-no-play.jpg',
-  'dolly-hackathon-demo.mp4': 'dolly-hackathon-no-play.jpg',
+  'dolly-hackathon-demo.mp4': 'dolly-hackathon-frame.jpg',
   'Toronto-tech-week.mp4': 'DZ23zLDxdpp.jpg?v=4',
   'Startup-week.mp4': 'startup-week-no-play.jpg'
 };
