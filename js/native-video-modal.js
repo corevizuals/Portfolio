@@ -10,7 +10,8 @@ const nativeVideoByPoster = {
   'CBC-backend-photo.JPG': 'Toronto-tech-week.mp4',
   'product-designers-vs-developers.mp4.png': 'product-designers-vs-developers.mp4',
   'asap-rock.jpg': 'asap-rock.mp4',
-  'corgi-cafe.jpg': 'corgi-cafe.mp4'
+  'corgi-cafe.jpg': 'corgi-cafe.mp4',
+  'nba-g-league.jpg': 'nba-g-league-recap.mp4'
 };
 
 const originalTitles = {
@@ -24,7 +25,8 @@ const originalTitles = {
   'Startup-week.mp4': 'Startup Week',
   'Toronto-tech-week.mp4': 'Toronto Tech Week',
   'asap-rock.mp4': 'ASAP Rocky Recap',
-  'corgi-cafe.mp4': 'Corgi Cafe'
+  'corgi-cafe.mp4': 'Corgi Cafe',
+  'nba-g-league-recap.mp4': 'NBA G League Montreal Recap'
 };
 
 const thumbnailByVideo = {
@@ -45,7 +47,8 @@ const sourceUrlByVideo = {
   'spiderman.mp4': 'https://www.instagram.com/jeboyofficial/reel/DbtDjXzOtMM/',
   'dolly-hackathon-demo.mp4': 'https://www.instagram.com/dollysetgo/reel/DbVvhLrMIWG/',
   'Toronto-tech-week.mp4': 'https://www.instagram.com/jeboyofficial/reel/DZ23zLDxdpp/',
-  'Startup-week.mp4': 'https://www.instagram.com/jeboyofficial/reel/Da0SbkrOvi7/'
+  'Startup-week.mp4': 'https://www.instagram.com/jeboyofficial/reel/Da0SbkrOvi7/',
+  'nba-g-league-recap.mp4': 'https://www.instagram.com/corevizuals/p/DW2EJN2Fg_J/'
 };
 
 const feature = document.querySelector('.netflix-hero');
