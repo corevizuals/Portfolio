@@ -83,24 +83,27 @@ const coreVizualsVideos = [
   ['1133598951', 'L’Oreal Usine Technology V2', 'https://i.vimeocdn.com/video/2078246330-1dba6e9b30a0faf77f2316fef75b823c536e4e88f36b795ea474ac5c059846fa-d_1280x720?region=us'],
   ['1142577143', "All In 2025 - L'Oreal Groupe Video Recap", 'https://i.vimeocdn.com/video/2090406015-7c24ef7e977ddc11100099be37689739e73a8d2275046d3ffb08c3b87604981a-d_1280x720?region=us'],
   ['1142578333', 'Osheaga 2025 - Interview with the Good Neighbours', 'https://i.vimeocdn.com/video/2090386727-4c08bde7c85f8b5db6576759719c4e039560665ded90b5e4015ea1c8c1c384d6-d_1280x720?region=us'],
-  ['1152417207', 'Seouléa Video 1', 'https://i.vimeocdn.com/video/2103975604-971642ae974646cd7b2d2e0a639ec317068235d02fda471be65ba677035f3fef-d_1280x720?region=us'],
-  ['1152417329', 'Seouléa Video 2', 'https://i.vimeocdn.com/video/2103975842-de36f7472f46ad0334ca21622d2c38c1315736e09cc9b14fc9475baffecde46a-d_1280x720?region=us'],
-  ['1152417382', 'Seouléa Video 3', 'https://i.vimeocdn.com/video/2103983934-10ce0c20254bdbbcb440c8c13a3e26d603361c67597a1f52d8f985acd4ed231f-d_1280x720?region=us'],
   ['1152417787', 'Las Flores Video 2', 'https://i.vimeocdn.com/video/2103976627-cfde4e17384303304eaf3342ee81d7633a6a932b903a899c2a1ef57e66261aac-d_1280x720?region=us'],
   ['1152422800', 'Film to the Moon', 'https://i.vimeocdn.com/video/2103983725-c7b851103dd32bc1684f6f15418e47230561130630fa68511277ca3c3fc496a5-d_1280x720?region=us'],
   ['1152659530', 'Las Flores Video 1', 'https://i.vimeocdn.com/video/2104320311-29c164cc67ff628e00cac6644959f3e3112d86bf8f5aba0f14c3e8ff9a474212-d_1280x720?region=us'],
-  ['1152663020', 'Las Flores Video 3', 'https://i.vimeocdn.com/video/2104323425-a4ec1a0b285403e12d3eaec30629888101715d6372c24f4d867ef73dce66275d-d_1280x720?region=us'],
-  ['827679214', 'Cubecom - Real Estate', 'https://i.vimeocdn.com/video/1671184990-8134af9ecdd4a073a2f14e7ed760648c7804d80d2b5a9852cd5e9c8a4bcbb1f8-d_1280x720?region=us'],
-  ['838898372', 'Francos Festival', 'https://i.vimeocdn.com/video/2078784007-adccec0ce7d989c9c68938c525f05a96c7a448117bc2620d2cc73bc2d23fc908-d_1280x720?region=us'],
-  ['881138947', 'Meet the Team in Tulum - JMMA', 'https://i.vimeocdn.com/video/1748525275-fbfb4c5d4c65fc6f4ac7e59136fcfac6a11880e78daee92b00c2ef1496a0709f-d_1280x720?region=us'],
-  ['882350750', 'Enuf Summer Recap', 'https://i.vimeocdn.com/video/1750361319-2057f0f31d7b99d17e82844db6d3c28b3adb1fb969214b70fbeae7c1bd692f53-d_1280x720?region=us']
+  ['1152663020', 'Las Flores Video 3', 'https://i.vimeocdn.com/video/2104323425-a4ec1a0b285403e12d3eaec30629888101715d6372c24f4d867ef73dce66275d-d_1280x720?region=us']
+];
+
+const soundversationVideos = [
+  ['AxBFLMr0cEo', 'Global Club Mix | Global Currency | Soundversation 002', 'https://i.ytimg.com/vi/AxBFLMr0cEo/maxresdefault.jpg'],
+  ['VFiGrJuEICw', 'Soulful Afro House Mix | Ethan Tomas | Soundversation 001', 'https://i.ytimg.com/vi/VFiGrJuEICw/maxresdefault.jpg']
 ];
 
 const clientWorkRow = document.getElementById('client-work-row');
 if (clientWorkRow) {
-  clientWorkRow.innerHTML = coreVizualsVideos.map(([id, title, thumbnail]) =>
+  const vimeoCards = coreVizualsVideos.map(([id, title, thumbnail]) =>
     `<a class="netflix-card vimeo-preview" data-vimeo="${id}" href="https://vimeo.com/${id}" target="_blank" rel="noopener"><img src="${thumbnail}" alt="${title}"><span>${title}</span></a>`
   ).join('');
+  const youtubeCards = soundversationVideos.map(([id, title, thumbnail]) =>
+    `<a class="netflix-card youtube-preview" data-youtube="${id}" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener"><img src="${thumbnail}" alt="${title}"><span>${title}</span></a>`
+  ).join('');
+  const nbaCard = '<a class="netflix-card" href="https://www.instagram.com/corevizuals/p/DW2EJN2Fg_J/" target="_blank" rel="noopener"><img src="images/video-thumbs/nba-g-league.jpg" alt="NBA G League Montreal Recap"><span>NBA G League Montreal Recap</span></a>';
+  clientWorkRow.innerHTML = youtubeCards + nbaCard + vimeoCards;
 }
 
 const modal = document.createElement('dialog');
@@ -117,14 +120,17 @@ modal.addEventListener('click', event => { if (event.target === modal) modal.clo
 
 document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const vimeoId = card.dataset.vimeo;
-  if (vimeoId) {
+  const youtubeId = card.dataset.youtube;
+  if (vimeoId || youtubeId) {
     card.addEventListener('click', event => {
       event.preventDefault();
       modalVideo.hidden = true;
       modalFrame.hidden = false;
-      modalFrame.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&dnt=1&title=0&byline=0&portrait=0`;
+      modalFrame.src = vimeoId
+        ? `https://player.vimeo.com/video/${vimeoId}?autoplay=1&dnt=1&title=0&byline=0&portrait=0`
+        : `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`;
       modalSource.href = card.href;
-      modalSource.textContent = 'Open on Vimeo ↗';
+      modalSource.textContent = vimeoId ? 'Open on Vimeo ↗' : 'Open on YouTube ↗';
       modal.showModal();
     });
     return;
