@@ -105,7 +105,7 @@ if (clientWorkRow) {
   const youtubeCards = soundversationVideos.map(([id, title, thumbnail]) =>
     `<a class="netflix-card youtube-preview" data-youtube="${id}" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener"><img src="${thumbnail}" alt="${title}"><span>${title}</span></a>`
   ).join('');
-  const nbaCard = '<a class="netflix-card" href="https://www.instagram.com/corevizuals/p/DW2EJN2Fg_J/" target="_blank" rel="noopener"><img src="images/video-thumbs/nba-g-league.jpg" alt="NBA G League Montreal Recap"><span>NBA G League Montreal Recap</span></a>';
+  const nbaCard = '<a class="netflix-card" href="https://www.instagram.com/corevizuals/p/DW2EJN2Fg_J/" target="_blank" rel="noopener"><img src="images/video-thumbs/nba-g-league.jpg?v=2" alt="NBA G League Montreal Recap"><span>NBA G League Montreal Recap</span></a>';
   clientWorkRow.innerHTML = youtubeCards + nbaCard + vimeoCards;
 }
 
@@ -141,7 +141,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
     return;
   }
   const image = card.querySelector('img') || document.querySelector('.netflix-hero > img');
-  const posterName = image && image.getAttribute('src').split('/').pop();
+  const posterName = image && image.getAttribute('src').split('/').pop().split('?')[0];
   let nativeVideo = nativeVideoByPoster[posterName];
   if (card.classList.contains('netflix-play')) nativeVideo = 'product-designers-vs-developers.mp4';
   if (!nativeVideo) return;
