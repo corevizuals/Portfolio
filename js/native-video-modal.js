@@ -58,10 +58,19 @@ if (feature) {
   feature.querySelector('.netflix-play').href = 'videos/product-designers-vs-developers.mp4';
 }
 
-const lifeRow = document.querySelectorAll('.netflix-row')[1];
+const videoRows = document.querySelectorAll('.netflix-row');
+const techRow = videoRows[0];
+const lifeRow = videoRows[1];
+const founderRow = videoRows[2];
+if (techRow) {
+  techRow.insertAdjacentHTML('afterbegin', '<a class="netflix-card" href="https://www.instagram.com/jeboymotion/reel/DcU87i9xpJk/"><img src="images/video-thumbs/corgi-cafe.jpg" alt="Corgi Cafe"><span>Corgi Cafe</span></a>');
+}
+if (techRow && founderRow) {
+  const inhandCard = techRow.children[2];
+  if (inhandCard) founderRow.insertBefore(inhandCard, founderRow.children[1] || null);
+}
 if (lifeRow) {
   lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="videos/asap-rock.mp4"><img src="images/video-thumbs/asap-rock.jpg" alt="ASAP Rocky Recap"><span>ASAP Rocky Recap</span></a>');
-  lifeRow.insertAdjacentHTML('beforeend', '<a class="netflix-card" href="https://www.instagram.com/jeboymotion/reel/DcU87i9xpJk/"><img src="images/video-thumbs/corgi-cafe.jpg" alt="Corgi Cafe"><span>Corgi Cafe</span></a>');
 }
 
 const modal = document.createElement('dialog');
@@ -81,6 +90,7 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   let nativeVideo = nativeVideoByPoster[posterName];
   if (card.classList.contains('netflix-play')) nativeVideo = 'product-designers-vs-developers.mp4';
   if (!nativeVideo) return;
+  if (['inhand-demo-video.mp4', '4th-of-july.mp4', 'spiderman.mp4', 'renn-jewelry.mp4', 'Startup-week.mp4'].includes(nativeVideo)) card.classList.remove('portrait');
   if (thumbnailByVideo[nativeVideo]) image.src = `images/video-thumbs/${thumbnailByVideo[nativeVideo]}`;
   const label = card.querySelector('span');
   if (label) label.textContent = originalTitles[nativeVideo];
@@ -95,9 +105,9 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
 });
 
 const visibleTitles = [
-  'Product Designers vs Developers', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Startup Week',
-  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap', 'Corgi Cafe',
-  'Startup Week', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
+  'Product Designers vs Developers', 'Corgi Cafe', 'Dolly Hackathon Demo', 'Startup Week',
+  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap',
+  'Startup Week', 'Inhand Demo Video', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
 ];
 
 document.querySelectorAll('.netflix-card').forEach((card, index) => {
