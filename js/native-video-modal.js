@@ -61,3 +61,14 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
     modalVideo.play().catch(() => {});
   });
 });
+
+const visibleTitles = [
+  'Product Designers vs Developers', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Startup Week',
+  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry',
+  'Startup Week', 'Toronto Tech Week', 'Dolly Hackathon Demo', 'Renn Jewelry'
+];
+
+document.querySelectorAll('.netflix-card').forEach((card, index) => {
+  const label = card.querySelector('span');
+  if (label && visibleTitles[index]) label.textContent = visibleTitles[index];
+});
