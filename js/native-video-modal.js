@@ -8,7 +8,6 @@ const nativeVideoByPoster = {
   'DanmgzNulTB.jpg': 'spiderman.mp4',
   'DbtDjXzOtMM.jpg': 'renn-jewelry.mp4',
   'CBC-backend-photo.JPG': 'Toronto-tech-week.mp4',
-  'core-vizuals-showcase-image.jpg': 'renn-jewelry.mp4',
   'product-designers-vs-developers.mp4.png': 'product-designers-vs-developers.mp4',
   'asap-rock.jpg': 'asap-rock.mp4',
   'corgi-cafe.jpg': 'corgi-cafe.mp4'
@@ -150,17 +149,6 @@ document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
     modal.showModal();
     modalVideo.play().catch(() => {});
   });
-});
-
-const visibleTitles = [
-  'Product Designers vs Developers', 'Corgi Cafe', 'Dolly Hackathon Demo', 'Startup Week',
-  '4th of July', '24 Hrs in NYC', 'Spiderman', 'Renn Jewelry', 'ASAP Rocky Recap',
-  'Startup Week', 'Toronto Tech Week', 'Inhand Demo Video', 'Dolly Hackathon Demo', 'Renn Jewelry'
-];
-
-document.querySelectorAll('.netflix-card').forEach((card, index) => {
-  const label = card.querySelector('span');
-  if (label && visibleTitles[index]) label.textContent = visibleTitles[index];
 });
 
 if (feature) {
