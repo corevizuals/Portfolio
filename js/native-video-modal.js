@@ -30,7 +30,7 @@ const originalTitles = {
 };
 
 const thumbnailByVideo = {
-  'product-designers-vs-developers.mp4': 'product-designers-no-play.jpg',
+  'product-designers-vs-developers.mp4': 'product-designers-no-play-v2.jpg',
   'corgi-cafe.mp4': 'corgi-cafe-no-play.jpg',
   'inhand-demo-video.mp4': 'inhand-demo-video.jpg',
   '4th-of-july.mp4': '4th-july-no-play.jpg',
@@ -55,7 +55,7 @@ const sourceUrlByVideo = {
 
 const feature = document.querySelector('.netflix-hero');
 if (feature) {
-  feature.querySelector('img').src = 'images/video-thumbs/product-designers-no-play.jpg';
+  feature.querySelector('img').src = 'images/video-thumbs/product-designers-no-play-v2.jpg';
   feature.querySelector('img').alt = 'Product Designers vs Developers';
   feature.querySelector('h1').textContent = originalTitles['product-designers-vs-developers.mp4'];
   feature.querySelector('.netflix-hero-content > p:not(.netflix-eyebrow)').textContent = 'A native portfolio video by Jeboy Compuesto.';
