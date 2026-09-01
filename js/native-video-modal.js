@@ -93,3 +93,16 @@ document.querySelectorAll('.netflix-card').forEach((card, index) => {
   const label = card.querySelector('span');
   if (label && visibleTitles[index]) label.textContent = visibleTitles[index];
 });
+
+if (feature) {
+  const heroImage = feature.querySelector('img');
+  const heroVideo = document.createElement('video');
+  heroVideo.src = 'videos/product-designers-vs-developers.mp4';
+  heroVideo.autoplay = true;
+  heroVideo.muted = true;
+  heroVideo.loop = true;
+  heroVideo.playsInline = true;
+  heroVideo.setAttribute('aria-label', 'Product Designers vs Developers preview');
+  heroImage.replaceWith(heroVideo);
+  heroVideo.play().catch(() => {});
+}
