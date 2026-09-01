@@ -24,9 +24,29 @@ const originalTitles = {
   'Toronto-tech-week.mp4': 'Toronto Tech Week'
 };
 
+const thumbnailByVideo = {
+  'product-designers-vs-developers.mp4': 'DaDkTh_u3FL.jpg',
+  '4th-of-july.mp4': 'DanmgzNulTB.jpg',
+  'renn-jewelry.mp4': 'DaIzAoYuklT.jpg',
+  'spiderman.mp4': 'DbtDjXzOtMM.jpg',
+  'dolly-hackathon-demo.mp4': 'DbVvhLrMIWG.jpg',
+  'Toronto-tech-week.mp4': 'DZ23zLDxdpp.jpg',
+  'Startup-week.mp4': 'Da0SbkrOvi7.jpg'
+};
+
+const sourceUrlByVideo = {
+  'product-designers-vs-developers.mp4': 'https://www.instagram.com/jeboyofficial/reel/DaDkTh_u3FL/',
+  '4th-of-july.mp4': 'https://www.instagram.com/jeboyofficial/reel/DanmgzNulTB/',
+  'renn-jewelry.mp4': 'https://www.instagram.com/jeboyofficial/reel/DaIzAoYuklT/',
+  'spiderman.mp4': 'https://www.instagram.com/jeboyofficial/reel/DbtDjXzOtMM/',
+  'dolly-hackathon-demo.mp4': 'https://www.instagram.com/dollysetgo/reel/DbVvhLrMIWG/',
+  'Toronto-tech-week.mp4': 'https://www.instagram.com/jeboyofficial/reel/DZ23zLDxdpp/',
+  'Startup-week.mp4': 'https://www.instagram.com/jeboyofficial/reel/Da0SbkrOvi7/'
+};
+
 const feature = document.querySelector('.netflix-hero');
 if (feature) {
-  feature.querySelector('img').src = 'images/video-thumbs/Da0SbkrOvi7.jpg';
+  feature.querySelector('img').src = 'images/video-thumbs/DaDkTh_u3FL.jpg';
   feature.querySelector('img').alt = 'Product Designers vs Developers';
   feature.querySelector('h1').textContent = originalTitles['product-designers-vs-developers.mp4'];
   feature.querySelector('.netflix-hero-content > p:not(.netflix-eyebrow)').textContent = 'A native portfolio video by Jeboy Compuesto.';
@@ -47,15 +67,17 @@ modal.addEventListener('click', event => { if (event.target === modal) modal.clo
 document.querySelectorAll('.netflix-card, .netflix-play').forEach(card => {
   const image = card.querySelector('img') || document.querySelector('.netflix-hero > img');
   const posterName = image && image.getAttribute('src').split('/').pop();
-  const nativeVideo = nativeVideoByPoster[posterName];
+  let nativeVideo = nativeVideoByPoster[posterName];
+  if (card.classList.contains('netflix-play')) nativeVideo = 'product-designers-vs-developers.mp4';
   if (!nativeVideo) return;
+  if (thumbnailByVideo[nativeVideo]) image.src = `images/video-thumbs/${thumbnailByVideo[nativeVideo]}`;
   const label = card.querySelector('span');
   if (label) label.textContent = originalTitles[nativeVideo];
   card.classList.add('native-preview');
   card.addEventListener('click', event => {
     event.preventDefault();
     modalVideo.src = `videos/${nativeVideo}`;
-    modalSource.href = card.href;
+    modalSource.href = sourceUrlByVideo[nativeVideo] || card.href;
     modal.showModal();
     modalVideo.play().catch(() => {});
   });
